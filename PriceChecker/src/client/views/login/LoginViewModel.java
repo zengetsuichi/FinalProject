@@ -20,4 +20,9 @@ public class LoginViewModel
   {
     return loginRegisterModel.validateLogin(username, password);
   }
+
+  public void setClientUsername(String username)
+  {
+    loginRegisterModel.setClientUsername(username);
+  }
 }

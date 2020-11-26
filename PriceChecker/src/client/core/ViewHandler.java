@@ -3,6 +3,7 @@ import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
 import client.views.editProductAdmin.EditProductAdminController;
 import client.views.login.LoginController;
+import client.views.shopManager.ShopManagerController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -55,8 +56,23 @@ public class ViewHandler
   }
 
   public void openShopManagerView(){
-    //TODO change this method
-    System.out.println("Shop manager view opened.");
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/shopManager/ShopManager.fxml"));
+      Parent root = loader.load();
+      ShopManagerController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Shop Manager");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
   }
 
   public void openAdministratorView(){

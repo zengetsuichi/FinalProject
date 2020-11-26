@@ -60,14 +60,17 @@ public class LoginController implements ViewController
         }
         else if (loginResponse.equals("User"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openNormalUserView();
         }
         else if (loginResponse.contains("Admin"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openAdministratorView();
         }
-        else if (loginResponse.equals("ShopManager"))
+        else if (loginResponse.contains("ShopManager"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openShopManagerView();
         }
         else
