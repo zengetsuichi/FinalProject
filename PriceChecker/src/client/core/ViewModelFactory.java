@@ -1,10 +1,13 @@
 package client.core;
+import client.clientmodel.shopManagerModel.ShopManagerModel;
 
 import client.views.addNewProductAdmin.AddNewProductAdminViewModel;
 import client.views.administrator.AdministratorViewModel;
 import client.views.editProductAdmin.EditProductAdminViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
+
+import client.views.shopManager.ShopManagerViewModel;
 
 /**
  * Class used for lazy instantiation of view model instances and passing
@@ -21,6 +24,7 @@ public class ViewModelFactory
   private AdministratorViewModel administratorViewModel;
   private AddNewProductAdminViewModel addNewProductAdminViewModel;
   private EditProductAdminViewModel editProductAdminViewModel;
+  private ShopManagerViewModel shopManagerViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -55,6 +59,14 @@ public class ViewModelFactory
       editProductAdminViewModel = new EditProductAdminViewModel(modelFactory.getEditProductAdministratorModel());
     }
     return editProductAdminViewModel;
+  }
+
+  public ShopManagerViewModel getShopManagerViewModel()
+  {
+    if(shopManagerViewModel == null){
+      shopManagerViewModel = new ShopManagerViewModel(modelFactory.getShopManagerModel());
+    }
+    return shopManagerViewModel;
   }
 
   public RegisterViewModel getRegisterViewModel() {

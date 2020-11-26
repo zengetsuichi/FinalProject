@@ -31,4 +31,6 @@ public interface Client extends PropertyChangeSubject
   String deleteProduct(int productId);
   void logOut();
   String validateRegister(String username, String email, String password, String dob);
+  void setClientUsername(String username);
+  String getLoggedInUser();
 }

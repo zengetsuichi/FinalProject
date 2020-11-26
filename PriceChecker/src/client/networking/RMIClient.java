@@ -24,6 +24,7 @@ import java.util.ArrayList;
 public class RMIClient implements Client, ClientCallback {
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
+  private String clientUsername;
 
   public RMIClient() {
     support = new PropertyChangeSupport(this);
@@ -177,6 +178,19 @@ public class RMIClient implements Client, ClientCallback {
   @Override
   public void update(String eventName, Object newValue)
           throws RemoteException {
+  @Override public void setClientUsername(String username)
+  {
+    clientUsername = username;
+  }
+
+  @Override public String getLoggedInUser()
+  {
+    return clientUsername;
+  }
+
+  @Override public void update(String eventName, Object newValue)
+      throws RemoteException
+  {
     support.firePropertyChange(eventName, null, newValue);
   }
 

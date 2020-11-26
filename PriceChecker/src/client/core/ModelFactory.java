@@ -7,6 +7,9 @@ import client.clientmodel.editProductAdministratorModel.EditProductAdministrator
 import client.clientmodel.editProductAdministratorModel.EditProductAdministratorModelManager;
 import client.clientmodel.loginRegisterModel.LoginRegisterModel;
 import client.clientmodel.loginRegisterModel.LoginRegisterModelManager;
+import client.clientmodel.shopManagerModel.ShopManagerModel;
+import client.clientmodel.shopManagerModel.ShopManagerModelManager;
+
 /**
  * Class used for lazy instantiation of model instances and passing
  * the instance of a client to the models.
@@ -20,6 +23,7 @@ public class ModelFactory
   private AdministratorModel administratorModel;
   private AddNewProductAdminModel addNewProductAdminModel;
   private EditProductAdministratorModel editProductAdministratorModel;
+  private ShopManagerModel shopManagerModel;
   private ClientFactory clientFactory;
 
   public ModelFactory(ClientFactory clientFactory){
@@ -54,5 +58,13 @@ public class ModelFactory
       editProductAdministratorModel = new EditProductAdministratorModelManager(clientFactory.getClient());
     }
     return editProductAdministratorModel;
+  }
+
+  public ShopManagerModel getShopManagerModel()
+  {
+    if(shopManagerModel == null){
+      shopManagerModel = new ShopManagerModelManager(clientFactory.getClient());
+    }
+    return shopManagerModel;
   }
 }
