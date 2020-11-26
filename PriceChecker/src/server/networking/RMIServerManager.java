@@ -124,6 +124,11 @@ public class RMIServerManager implements RMIServer
     return loginRegisterServerModel.validateLogin(username, password);
   }
 
+  @Override
+  public String validateRegister(String username, String email, String password, String dob) throws RemoteException {
+    return loginRegisterServerModel.validateRegister(username,email,password,dob);
+  }
+
   /**
    * A method used for saving the client references into the pool of listeners.
    * @author Gosia

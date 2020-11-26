@@ -12,7 +12,7 @@
     <orderEntry type="module" module-name="PriceChecker" />
     <orderEntry type="library" name="JavaFX" level="application" />
     <orderEntry type="library" name="libraries" level="project" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="JUnit5.4">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/" />
@@ -28,6 +28,7 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="controlsfx-11.0.3" level="project" />
+    <orderEntry type="library" exported="" name="controlsfx-11.0.3" level="project" />
+    <orderEntry type="library" exported="" name="lib" level="application" />
   </component>
 </module>

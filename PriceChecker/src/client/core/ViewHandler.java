@@ -1,14 +1,17 @@
 package client.core;
+
 import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
 import client.views.editProductAdmin.EditProductAdminController;
 import client.views.login.LoginController;
+import client.views.register.RegisterController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import shared.util.Product;
+
 import java.io.IOException;
  /**
  * Class that provides methods for opening specific views.
@@ -49,9 +52,28 @@ public class ViewHandler
     }
   }
 
+
+
   public void openRegisterView(){
     //TODO change this method
-    System.out.println("Register view opened.");
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/register/Register.fxml"));
+      Parent root = loader.load();
+      RegisterController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Price Checker Register");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+
   }
 
   public void openShopManagerView(){

@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.CheckListView;
 import org.controlsfx.control.SearchableComboBox;
 import shared.util.Product;
+
 import java.util.ArrayList;
 
 public class EditProductAdminController implements ViewController

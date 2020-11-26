@@ -24,4 +24,9 @@ public class LoginRegisterModelManager implements LoginRegisterModel
     return client.validateLogin(username, password);
   }
 
+  @Override
+  public String validateRegister(String username, String email, String password, String dob) {
+    return client.validateRegister(username,email,password,dob);
+  }
+
 }

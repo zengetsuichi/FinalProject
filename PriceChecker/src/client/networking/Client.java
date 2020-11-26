@@ -30,4 +30,5 @@ public interface Client extends PropertyChangeSubject
       String category, ArrayList<String> parseTag, int productId);
   String deleteProduct(int productId);
   void logOut();
+  String validateRegister(String username, String email, String password, String dob);
 }

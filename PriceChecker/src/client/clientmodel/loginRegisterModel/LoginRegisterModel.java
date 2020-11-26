@@ -8,4 +8,6 @@ package client.clientmodel.loginRegisterModel;
 public interface LoginRegisterModel
 {
   String validateLogin(String username, String password);
+  String validateRegister(String username, String email, String password, String dob);
+
 }
