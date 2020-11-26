@@ -1,5 +1,6 @@
 package shared.networking;
 
+import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 
@@ -32,5 +33,5 @@ public interface RMIServer extends Remote
   String deleteProduct(int productId) throws RemoteException;
   void logOut(ClientCallback client) throws RemoteException;
   String validateRegister(String username, String email, String password, String dob) throws RemoteException;
-
+  ArrayList<Product> getAllProductsForSpecificManager(String username) throws RemoteException;
 }

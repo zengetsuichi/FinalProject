@@ -1,8 +1,10 @@
 package client.networking;
+import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.PropertyChangeSubject;
 import shared.util.ShopPrice;
 import java.util.ArrayList;
+
 /**
  * Interface is used for separating the models from the client implementation as
  * well as providing abstract classes to the RMI client.
@@ -33,4 +35,5 @@ public interface Client extends PropertyChangeSubject
   String validateRegister(String username, String email, String password, String dob);
   void setClientUsername(String username);
   String getLoggedInUser();
+  ArrayList<Product> getAllProductsForSpecificManager(String username);
 }

@@ -1,9 +1,11 @@
 package client.clientmodel.shopManagerModel;
 
 import client.networking.Client;
+import shared.util.Product;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 public class ShopManagerModelManager implements ShopManagerModel
 {
@@ -30,5 +32,21 @@ public class ShopManagerModelManager implements ShopManagerModel
   @Override public String getLoggedInUser()
   {
     return client.getLoggedInUser();
+  }
+
+  @Override public ArrayList<Product> getAllProductsForSpecificManager(
+      String username)
+  {
+    return client.getAllProductsForSpecificManager(username);
+  }
+
+  @Override public ArrayList<String> getAllTagsById(int productId)
+  {
+    return client.getAllTagsById(productId);
+  }
+
+  @Override public void logOut()
+  {
+    client.logOut();
   }
 }

@@ -11,6 +11,7 @@ public class Product implements Serializable
   private int productId;
   private String description;
   private String category;
+  private int price;
 
   public Product( int productId, String productName, String description,
       String category)
@@ -19,6 +20,15 @@ public class Product implements Serializable
     this.productId = productId;
     this.description = description;
     this.category = category;
+  }
+  public Product( int productId, String productName, String description,
+      String category, int price)
+  {
+    this.productName = productName;
+    this.productId = productId;
+    this.description = description;
+    this.category = category;
+    this.price = price;
   }
 
   public String getProductName()
@@ -70,10 +80,22 @@ public class Product implements Serializable
         && productId == other.productId && category.equals(other.category);
   }
 
+  public int getPrice()
+  {
+    return price;
+  }
+
+  public void setPrice(int price)
+  {
+    this.price = price;
+  }
+
   @Override public String toString()
   {
     return "Product{" + "productName='" + productName + '\'' + ", productId="
         + productId + ", description='" + description + '\'' + ", category='"
-        + category + '\'' + '}';
+        + category + '\'' + ", price=" + price + '}';
   }
+
+
 }

@@ -5,9 +5,11 @@ import server.networking.servermodel.addNewProductAdminServerModel.AddNewProduct
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModel;
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
+import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.util.EventType;
+import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import java.beans.PropertyChangeEvent;
@@ -33,18 +35,21 @@ public class RMIServerManager implements RMIServer
   private AdministratorServerModel administratorServerModel;
   private AddNewProductAdminServerModel addNewProductAdminServerModel;
   private EditProductAdminServerModel editProductAdminServerModel;
+  private ShopManagerServerModel shopManagerServerModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
 
   public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
       AdministratorServerModel administratorServerModel,
       AddNewProductAdminServerModel addNewProductAdminServerModel,
-      EditProductAdminServerModel editProductAdminServerModel) throws RemoteException
+      EditProductAdminServerModel editProductAdminServerModel,
+      ShopManagerServerModel shopManagerServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
     this.administratorServerModel = administratorServerModel;
     this.addNewProductAdminServerModel = addNewProductAdminServerModel;
     this.editProductAdminServerModel = editProductAdminServerModel;
+    this.shopManagerServerModel = shopManagerServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -127,6 +132,12 @@ public class RMIServerManager implements RMIServer
   @Override
   public String validateRegister(String username, String email, String password, String dob) throws RemoteException {
     return loginRegisterServerModel.validateRegister(username,email,password,dob);
+  }
+
+  @Override public ArrayList<Product> getAllProductsForSpecificManager(
+      String username) throws RemoteException
+  {
+    return shopManagerServerModel.getAllProductsForSpecificManager(username);
   }
 
   /**
