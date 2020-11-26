@@ -175,9 +175,7 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
-  @Override
-  public void update(String eventName, Object newValue)
-          throws RemoteException {
+
   @Override public void setClientUsername(String username)
   {
     clientUsername = username;
@@ -201,8 +199,7 @@ public class RMIClient implements Client, ClientCallback {
   }
 
   @Override
-  public void removeListener(String eventName,
-                             PropertyChangeListener listener) {
+  public void removeListener(String eventName, PropertyChangeListener listener) {
     support.removePropertyChangeListener(eventName, listener);
   }
 

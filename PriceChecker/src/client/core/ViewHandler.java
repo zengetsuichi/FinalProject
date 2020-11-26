@@ -4,6 +4,8 @@ import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
 import client.views.editProductAdmin.EditProductAdminController;
 import client.views.login.LoginController;
+import client.views.register.RegisterController;
+import client.views.shopManager.ShopManagerController;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
