@@ -197,6 +197,15 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  @Override public String deleteProductPrice(int productId, String username)
+  {
+    try {
+      return rmiServer.deleteProductPrice(productId, username);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
   @Override public void update(String eventName, Object newValue)
       throws RemoteException
   {

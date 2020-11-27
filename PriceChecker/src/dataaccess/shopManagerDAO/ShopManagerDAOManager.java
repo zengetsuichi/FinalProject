@@ -46,4 +46,18 @@ public class ShopManagerDAOManager implements ShopManagerDAO
       return products;
     }
   }
+
+  @Override public String deleteProductPrice(int productId, String username) throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement(
+          "DELETE FROM price WHERE productId = ? AND userid = (SELECT userid FROM users WHERE username = ?);");
+      statement.setInt(1, productId);
+      statement.setString(2, username);
+      statement.executeUpdate();
+
+      return "Product deleted.";
+    }
+  }
 }

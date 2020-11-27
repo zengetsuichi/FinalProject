@@ -34,4 +34,5 @@ public interface RMIServer extends Remote
   void logOut(ClientCallback client) throws RemoteException;
   String validateRegister(String username, String email, String password, String dob) throws RemoteException;
   ArrayList<Product> getAllProductsForSpecificManager(String username) throws RemoteException;
+  String deleteProductPrice(int productId, String username) throws RemoteException;
 }

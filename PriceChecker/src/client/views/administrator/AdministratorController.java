@@ -176,6 +176,7 @@ public class AdministratorController implements ViewController
     }
     else if(actionEvent.getSource() == deleteProductBtn)
     {
+      productTable.getSelectionModel().select(-1);
       deleteProduct();
     }
   }

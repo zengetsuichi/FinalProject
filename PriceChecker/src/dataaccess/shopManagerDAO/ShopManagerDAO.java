@@ -9,4 +9,5 @@ public interface ShopManagerDAO
 {
   ArrayList<Product> getAllProductsForSpecificManager(String username) throws
       SQLException;
+  String deleteProductPrice(int productId, String username)  throws SQLException;
 }

@@ -36,4 +36,5 @@ public interface Client extends PropertyChangeSubject
   void setClientUsername(String username);
   String getLoggedInUser();
   ArrayList<Product> getAllProductsForSpecificManager(String username);
+  String deleteProductPrice(int productId, String username);
 }

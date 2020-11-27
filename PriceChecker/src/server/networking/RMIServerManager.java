@@ -140,6 +140,11 @@ public class RMIServerManager implements RMIServer
     return shopManagerServerModel.getAllProductsForSpecificManager(username);
   }
 
+  @Override public String deleteProductPrice(int productId, String username) throws RemoteException
+  {
+    return shopManagerServerModel.deleteProductPrice(productId, username);
+  }
+
   /**
    * A method used for saving the client references into the pool of listeners.
    * @author Gosia
@@ -163,5 +168,6 @@ public class RMIServerManager implements RMIServer
     addNewProductAdminServerModel.addListener(EventType.NEW_TAG.name(), listener);
     editProductAdminServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     administratorServerModel.addListener(EventType.DELETED_PRODUCT.name(), listener);
+    shopManagerServerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), listener);
   }
 }
