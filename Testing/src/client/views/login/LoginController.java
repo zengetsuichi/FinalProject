@@ -1,5 +1,4 @@
 package client.views.login;
-
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
@@ -9,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 /**
  * Class used for initializing the view components based on
  * the data send from view model.
@@ -18,15 +16,10 @@ import javafx.scene.control.TextField;
 
 public class LoginController implements ViewController
 {
-
   @FXML private TextField usernameTextField;
-
   @FXML private PasswordField passwordTextField;
-
   @FXML private Button loginBtn;
-
   @FXML private Button registerBtn;
-
   @FXML private Label errorLabel;
 
   private ViewHandler viewHandler;
@@ -67,22 +60,24 @@ public class LoginController implements ViewController
         }
         else if (loginResponse.equals("User"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openNormalUserView();
         }
-        else if (loginResponse.equals("Admin"))
+        else if (loginResponse.contains("Admin"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openAdministratorView();
         }
-        else if (loginResponse.equals("ShopManager"))
+        else if (loginResponse.contains("ShopManager"))
         {
+          loginViewModel.setClientUsername(username);
           viewHandler.openShopManagerView();
         }
         else
         {
-          System.out.println(loginResponse);
+          System.out.println(loginResponse + "here");
         }
       }
-
     }
     else if (actionEvent.getSource() == registerBtn)
     {

@@ -20,6 +20,6 @@ public class PriceCheckerApp extends Application
     ModelFactory modelFactory = new ModelFactory(clientFactory);
     ViewModelFactory viewModelFactory = new ViewModelFactory(modelFactory);
     ViewHandler viewHandler = new ViewHandler(viewModelFactory);
-    viewHandler.openLoginView();
+    viewHandler.start();
   }
 }

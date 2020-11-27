@@ -3,6 +3,7 @@ package client.views;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import javafx.event.ActionEvent;
+
 /**
  * @author Gosia, Piotr
  */

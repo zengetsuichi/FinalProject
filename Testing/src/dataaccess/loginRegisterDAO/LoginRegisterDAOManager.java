@@ -3,14 +3,11 @@ package dataaccess.loginRegisterDAO;
 import dataaccess.DatabaseConnection;
 import shared.util.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 /**
- * Class used for retrieving neccessary information from the database.
+ * Class used for retrieving necessary information from the database.
  * @author Gosia, Piotr
  */
 public class LoginRegisterDAOManager implements LoginRegisterDAO
@@ -22,7 +19,6 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
   {
     databaseConnection = DatabaseConnection.getInstance();
   }
-
 
   /**
    * Method used for retrieving the data from database about the specific user.
@@ -50,5 +46,52 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
    }
   }
 
+  /**
+   * Method used for inserting the data to database about the user.
+   *
+   * @param username - the username of the person system registers
+   * @param email - the email of the person system registers
+   * @param password - the password of the person system registers
+   * @param dob - date of birth of the person system registers
+   * @author Dorin, Piotr
+   */
 
+  @Override
+  public User register(String username, String email, String password, String dob) throws SQLException {
+    try (Connection connection = databaseConnection.getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO users(username, email, password, dob, type) VALUES(? , ? , ? , ? , ?)");
+      statement.setString(1, username);
+      statement.setString(2, email);
+      statement.setString(3, password);
+      Date date=Date.valueOf(dob);
+      // statement.setDate(4,new Date(622790105000L));
+      statement.setDate(4,date);
+      //statement.setString(4,date);
+      statement.setString(5,"User");
+      statement.executeUpdate();
+
+      return null;
+
+    }}
+
+  /**
+   * Method used for retrieving the data from database about the specific user to check if the email already exist
+   *
+   * @param email - the email of the person whose data we want to retrieve
+   * @author Dorin, Piotr
+   */
+
+  @Override
+  public String findEmail(String email) throws SQLException {
+    try (Connection connection = databaseConnection.getConnection()) {
+      PreparedStatement statement = connection.prepareStatement("SELECT email FROM users WHERE email = ?");
+      statement.setString(1, email);
+      ResultSet resultSet = statement.executeQuery();
+      if(resultSet.next()) {
+        return resultSet.getString("email");
+      } else {
+        return null;
+      }
+    }
+  }
 }

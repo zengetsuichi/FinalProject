@@ -1,8 +1,6 @@
 package client.core;
-
 import client.networking.Client;
 import client.networking.RMIClient;
-
 /**
  * Class responsible for creating an instance of the client.
  * @author Gosia, Piotr

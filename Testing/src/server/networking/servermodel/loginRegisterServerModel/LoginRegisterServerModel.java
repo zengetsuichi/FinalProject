@@ -7,4 +7,6 @@ package server.networking.servermodel.loginRegisterServerModel;
 public interface LoginRegisterServerModel
 {
   String validateLogin(String username, String password);
+  String validateRegister(String username, String email, String password, String dob);
+
 }

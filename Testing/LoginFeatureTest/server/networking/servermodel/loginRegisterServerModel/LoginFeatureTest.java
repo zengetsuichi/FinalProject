@@ -108,7 +108,4 @@ class LoginFeatureTest
     assertEquals(error, loginRegisterServerModel.validateLogin(username, password));
   }
 
-
-
-
 }
