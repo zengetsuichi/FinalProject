@@ -15,6 +15,8 @@ import server.networking.servermodel.addNewProductAdminServerModel.AddNewProduct
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModelManager;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModelManager;
+import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
+import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModelManager;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModel;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModelManager;
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
@@ -48,9 +50,10 @@ public class RunServer
     EditProductAdminServerModel editProductAdminServerModel = new EditProductAdminServerModelManager(administratorDAO);
     AddNewProductAdminServerModel addNewProductAdminServerModel = new AddNewProductAdminServerModelManager(addNewProductAdminDAO, administratorDAO);
     ShopManagerServerModel shopManagerServerModel = new ShopManagerServerModelManager(shopManagerDAO);
+    AdministratorUsersServerModel administratorUsersServerModel = new AdministratorUsersServerModelManager(administratorDAO);
 
     RMIServer rmiServer = new RMIServerManager(loginRegisterServerModel, administratorServerModel,
-        addNewProductAdminServerModel, editProductAdminServerModel, shopManagerServerModel);
+        addNewProductAdminServerModel, editProductAdminServerModel, shopManagerServerModel, administratorUsersServerModel);
     rmiServer.startServer();
   }
 }

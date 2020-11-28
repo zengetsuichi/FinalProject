@@ -3,6 +3,7 @@ import client.clientmodel.shopManagerModel.ShopManagerModel;
 
 import client.views.addNewProductAdmin.AddNewProductAdminViewModel;
 import client.views.administrator.AdministratorViewModel;
+import client.views.administratorUsersPage.AdministratorUsersPageViewModel;
 import client.views.editProductAdmin.EditProductAdminViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
@@ -25,6 +26,7 @@ public class ViewModelFactory
   private AddNewProductAdminViewModel addNewProductAdminViewModel;
   private EditProductAdminViewModel editProductAdminViewModel;
   private ShopManagerViewModel shopManagerViewModel;
+  private AdministratorUsersPageViewModel administratorUsersPageViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -74,5 +76,12 @@ public class ViewModelFactory
       registerViewModel = new RegisterViewModel(modelFactory.getLoginRegisterModel());
     }
     return registerViewModel;
+  }
+
+  public AdministratorUsersPageViewModel getAdministratorUsersPageViewModel() {
+    if(administratorUsersPageViewModel == null){
+      administratorUsersPageViewModel = new AdministratorUsersPageViewModel(modelFactory.getAdministratorUsersPageModel());
+    }
+    return administratorUsersPageViewModel;
   }
 }

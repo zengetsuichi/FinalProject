@@ -15,9 +15,10 @@ public class User implements Serializable
   private String password;
   private String dob;
   private String type;
+  private boolean isSubscribed;
 
   public User(String username, String email, String password,
-      String dob, String type, int userId)
+      String dob, String type, int userId, boolean isSubscribed)
   {
     this.username = username;
     this.email = email;
@@ -25,6 +26,7 @@ public class User implements Serializable
     this.dob = dob;
     this.type = type;
     this.userId = userId;
+    this.isSubscribed = isSubscribed;
   }
 
   public String getUsername()
@@ -86,6 +88,16 @@ public class User implements Serializable
   public void setType(String type)
   {
     this.type = type;
+  }
+
+  public boolean getIsSubscribed()
+  {
+    return isSubscribed;
+  }
+
+  public void setSubscribed(boolean subscribed)
+  {
+    isSubscribed = subscribed;
   }
 
   @Override public String toString()

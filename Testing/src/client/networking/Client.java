@@ -1,9 +1,8 @@
 package client.networking;
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.PropertyChangeSubject;
-import shared.util.ShopPrice;
+import shared.util.*;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Interface is used for separating the models from the client implementation as
@@ -36,4 +35,6 @@ public interface Client extends PropertyChangeSubject
   void setClientUsername(String username);
   String getLoggedInUser();
   ArrayList<Product> getAllProductsForSpecificManager(String username);
+  String deleteProductPrice(int productId, String username);
+  List<User> getAllUsers();
 }

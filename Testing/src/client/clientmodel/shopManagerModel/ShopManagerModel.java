@@ -12,4 +12,5 @@ public interface ShopManagerModel extends PropertyChangeSubject
   ArrayList<Product> getAllProductsForSpecificManager(String username);
   ArrayList<String> getAllTagsById(int productId);
   void logOut();
+  String deleteProductPrice(int productId, String username);
 }

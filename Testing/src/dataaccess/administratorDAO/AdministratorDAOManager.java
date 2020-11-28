@@ -4,6 +4,7 @@ import dataaccess.DatabaseConnection;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
+import shared.util.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Class used for retrieving necessary information from the database.
@@ -143,6 +146,41 @@ public class AdministratorDAOManager implements AdministratorDAO
       statement.setInt(1, productId);
       statement.execute();
       return "Product deleted.";
+    }
+  }
+
+  @Override public List<User> getAllUsers() throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection()){
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM users");
+      ResultSet resultSet = statement.executeQuery();
+      List<User> usersList = new ArrayList<>();
+      while(resultSet.next()){
+        int userId = resultSet.getInt("userid");
+        String username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String dob = resultSet.getString("dob");
+        String type = resultSet.getString("type");
+        User user = new User(username, email, "", dob, type, userId, false);
+
+        if(!user.getType().contains("Admin"))
+          usersList.add(user);
+      }
+
+      PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM defaultUser");
+      ResultSet resultSet1 = statement1.executeQuery();
+      while(resultSet1.next()){
+        int userId = resultSet1.getInt("userid");
+        String issubscribed = resultSet1.getString("issubscribed");
+
+        for (User user : usersList)
+        {
+          if(user.getUserId() == userId)
+            user.setSubscribed(issubscribed.equals("T"));
+        }
+      }
+      return usersList;
     }
   }
 

@@ -4,6 +4,8 @@ import shared.networking.RMIServer;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
+import shared.util.User;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -12,6 +14,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Class implementing the client interface. Used for requesting data from
  * the RMI server as well as firing events.
@@ -193,6 +197,26 @@ public class RMIClient implements Client, ClientCallback {
     try {
       return rmiServer.getAllProductsForSpecificManager(username);
     } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String deleteProductPrice(int productId, String username)
+  {
+    try {
+      return rmiServer.deleteProductPrice(productId, username);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public List<User> getAllUsers()
+  {
+    try
+    {
+      return rmiServer.getAllUsers();
+    }
+    catch (RemoteException e) {
       throw new RuntimeException("Could not contact server");
     }
   }

@@ -141,13 +141,31 @@ public class ShopManagerController implements ViewController
       //new view for editing buttons  
     }
     else if(actionEvent.getSource() == deleteProductBtn){
+      productTable.getSelectionModel().select(-1);
       deleteProduct();
     }
     
   }
 
+  /**
+   * Implementation of delete button
+   * @author Dorin
+   */
   private void deleteProduct()
   {
+    if(productTable.getSelectionModel().getSelectedCells().isEmpty())
+    {
+      errorLabel.setText("Please first select a product in a table to remove.");
+    }
+    else
+    {
+      TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
+      int row = pos.getRow();
+      Product item = productTable.getItems().get(row);
+      String response = shopManagerViewModel.deleteProductPrice(item.getProductId(), username);
+      errorLabel.setText(response);
+
+    }
   }
 
   @FXML

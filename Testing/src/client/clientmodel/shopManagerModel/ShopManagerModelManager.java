@@ -1,6 +1,7 @@
 package client.clientmodel.shopManagerModel;
 
 import client.networking.Client;
+import shared.util.EventType;
 import shared.util.Product;
 
 import java.beans.PropertyChangeListener;
@@ -15,6 +16,8 @@ public class ShopManagerModelManager implements ShopManagerModel
   public ShopManagerModelManager(Client client)
   {
     this.client = client;
+
+    client.addListener(EventType.DELETED_PRODUCT_PRICE.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public void addListener(String eventName,
@@ -48,5 +51,10 @@ public class ShopManagerModelManager implements ShopManagerModel
   @Override public void logOut()
   {
     client.logOut();
+  }
+
+  @Override public String deleteProductPrice(int productId, String username)
+  {
+    return client.deleteProductPrice(productId, username);
   }
 }
