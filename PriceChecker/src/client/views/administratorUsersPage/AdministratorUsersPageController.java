@@ -3,10 +3,13 @@ package client.views.administratorUsersPage;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import shared.util.Product;
 import shared.util.User;
 
 public class AdministratorUsersPageController implements ViewController
@@ -64,7 +67,44 @@ public class AdministratorUsersPageController implements ViewController
     dobColumn.setCellValueFactory(new PropertyValueFactory<User, String>("dob"));
     userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
     isSubscribedColumn.setCellValueFactory(new PropertyValueFactory<User, Boolean>("isSubscribed"));
-    usersTable.setItems(administratorUsersPageViewModel.getAllUsers());
+
+    // Initialize the filtered list with an observable list of all users.
+    FilteredList<User> filteredData = new FilteredList<>(
+        administratorUsersPageViewModel.getAllUsers(), p -> true);
+
+    // Set Predicate expression whenever filter changes.
+    searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
+      filteredData.setPredicate(user -> {
+        // If search bar text field is empty, display all users.
+        if (newValue == null || newValue.isEmpty()) {
+          return true;
+        }
+
+        // Compare username or email or dob or type or isSubscribed with the string from the search bar.
+        String lowerCaseFilter = newValue.toLowerCase();
+
+        if (user.getUsername().toLowerCase().contains(lowerCaseFilter))
+          return true; // String matches with username.
+        else if (user.getEmail().toLowerCase().contains(lowerCaseFilter))
+          return true; // String matches with user email.
+        else if (user.getDob().toLowerCase().contains(lowerCaseFilter))
+          return true; // String matches with user dob.
+        else if (user.getType().toLowerCase().contains(lowerCaseFilter))
+          return true; // String matches with user type.
+        else if (String.valueOf(user.getIsSubscribed()).toLowerCase().contains(lowerCaseFilter))
+          return true; // String matches with user subscription.
+        return false; // Does not match.
+      });
+    });
+
+    // Initialize the filtered list with a sorted list.
+    SortedList<User> sortedData = new SortedList<>(filteredData);
+
+    // Order of values in the sorted list is bound to the order of values from the user table
+    sortedData.comparatorProperty().bind(usersTable.comparatorProperty());
+
+    // Add filtered data to the table.
+    usersTable.setItems(sortedData);
   }
 
   @Override public void handleClickMe(ActionEvent actionEvent)
