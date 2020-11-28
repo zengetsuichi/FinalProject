@@ -3,15 +3,14 @@ package server.networking;
 
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
+import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModel;
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.util.EventType;
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.ShopPrice;
+import shared.util.*;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.AlreadyBoundException;
@@ -21,6 +20,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,13 +36,15 @@ public class RMIServerManager implements RMIServer
   private AddNewProductAdminServerModel addNewProductAdminServerModel;
   private EditProductAdminServerModel editProductAdminServerModel;
   private ShopManagerServerModel shopManagerServerModel;
+  private AdministratorUsersServerModel administratorUsersServerModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
 
   public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
       AdministratorServerModel administratorServerModel,
       AddNewProductAdminServerModel addNewProductAdminServerModel,
       EditProductAdminServerModel editProductAdminServerModel,
-      ShopManagerServerModel shopManagerServerModel) throws RemoteException
+      ShopManagerServerModel shopManagerServerModel,
+      AdministratorUsersServerModel administratorUsersServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
@@ -50,13 +52,14 @@ public class RMIServerManager implements RMIServer
     this.addNewProductAdminServerModel = addNewProductAdminServerModel;
     this.editProductAdminServerModel = editProductAdminServerModel;
     this.shopManagerServerModel = shopManagerServerModel;
+    this.administratorUsersServerModel = administratorUsersServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
   {
     Registry registry = LocateRegistry.createRegistry(1099);
     registry.bind("priceCheckerServer", this);
-
+    System.out.println("Server started.");
   }
 
   @Override public ProductList loadProductData() throws RemoteException
@@ -143,6 +146,11 @@ public class RMIServerManager implements RMIServer
   @Override public String deleteProductPrice(int productId, String username) throws RemoteException
   {
     return shopManagerServerModel.deleteProductPrice(productId, username);
+  }
+
+  @Override public List<User> getAllUsers() throws RemoteException
+  {
+    return administratorUsersServerModel.getAllUsers();
   }
 
   /**

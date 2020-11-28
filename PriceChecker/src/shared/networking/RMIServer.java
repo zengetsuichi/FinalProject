@@ -3,11 +3,13 @@ package shared.networking;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
+import shared.util.User;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An RMIServer interface is used for separating the Client
@@ -35,4 +37,5 @@ public interface RMIServer extends Remote
   String validateRegister(String username, String email, String password, String dob) throws RemoteException;
   ArrayList<Product> getAllProductsForSpecificManager(String username) throws RemoteException;
   String deleteProductPrice(int productId, String username) throws RemoteException;
+  List<User> getAllUsers() throws RemoteException;
 }

@@ -3,6 +3,8 @@ import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminMode
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModelManager;
 import client.clientmodel.administratorModel.AdministratorModel;
 import client.clientmodel.administratorModel.AdministratorModelManager;
+import client.clientmodel.administratorUsersPageModel.AdministratorUsersPageModel;
+import client.clientmodel.administratorUsersPageModel.AdministratorUsersPageModelManager;
 import client.clientmodel.editProductAdministratorModel.EditProductAdministratorModel;
 import client.clientmodel.editProductAdministratorModel.EditProductAdministratorModelManager;
 import client.clientmodel.loginRegisterModel.LoginRegisterModel;
@@ -24,6 +26,7 @@ public class ModelFactory
   private AddNewProductAdminModel addNewProductAdminModel;
   private EditProductAdministratorModel editProductAdministratorModel;
   private ShopManagerModel shopManagerModel;
+  private AdministratorUsersPageModel administratorUsersPageModel;
   private ClientFactory clientFactory;
 
   public ModelFactory(ClientFactory clientFactory){
@@ -66,5 +69,13 @@ public class ModelFactory
       shopManagerModel = new ShopManagerModelManager(clientFactory.getClient());
     }
     return shopManagerModel;
+  }
+
+  public AdministratorUsersPageModel getAdministratorUsersPageModel()
+  {
+    if(administratorUsersPageModel == null){
+      administratorUsersPageModel = new AdministratorUsersPageModelManager(clientFactory.getClient());
+    }
+    return administratorUsersPageModel;
   }
 }
