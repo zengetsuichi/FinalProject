@@ -113,5 +113,8 @@ public class AdministratorUsersPageController implements ViewController
       administratorUsersPageViewModel.logOut();
       viewHandler.openLoginView();
     }
+    else if (actionEvent.getSource() == addUserBtn){
+      viewHandler.openAddNewManagerView();
+    }
   }
 }

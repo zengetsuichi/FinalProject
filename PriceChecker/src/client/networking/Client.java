@@ -37,4 +37,5 @@ public interface Client extends PropertyChangeSubject
   ArrayList<Product> getAllProductsForSpecificManager(String username);
   String deleteProductPrice(int productId, String username);
   List<User> getAllUsers();
+  String addNewManager(User newManager);
 }

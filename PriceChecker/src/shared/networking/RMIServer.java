@@ -38,4 +38,5 @@ public interface RMIServer extends Remote
   ArrayList<Product> getAllProductsForSpecificManager(String username) throws RemoteException;
   String deleteProductPrice(int productId, String username) throws RemoteException;
   List<User> getAllUsers() throws RemoteException;
+  String addNewManager(User newManager) throws RemoteException;
 }

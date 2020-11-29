@@ -221,6 +221,7 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+
   @Override public void update(String eventName, Object newValue)
       throws RemoteException
   {
@@ -268,4 +269,16 @@ public class RMIClient implements Client, ClientCallback {
       throw new RuntimeException("Could not contact server");
     }
   }
+
+  @Override public String addNewManager(User newManager)
+  {
+    try
+    {
+      return rmiServer.addNewManager(newManager);
+    }
+    catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
 }

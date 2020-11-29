@@ -153,6 +153,11 @@ public class RMIServerManager implements RMIServer
     return administratorUsersServerModel.getAllUsers();
   }
 
+  @Override public String addNewManager(User newManager) throws RemoteException
+  {
+    return administratorUsersServerModel.addNewManager(newManager);
+  }
+
   /**
    * A method used for saving the client references into the pool of listeners.
    * @author Gosia
@@ -177,5 +182,6 @@ public class RMIServerManager implements RMIServer
     editProductAdminServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     administratorServerModel.addListener(EventType.DELETED_PRODUCT.name(), listener);
     shopManagerServerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), listener);
+    administratorUsersServerModel.addListener(EventType.NEW_SHOP_MANAGER.name(), listener);
   }
 }

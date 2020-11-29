@@ -1,5 +1,6 @@
 package client.core;
 
+import client.views.addNewManagerAdmin.AddNewManagerAdminController;
 import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
 import client.views.administratorUsersPage.AdministratorUsersPageController;
@@ -190,6 +191,26 @@ public class ViewHandler
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("Edit Users Administrator");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openAddNewManagerView(){
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/addNewManagerAdmin/AddNewManagerAdmin.fxml"));
+      Parent root = loader.load();
+      AddNewManagerAdminController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Add shop manager");
       stage.show();
     }
     catch (IOException e)

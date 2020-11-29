@@ -1,4 +1,6 @@
 package client.core;
+import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModel;
+import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModelManager;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModel;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModelManager;
 import client.clientmodel.administratorModel.AdministratorModel;
@@ -28,6 +30,7 @@ public class ModelFactory
   private ShopManagerModel shopManagerModel;
   private AdministratorUsersPageModel administratorUsersPageModel;
   private ClientFactory clientFactory;
+  private AddNewManagerAdminModel addNewManagerAdminModel;
 
   public ModelFactory(ClientFactory clientFactory){
     this.clientFactory = clientFactory;
@@ -77,5 +80,12 @@ public class ModelFactory
       administratorUsersPageModel = new AdministratorUsersPageModelManager(clientFactory.getClient());
     }
     return administratorUsersPageModel;
+  }
+
+  public AddNewManagerAdminModel getAddNewManagerAdminModel(){
+    if(addNewManagerAdminModel == null){
+      addNewManagerAdminModel = new AddNewManagerAdminModelManager(clientFactory.getClient());
+    }
+    return addNewManagerAdminModel;
   }
 }
