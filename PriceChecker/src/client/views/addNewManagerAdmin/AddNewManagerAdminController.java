@@ -65,35 +65,39 @@ public class AddNewManagerAdminController implements ViewController
     String email = emailTextField.getText();
     String password = passwordTextField.getText();
 
-
     Pattern pattern = Pattern.compile("^.+@.+\\..+$");
     Matcher emailValidation = pattern.matcher(email);
 
-    if (!username.isEmpty() && username.length() <= 20) {
-      if (!email.isEmpty() && email.length() <= 50 && emailValidation.matches()) {
-        if (!password.isEmpty()) {
-          if (!(dateOfBirthPicker.getValue() == null)) {
-            String dateOfBirth = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-            User newManager = new User(username, email, password, dateOfBirth, "ShopManager");
-            String response = addNewManagerAdminViewModel.addNewManager(newManager);
-            if(response.equals("Shop manager added.")){
-              viewHandler.openAdministratorUsersPage();
-            }
-            else{
-              errorLabel.setText(response);
-            }
-          }
-          else
-            errorLabel.setText("Date of birth cannot be empty.");
-        }
-        else
-          errorLabel.setText("Password text field cannot be empty.");
-      }
-      else
-      errorLabel.setText("Email field is either empty, invalid or too long.");
+    if (username.isEmpty() || email.isEmpty() || (dateOfBirthPicker.getValue()
+        == null) || passwordTextField.getText().isEmpty())
+    {
+      errorLabel.setText("Fill out all the fields.");
     }
     else
-      errorLabel.setText("Username is too long or the field is empty.");
+    {
+      if (username.length() <= 20)
+      {
+        if (email.length() <= 50 && emailValidation.matches())
+        {
+          String dateOfBirth = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+          User newManager = new User(username, email, password, dateOfBirth,
+              "ShopManager");
+          String response = addNewManagerAdminViewModel.addNewManager(newManager);
+          if (response.equals("Shop manager added."))
+          {
+            viewHandler.openAdministratorUsersPage();
+          }
+          else
+          {
+            errorLabel.setText(response);
+          }
+        }
+        else
+          errorLabel.setText("Email field is invalid or too long.");
+      }
+      else
+        errorLabel.setText("Username is too long.");
+    }
   }
 
 
