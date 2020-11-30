@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * An interface separating the data access objects from server models.
- * @author Gosia, Hadi
+ * @author Gosia, Karlo
  */
 public interface AdministratorDAO
 {

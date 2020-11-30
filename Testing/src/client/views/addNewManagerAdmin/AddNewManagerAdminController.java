@@ -79,6 +79,7 @@ public class AddNewManagerAdminController implements ViewController
       {
         if (email.length() <= 50 && emailValidation.matches())
         {
+          //TODO Gosia add length password
           String dateOfBirth = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
           User newManager = new User(username, email, password, dateOfBirth,
               "ShopManager");

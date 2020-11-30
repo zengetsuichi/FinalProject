@@ -43,4 +43,12 @@ public class ShopPrice implements Serializable
     return "ShopPrice{" + "shopName='" + shopName + '\'' + ", price=" + price
         + '}';
   }
+
+  public boolean equals(Object obj)
+  {
+    if(!(obj instanceof ShopPrice))
+      return false;
+    ShopPrice other = (ShopPrice) obj;
+    return shopName.equals(other.shopName) && price == other.price;
+  }
 }
