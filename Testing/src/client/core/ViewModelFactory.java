@@ -1,6 +1,7 @@
 package client.core;
 import client.clientmodel.shopManagerModel.ShopManagerModel;
 
+import client.views.addNewManagerAdmin.AddNewManagerAdminViewModel;
 import client.views.addNewProductAdmin.AddNewProductAdminViewModel;
 import client.views.administrator.AdministratorViewModel;
 import client.views.administratorUsersPage.AdministratorUsersPageViewModel;
@@ -27,6 +28,7 @@ public class ViewModelFactory
   private EditProductAdminViewModel editProductAdminViewModel;
   private ShopManagerViewModel shopManagerViewModel;
   private AdministratorUsersPageViewModel administratorUsersPageViewModel;
+  private AddNewManagerAdminViewModel addNewManagerAdminViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -83,5 +85,13 @@ public class ViewModelFactory
       administratorUsersPageViewModel = new AdministratorUsersPageViewModel(modelFactory.getAdministratorUsersPageModel());
     }
     return administratorUsersPageViewModel;
+  }
+
+  public AddNewManagerAdminViewModel getAddNewManagerAdminViewModel()
+  {
+    if(addNewManagerAdminViewModel == null){
+      addNewManagerAdminViewModel = new AddNewManagerAdminViewModel(modelFactory.getAddNewManagerAdminModel());
+    }
+    return addNewManagerAdminViewModel;
   }
 }

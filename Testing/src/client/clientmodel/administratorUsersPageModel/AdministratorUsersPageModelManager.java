@@ -1,6 +1,7 @@
 package client.clientmodel.administratorUsersPageModel;
 
 import client.networking.Client;
+import shared.util.EventType;
 import shared.util.User;
 
 import java.beans.PropertyChangeListener;
@@ -16,6 +17,7 @@ public class AdministratorUsersPageModelManager
   public AdministratorUsersPageModelManager(Client client)
   {
     this.client = client;
+    client.addListener(EventType.NEW_SHOP_MANAGER.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public List<User> getAllUsers()
