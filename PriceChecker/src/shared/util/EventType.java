@@ -1,6 +1,5 @@
 package shared.util;
 
-import jdk.internal.jmod.JmodFile;
 
 public enum EventType
 {

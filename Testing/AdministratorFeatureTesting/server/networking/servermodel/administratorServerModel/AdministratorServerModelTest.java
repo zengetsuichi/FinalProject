@@ -14,8 +14,7 @@ import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class AdministratorServerModelTest
 {
@@ -58,7 +57,7 @@ class AdministratorServerModelTest
   }
 
   /*
-  The method is testing whether the server will return the shops that are offering the
+  The method is testing whether the server model will return the shops that are offering the
   specific product along with the prices corresponding to each shop.
    */
 
@@ -75,4 +74,53 @@ class AdministratorServerModelTest
 
     assertEquals(shopsPrices, administratorServerModel.getShopPricesById(1));
   }
+
+   /*
+   The test method checks whether the server model will return an empty list
+   when asked for shop and prices for a product that does not exist.
+   */
+
+  @Test
+  public void getShopAndPricesForTheNonExistingProduct(){
+    ArrayList<ShopPrice> shopPrices = new ArrayList<>();
+    assertEquals(shopPrices, administratorServerModel.getShopPricesById(1000));
+  }
+
+  /*
+  The method is testing whether the server model will return all the tags
+  assigned to a specific product.
+   */
+
+  @Test
+  public void returnAllTagsAssignedToASpecificProduct(){
+    //arrange, all tags assigned to the product
+    ArrayList<String> tags = new ArrayList<>();
+    tags.add("cola");
+    tags.add("drink");
+
+    assertEquals(tags, administratorServerModel.getAllTagsById(1));
+  }
+
+  /*
+  The method is testing whether the server model will return an empty ArrayList
+  when asking for tags for a non existing product.
+   */
+
+  @Test
+  public void returnEmptyArrayOfTagsForNonExistingProduct(){
+    //arrange, all tags assigned to the product
+    ArrayList<String> tags = new ArrayList<>();
+    assertEquals(tags, administratorServerModel.getAllTagsById(10000));
+  }
+
+  /*
+  The method used for testing whether the server model will
+  delete the product from the database by specific product id
+   */
+
+  @Test
+  public void deleteTheSpecificProduct(){
+    assertEquals("Product deleted.", administratorServerModel.deleteProduct(1));
+  }
+
 }
