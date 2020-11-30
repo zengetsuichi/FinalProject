@@ -18,6 +18,7 @@ public class AdministratorUsersPageModelManager
   {
     this.client = client;
     client.addListener(EventType.NEW_SHOP_MANAGER.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.EDIT_USER.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public List<User> getAllUsers()

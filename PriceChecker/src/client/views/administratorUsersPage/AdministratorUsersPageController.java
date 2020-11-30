@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.util.Product;
 import shared.util.User;
 
 public class AdministratorUsersPageController implements ViewController
@@ -68,6 +67,7 @@ public class AdministratorUsersPageController implements ViewController
     userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
     isSubscribedColumn.setCellValueFactory(new PropertyValueFactory<User, Boolean>("isSubscribed"));
 
+
     // Initialize the filtered list with an observable list of all users.
     FilteredList<User> filteredData = new FilteredList<>(
         administratorUsersPageViewModel.getAllUsers(), p -> true);
@@ -115,6 +115,21 @@ public class AdministratorUsersPageController implements ViewController
     }
     else if (actionEvent.getSource() == addUserBtn){
       viewHandler.openAddNewManagerView();
-    }
+    }else if (actionEvent.getSource() == editUserBtn){
+      if(usersTable.getSelectionModel().getSelectedCells().isEmpty())
+      {
+        errorLabel.setText("Please first select a user from the table.");
+      } else {
+      /*
+          Taking the selected row from the table, creating a user object,
+          passing it to the next view.
+       */
+        TablePosition pos = usersTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        User user = usersTable.getItems().get(row);
+
+        viewHandler.openAdministratorEditUserView(user);
+      }
+  }
   }
 }

@@ -261,7 +261,8 @@ public class RMIClient implements Client, ClientCallback {
               response.equals("Houston we have a problem someone fucked up the code.")) {
         return response;
       } else {
-        rmiServer.registerClient(this);
+
+       rmiServer.registerClient(this);
         return response;
       }
 
@@ -276,6 +277,26 @@ public class RMIClient implements Client, ClientCallback {
     {
       return rmiServer.addNewManager(newManager);
     }
+    catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob)
+  {
+
+    try {
+      String response = rmiServer.validateUserEdit(oldUsername, oldEmail, username, email, password, dob);
+      if (response.equals("User with this username already exist") ||
+          response.equals("Email already used") ||
+          response.equals("Houston we have a problem someone fucked up the code.")) {
+        return response;
+      } else {
+
+         //register as listener
+        rmiServer.registerClient(this);
+        return response;
+      } }
     catch (RemoteException e) {
       throw new RuntimeException("Could not contact server");
     }

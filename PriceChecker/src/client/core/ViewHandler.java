@@ -3,6 +3,7 @@ package client.core;
 import client.views.addNewManagerAdmin.AddNewManagerAdminController;
 import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
+import client.views.administratorEditUser.AdministratorEditUserController;
 import client.views.administratorUsersPage.AdministratorUsersPageController;
 import client.views.editProductAdmin.EditProductAdminController;
 import client.views.login.LoginController;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import shared.util.Product;
+import shared.util.User;
 
 import java.io.IOException;
  /**
@@ -203,7 +205,7 @@ public class ViewHandler
     try
     {
       FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("../views/addNewManagerAdmin/AddNewManagerAdmin.fxml"));
+      loader.setLocation(getClass().getResource("../views/addNewManagerAdmin/AdministratorEditUser.fxml"));
       Parent root = loader.load();
       AddNewManagerAdminController view = loader.getController();
 
@@ -211,6 +213,28 @@ public class ViewHandler
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("Add shop manager");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openAdministratorEditUserView(User user)
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/administratorEditUser/AdministratorEditUser.fxml"));
+      Parent root = loader.load();
+      AdministratorEditUserController ctlr = loader.getController();
+      ctlr.setUser(user);
+
+      ctlr.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Edit User");
       stage.show();
     }
     catch (IOException e)

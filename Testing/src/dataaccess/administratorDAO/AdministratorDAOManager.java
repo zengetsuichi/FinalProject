@@ -162,7 +162,7 @@ public class AdministratorDAOManager implements AdministratorDAO
         String password = resultSet.getString("password");
         String dob = resultSet.getString("dob");
         String type = resultSet.getString("type");
-        User user = new User(username, email, "", dob, type, userId, false);
+        User user = new User(username, email, password, dob, type, userId, false);
 
         if(!user.getType().contains("Admin"))
           usersList.add(user);

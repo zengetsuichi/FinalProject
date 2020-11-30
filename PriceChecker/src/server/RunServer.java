@@ -13,6 +13,8 @@ import dataaccess.shopManagerDAO.ShopManagerDAOManager;
 import server.networking.RMIServerManager;
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModelManager;
+import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModel;
+import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModelManager;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModelManager;
 import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
@@ -51,9 +53,10 @@ public class RunServer
     AddNewProductAdminServerModel addNewProductAdminServerModel = new AddNewProductAdminServerModelManager(addNewProductAdminDAO, administratorDAO);
     ShopManagerServerModel shopManagerServerModel = new ShopManagerServerModelManager(shopManagerDAO);
     AdministratorUsersServerModel administratorUsersServerModel = new AdministratorUsersServerModelManager(administratorDAO);
+    AdministratorEditUserServerModel administratorEditUserServerModel = new AdministratorEditUserServerModelManager(administratorDAO, loginRegisterDAO);
 
     RMIServer rmiServer = new RMIServerManager(loginRegisterServerModel, administratorServerModel,
-        addNewProductAdminServerModel, editProductAdminServerModel, shopManagerServerModel, administratorUsersServerModel);
+        addNewProductAdminServerModel, editProductAdminServerModel, shopManagerServerModel, administratorUsersServerModel, administratorEditUserServerModel);
     rmiServer.startServer();
   }
 }

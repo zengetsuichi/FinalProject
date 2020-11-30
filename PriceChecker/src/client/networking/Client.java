@@ -38,4 +38,5 @@ public interface Client extends PropertyChangeSubject
   String deleteProductPrice(int productId, String username);
   List<User> getAllUsers();
   String addNewManager(User newManager);
+  String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob);
 }

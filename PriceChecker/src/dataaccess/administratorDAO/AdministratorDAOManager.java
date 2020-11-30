@@ -159,7 +159,7 @@ public class AdministratorDAOManager implements AdministratorDAO
         String password = resultSet.getString("password");
         String dob = resultSet.getString("dob");
         String type = resultSet.getString("type");
-        User user = new User(username, email, "", dob, type, userId, false);
+        User user = new User(username, email, password, dob, type, userId, false);
 
         if(!user.getType().contains("Admin"))
           usersList.add(user);
@@ -243,6 +243,8 @@ public class AdministratorDAOManager implements AdministratorDAO
     }
   }
 
+
+
   private void addNewManagerNow(User newManager) throws SQLException
   {
     try (Connection connection = databaseConnection.getConnection()){
@@ -255,6 +257,21 @@ public class AdministratorDAOManager implements AdministratorDAO
       statement.setString(5, newManager.getType());
       statement.executeUpdate();
     }
+  }
+
+  @Override public void editUser(String oldUsername, String oldEmail, String username, String email, String password, String dob)throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection()){
+      PreparedStatement statement = connection.prepareStatement("UPDATE users  SET username = ?, email = ?, password = ?, dob = ? WHERE username = ?");
+      statement.setString(1, username);
+      statement.setString(2, email);
+      statement.setString(3, password);
+      Date date = Date.valueOf(dob);
+      statement.setDate(4, date);
+      statement.setString(5, oldUsername);
+      statement.executeUpdate();
+    }
+
   }
 
 }

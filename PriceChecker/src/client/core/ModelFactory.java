@@ -3,6 +3,8 @@ import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModel;
 import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModelManager;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModel;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModelManager;
+import client.clientmodel.administratorEditUser.AdministratorEditUserModel;
+import client.clientmodel.administratorEditUser.AdministratorEditUserModelManager;
 import client.clientmodel.administratorModel.AdministratorModel;
 import client.clientmodel.administratorModel.AdministratorModelManager;
 import client.clientmodel.administratorUsersPageModel.AdministratorUsersPageModel;
@@ -31,6 +33,7 @@ public class ModelFactory
   private AdministratorUsersPageModel administratorUsersPageModel;
   private ClientFactory clientFactory;
   private AddNewManagerAdminModel addNewManagerAdminModel;
+  private AdministratorEditUserModelManager administratorEditUserModelManager;
 
   public ModelFactory(ClientFactory clientFactory){
     this.clientFactory = clientFactory;
@@ -87,5 +90,13 @@ public class ModelFactory
       addNewManagerAdminModel = new AddNewManagerAdminModelManager(clientFactory.getClient());
     }
     return addNewManagerAdminModel;
+  }
+
+  public AdministratorEditUserModel getAdministratorEditUserModel()
+  {
+    if(administratorEditUserModelManager == null){
+      administratorEditUserModelManager = new AdministratorEditUserModelManager(clientFactory.getClient());
+    }
+    return administratorEditUserModelManager;
   }
 }

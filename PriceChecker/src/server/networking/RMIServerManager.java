@@ -2,6 +2,7 @@ package server.networking;
 
 
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
+import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModel;
@@ -37,14 +38,13 @@ public class RMIServerManager implements RMIServer
   private EditProductAdminServerModel editProductAdminServerModel;
   private ShopManagerServerModel shopManagerServerModel;
   private AdministratorUsersServerModel administratorUsersServerModel;
+  private AdministratorEditUserServerModel administratorEditUserServerModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
 
-  public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
-      AdministratorServerModel administratorServerModel,
-      AddNewProductAdminServerModel addNewProductAdminServerModel,
-      EditProductAdminServerModel editProductAdminServerModel,
-      ShopManagerServerModel shopManagerServerModel,
-      AdministratorUsersServerModel administratorUsersServerModel) throws RemoteException
+  public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel, AdministratorServerModel administratorServerModel,
+      AddNewProductAdminServerModel addNewProductAdminServerModel, EditProductAdminServerModel editProductAdminServerModel,
+      ShopManagerServerModel shopManagerServerModel, AdministratorUsersServerModel administratorUsersServerModel,
+      AdministratorEditUserServerModel administratorEditUserServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
@@ -53,6 +53,7 @@ public class RMIServerManager implements RMIServer
     this.editProductAdminServerModel = editProductAdminServerModel;
     this.shopManagerServerModel = shopManagerServerModel;
     this.administratorUsersServerModel = administratorUsersServerModel;
+    this.administratorEditUserServerModel= administratorEditUserServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -158,6 +159,11 @@ public class RMIServerManager implements RMIServer
     return administratorUsersServerModel.addNewManager(newManager);
   }
 
+  @Override public String validateUserEdit(String oldUsername, String oldEmail, String username, String email, String password, String dob)
+  {
+    return administratorEditUserServerModel.validateUserEdit(oldUsername, oldEmail, username,email,password,dob);
+  }
+
   /**
    * A method used for saving the client references into the pool of listeners.
    * @author Gosia
@@ -183,5 +189,6 @@ public class RMIServerManager implements RMIServer
     administratorServerModel.addListener(EventType.DELETED_PRODUCT.name(), listener);
     shopManagerServerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), listener);
     administratorUsersServerModel.addListener(EventType.NEW_SHOP_MANAGER.name(), listener);
+    administratorEditUserServerModel.addListener(EventType.EDIT_USER.name(), listener);
   }
 }
