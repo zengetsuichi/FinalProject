@@ -24,8 +24,24 @@ class AdministratorUsersServerModelTest
     AdministratorDAO administratorDAO = new AdministratorDAOManager();
     administratorUsersServerModel = new AdministratorUsersServerModelManager(administratorDAO);
     dummyDatabase = new DummyDatabase();
-
   }
+
+  @AfterEach
+  public void drop(){
+    dummyDatabase.dropDatabase();
+  }
+
+  /*
+  Test method prepared for checking if the method will return the list of all
+  the users stored in database.
+   */
+
+  @Test
+  public void getAllUsersInDatabase(){
+    //arrange
+    //TODO wait for update
+  }
+
 
   /*
   Test method prepared for checking if the method will add the user to the
@@ -40,8 +56,6 @@ class AdministratorUsersServerModelTest
         "2003-01-12", "ShopManager");
     //assert
     assertEquals("Shop manager added.", administratorUsersServerModel.addNewManager(newManager));
-
-    dummyDatabase.dropDatabase();
   }
 
   /*
@@ -53,11 +67,25 @@ class AdministratorUsersServerModelTest
   public void addAlreadyExistingManager(){
     //arrange
     dummyDatabase.createDummyDatabase();
-    User newManager = new User("Netto", "netto@gmail.com", "netto1",
+    User newManager = new User("Netto", "admin@gmail.com", "netto1",
         "2003-02-01", "ShopManager");
     //assert
     assertEquals("Specified shop manager already exists.", administratorUsersServerModel.addNewManager(newManager));
-    dummyDatabase.dropDatabase();
+  }
+
+  /*
+  Test method prepared for checking if the method will add the user to the
+  database providing that the input email already exists.
+   */
+
+  @Test
+  public void addManagerWithAlreadyExistingEmail(){
+    //arrange
+    dummyDatabase.createDummyDatabase();
+    User newManager = new User("Neto", "admin@gmail.com", "netto1",
+        "2003-02-01", "ShopManager");
+    //assert
+    assertEquals("Shop manager with this email already exists.", administratorUsersServerModel.addNewManager(newManager));
   }
 
 }

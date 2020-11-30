@@ -215,7 +215,6 @@ public class AdministratorDAOManager implements AdministratorDAO
 
   @Override public String addNewManager(User newManager) throws SQLException
   {
-
     try (Connection connection = databaseConnection.getConnection())
     {
       PreparedStatement statement = connection.prepareStatement("SELECT * FROM users where username = ?");
@@ -232,9 +231,36 @@ public class AdministratorDAOManager implements AdministratorDAO
         String type = resultSet.getString("type");
         user = new User(username, email, password, dob, type, userId, false);
       }
-
       if(user != null)
         return "Specified shop manager already exists.";
+      else
+      {
+        String response = checkTheEmail(newManager);
+        return response;
+      }
+    }
+  }
+
+  private String checkTheEmail(User newManager) throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM users where email = ?");
+      statement.setString(1, newManager.getEmail());
+      ResultSet resultSet = statement.executeQuery();
+      User user = null;
+      while (resultSet.next())
+      {
+        int userId = resultSet.getInt("userid");
+        String username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String dob = resultSet.getString("dob");
+        String type = resultSet.getString("type");
+        user = new User(username, email, password, dob, type, userId, false);
+      }
+      if(user != null)
+        return "Shop manager with this email already exists.";
       else
       {
         addNewManagerNow(newManager);

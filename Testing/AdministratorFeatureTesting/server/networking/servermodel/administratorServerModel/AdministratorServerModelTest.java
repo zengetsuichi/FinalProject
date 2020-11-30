@@ -8,8 +8,14 @@ import org.junit.jupiter.api.Test;
 import server.DummyDatabase;
 import shared.util.Product;
 import shared.util.ProductList;
+import shared.util.ShopPrice;
 
+import java.sql.Array;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AdministratorServerModelTest
 {
@@ -40,11 +46,33 @@ class AdministratorServerModelTest
     //arrange
     //creating product list product as it is in database
     Product product1 = new Product(1,"Cola 330", "Cola 330 ml, can, best for parties","Beverages");
-    Product product2 = new Product(2,"Fanta 1l", "Fanta, bottle, german engineering","Fruits");
-    Product product3 = new Product(3,"Big Bread", "Big bread, cuted for toaster","Bread");
-    Product product4 = new Product(4,"Nescafe 1kg", "Nescafe, worst coffe for even worser times","Coffee");
+    Product product2 = new Product(2,"Fanta 1l", "Fanta, bottle, german engineering","Beverages");
+    Product product4 = new Product(3,"Nescafe 1kg", "Nescafe, worst coffe for even worser times","Coffee");
     ProductList productList = new ProductList();
+    productList.addProduct(product1);
+    productList.addProduct(product2);
+    productList.addProduct(product4);
+    ArrayList<Product> array = administratorServerModel.loadProductData().getProducts();
+
+    assertTrue(productList.equals(array));
   }
 
+  /*
+  The method is testing whether the server will return the shops that are offering the
+  specific product along with the prices corresponding to each shop.
+   */
 
+  @Test
+  public void getShopAndPricesForTheSpecificProduct(){
+    //arrange
+    //creating shop and prices
+    ShopPrice shopPrices = new ShopPrice("Netto", 105);
+    ShopPrice shopPrices2 = new ShopPrice("Lidl", 100);
+
+    ArrayList<ShopPrice> shopsPrices = new ArrayList<>();
+    shopsPrices.add(shopPrices);
+    shopsPrices.add(shopPrices2);
+
+    assertEquals(shopsPrices, administratorServerModel.getShopPricesById(1));
+  }
 }

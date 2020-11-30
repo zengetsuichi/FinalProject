@@ -34,4 +34,9 @@ public class ProductList implements Serializable
     });
     return products;
   }
+
+  public boolean equals(ArrayList<Product> productList){
+    return products.equals(productList);
+  }
+
 }

@@ -24,9 +24,9 @@ CREATE TABLE users(
     userId SERIAL PRIMARY KEY,
     username d_username NOT null UNIQUE,
     email d_email NOT null UNIQUE,
-	password d_password NOT null,
+    password d_password NOT null,
     dob d_dob NOT null,
-	type d_type NOT null
+    type d_type NOT null
 );
 
 CREATE TABLE defaultUser(
@@ -90,11 +90,11 @@ CREATE TABLE shoppingList(
 
 CREATE DOMAIN d_quantity AS INT;
 ALTER DOMAIN d_quantity ADD CONSTRAINT d_con_quantity
-CHECK (VALUE BETWEEN 0 AND 100) ;
+CHECK (VALUE BETWEEN 0 AND 100);
 
 CREATE TABLE shoppingListItem(
 	shopListId INT NOT null,
-    productId INT NOT null,
+  productId INT NOT null,
 	quantity d_quantity DEFAULT 1,
     FOREIGN KEY (productId)
     REFERENCES product(productId)
@@ -105,102 +105,57 @@ CREATE TABLE shoppingListItem(
 INSERT INTO category
 VALUES ('Beverages'),
 ('Meat'),
-('Dairy'),
-('Vegetables'),
-('Fruits'),
-('Bread'),
 ('Sweets'),
-('Tea'),
 ('Coffee');
 
 INSERT INTO tag
-VALUES ('cola'),
-('drink'),
+VALUES ('drink'),
 ('beer'),
-('fanta'),
-('pepsi'),
-('1 kg'),
-('coconut'),
-('onion'),
-('banana'),
-('apple'),
-('healty food'),
-('can'),
-('bottle'),
-('1l'),
-('2l'),
-('1.5l'),
-('toast'),
-('baquet'),
-('candle'),
-('christmas'),
-('easter'),
-('holidays');
+('coffee'),
+('cola');
 
 INSERT INTO product (productName, productDescription, categoryName)
 VALUES ('Cola 330', 'Cola 330 ml, can, best for parties','Beverages'),
 ('Fanta 1l', 'Fanta, bottle, german engineering','Beverages'),
-('Apple 1kg', 'Apples, best for lame parties','Fruits'),
-('Big Bread', 'Big bread, cuted for toaster','Bread'),
 ('Nescafe 1kg', 'Nescafe, worst coffe for even worser times','Coffee');
 
 INSERT INTO users ( username, email, password, dob, type)
 VALUES ( 'Admin', 'admin@gmail.com','admin1','01-02-2003','Admin'),
-( 'Netto', 'netto@gmail.com','netto1','01-02-2003','ShopManager'),
-( 'Lidl', 'lidl@gmail.com','admin1','01-02-2003','ShopManager'),
-( 'Fottex', 'fottex@gmail.com','admin1','01-02-2003','ShopManager'),
+( 'Netto', 'netto@gmail.com','admin1','01-02-2003','ShopManager'),
+( 'Lidl', 'lidl@gmail.com','lidl1','01-02-2003','ShopManager'),
 ( 'User1', 'user1@gmail.com','user1','01-02-2003','User'),
-('User2', 'user2@gmail.com','user1','01-02-2003','User'),
-( 'User3', 'user3@gmail.com','user1','01-02-2003','User');
+('User2', 'user2@gmail.com','user2','01-02-2003','User');
 
 
-INSERT INTO price (productId,userId, price)
-VALUES (2,2,6),
-(2,3, 15),
-(2,4, 15),
-(3,2, 7 ),
-(4,3, 16),
-(4,4, 5),
-(5,2, 5 ),
-(5,3, 10),
-(3,4, 20),
-(5,4, 11),
-(3,3, 12);
-
+INSERT INTO price (productId, userId, price)
+VALUES (1, 2, 105),
+(2, 2, 155),
+(3, 2, 55),
+(1, 3, 100),
+(2, 3, 150),
+(3, 3, 50);
 
 INSERT INTO productTag(productId, tagName)
 VALUES (1, 'cola' ),
 (1, 'drink' ),
 (2,'drink'),
-(3,'healty food'),
-(3,'1 kg'),
-(4,'toast'),
-(5,'drink'),
-(5,'1 kg');
+(3,'coffee'),
+(3,'drink');
 
 INSERT INTO defaultUser
-VALUES (1, 'F'),
-(2, 'F'),
-(3, 'F'),
-(4, 'F'),
-(5, 'F'),
-(6, 'F'),
-(7, 'F');
+VALUES (4, 'F'),
+(5, 'F');
 
 INSERT INTO shoppingList(userId)
-VALUES (5),
-(5),
-(6),
-(7);
+VALUES (4),
+(5);
 
 INSERT INTO shoppingListItem(shopListId, productId, quantity)
-VALUES (1,3, 1),
+VALUES (1, 3, 1),
 (1,1,1),
-(1,2,1),
-(3,4,1),
-(3,1,1),
-(3,2,1),
-(2,5,1),
-(4,5,1);
+(2,2,1),
+(2,3,1);
+
+
 
 
