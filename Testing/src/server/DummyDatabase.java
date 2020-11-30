@@ -1,4 +1,4 @@
-package dataaccess;
+package server;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,45 +6,32 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.sql.*;
 
-
+import dataaccess.DatabaseConnection;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 public class DummyDatabase
 {
-  private String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=pricechecker";
-  private String username = "postgres";
-  private String password = "database123";
-  private Connection con;
+  private DatabaseConnection databaseConnection;
 
-  public DummyDatabase()
+  public DummyDatabase() throws SQLException
   {
-    try
-    {
-      //Registering the Driver
-      DriverManager.registerDriver(new org.postgresql.Driver());
-      //Getting the connection
-      con = DriverManager.getConnection(url, username, password);
-    }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
-    }
-
+    databaseConnection = DatabaseConnection.getInstance();
   }
+
   public void createDummyDatabase()
   {
-    try
+    try(Connection connection = databaseConnection.getConnection())
     {
       System.out.println("Connection established......");
       //Initialize the script runner
-      ScriptRunner sr = new ScriptRunner(con);
+      ScriptRunner sr = new ScriptRunner(connection);
       //Creating a reader object
       Reader reader = null;
       reader = new BufferedReader(new FileReader("Testing/dummydatabase.sql"));
       //Running the script
       sr.runScript(reader);
     }
-    catch (FileNotFoundException e)
+    catch (FileNotFoundException | SQLException e)
     {
       e.printStackTrace();
     }
@@ -53,9 +40,9 @@ public class DummyDatabase
 
   public void dropDatabase()
   {
-    try
+    try(Connection connection = databaseConnection.getConnection())
     {
-      PreparedStatement statement = con.prepareStatement("DROP schema pricecheckerdummy cascade");
+      PreparedStatement statement = connection.prepareStatement("DROP schema pricecheckerdummy cascade");
       statement.executeUpdate();
     }
     catch (SQLException throwables)
@@ -63,6 +50,8 @@ public class DummyDatabase
       throwables.printStackTrace();
     }
   }
+
+
 
 
 }

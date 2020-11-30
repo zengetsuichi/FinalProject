@@ -1,10 +1,10 @@
 package client.clientmodel.addNewProductAdministratorModel;
 import client.networking.Client;
 import shared.util.EventType;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-
 /**
  * Class implementing the model interface. Used for requesting data from
  * the client as well as listening for events and passing them forward.
@@ -15,7 +15,6 @@ import java.util.ArrayList;
  *
  * @author Gosia, Karlo
  */
-
 public class AddNewProductAdminModelManager implements AddNewProductAdminModel
 {
   private Client client;

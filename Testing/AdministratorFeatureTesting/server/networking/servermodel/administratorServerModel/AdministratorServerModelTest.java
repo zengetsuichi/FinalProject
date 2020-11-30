@@ -1,17 +1,15 @@
 package server.networking.servermodel.administratorServerModel;
 
-import dataaccess.DummyDatabase;
 import dataaccess.administratorDAO.AdministratorDAO;
 import dataaccess.administratorDAO.AdministratorDAOManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.DummyDatabase;
 import shared.util.Product;
 import shared.util.ProductList;
 
 import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AdministratorServerModelTest
 {

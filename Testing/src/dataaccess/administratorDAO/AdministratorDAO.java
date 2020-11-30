@@ -21,4 +21,5 @@ public interface AdministratorDAO
       int productId) throws SQLException;
   String deleteProduct(int productId) throws SQLException;
   List<User> getAllUsers() throws SQLException;
+  String addNewManager(User newManager) throws SQLException;
 }

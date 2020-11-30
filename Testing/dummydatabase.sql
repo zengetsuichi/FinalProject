@@ -146,7 +146,7 @@ VALUES ('Cola 330', 'Cola 330 ml, can, best for parties','Beverages'),
 
 INSERT INTO users ( username, email, password, dob, type)
 VALUES ( 'Admin', 'admin@gmail.com','admin1','01-02-2003','Admin'),
-( 'Netto', 'netto@gmail.com','admin1','01-02-2003','ShopManager'),
+( 'Netto', 'netto@gmail.com','netto1','01-02-2003','ShopManager'),
 ( 'Lidl', 'lidl@gmail.com','admin1','01-02-2003','ShopManager'),
 ( 'Fottex', 'fottex@gmail.com','admin1','01-02-2003','ShopManager'),
 ( 'User1', 'user1@gmail.com','user1','01-02-2003','User'),

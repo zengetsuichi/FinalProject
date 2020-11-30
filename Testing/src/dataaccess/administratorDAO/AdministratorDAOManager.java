@@ -6,10 +6,7 @@ import shared.util.ProductList;
 import shared.util.ShopPrice;
 import shared.util.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -215,4 +212,49 @@ public class AdministratorDAOManager implements AdministratorDAO
       }
     }
   }
+
+  @Override public String addNewManager(User newManager) throws SQLException
+  {
+
+    try (Connection connection = databaseConnection.getConnection())
+    {
+      PreparedStatement statement = connection.prepareStatement("SELECT * FROM users where username = ?");
+      statement.setString(1, newManager.getUsername());
+      ResultSet resultSet = statement.executeQuery();
+      User user = null;
+      while (resultSet.next())
+      {
+        int userId = resultSet.getInt("userid");
+        String username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String dob = resultSet.getString("dob");
+        String type = resultSet.getString("type");
+        user = new User(username, email, password, dob, type, userId, false);
+      }
+
+      if(user != null)
+        return "Specified shop manager already exists.";
+      else
+      {
+        addNewManagerNow(newManager);
+        return "Shop manager added.";
+      }
+    }
+  }
+
+  private void addNewManagerNow(User newManager) throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection()){
+      PreparedStatement statement = connection.prepareStatement("INSERT INTO users (username, email, password, dob, type) VALUES(?, ?, ?, ?, ?)");
+      statement.setString(1, newManager.getUsername());
+      statement.setString(2, newManager.getEmail());
+      statement.setString(3, newManager.getPassword());
+      Date date = Date.valueOf(newManager.getDob());
+      statement.setDate(4, date);
+      statement.setString(5, newManager.getType());
+      statement.executeUpdate();
+    }
+  }
+
 }
