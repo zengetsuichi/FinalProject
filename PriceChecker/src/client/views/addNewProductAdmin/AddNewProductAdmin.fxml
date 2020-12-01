@@ -27,6 +27,6 @@
       <Button fx:id="addNewCategoryBtn" layoutX="338.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add a new category" />
       <Button fx:id="goBackBtn" layoutX="32.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe" text="Go back to product page" />
       <CheckListView fx:id="checkListViewTags" layoutX="537.0" layoutY="161.0" prefHeight="318.0" prefWidth="202.0" />
-      <Label fx:id="errorLabel" layoutX="537.0" layoutY="34.0" prefHeight="18.0" prefWidth="242.0" />
+      <Label fx:id="errorLabel" layoutX="537.0" layoutY="34.0" prefHeight="18.0" prefWidth="478.0" />
    </children>
 </AnchorPane>

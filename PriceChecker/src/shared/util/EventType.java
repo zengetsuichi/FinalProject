@@ -1,6 +1,5 @@
 package shared.util;
 
-
 public enum EventType
 {
   NEW_PRODUCT,

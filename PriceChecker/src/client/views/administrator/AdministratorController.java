@@ -82,7 +82,7 @@ public class AdministratorController implements ViewController
 
   /**
    * Method used to load the product data into the Product Table
-   * @author Gosia, Hadi
+   * @author Gosia, Karlo
    */
   private void loadProductTable()
   {

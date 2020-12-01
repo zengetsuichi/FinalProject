@@ -91,7 +91,7 @@ public class EditProductAdminController implements ViewController
 
     if(!productName.isEmpty() && productName.length() <= 40){
       if(!productDescription.isEmpty() && productDescription.length() <= 200){
-        if(!category.isEmpty()){
+        if(category != null){
           if(!tags.isEmpty()){
             ArrayList<String> parseTag = new ArrayList<>(tags);
             String response = editProductAdminViewModel.editProduct(productName, productDescription, category, parseTag, product.getProductId());
