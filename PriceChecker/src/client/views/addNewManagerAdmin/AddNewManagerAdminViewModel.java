@@ -2,6 +2,11 @@ package client.views.addNewManagerAdmin;
 
 import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModel;
 import shared.util.User;
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Gosia
+ */
 
 public class AddNewManagerAdminViewModel
 {

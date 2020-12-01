@@ -21,6 +21,7 @@ public class AdministratorEditUserModelManager implements AdministratorEditUserM
   {
     return client.validateEditUser(oldUsername, oldEmail, username,email,password,dob);
   }
+
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
   {
