@@ -113,13 +113,15 @@ public class AdministratorUsersPageController implements ViewController
       administratorUsersPageViewModel.logOut();
       viewHandler.openLoginView();
     }
-    else if (actionEvent.getSource() == addUserBtn){
+    else if (actionEvent.getSource() == addUserBtn)
       viewHandler.openAddNewManagerView();
-    }else if (actionEvent.getSource() == editUserBtn){
+    else if (actionEvent.getSource() == editUserBtn)
+    {
       if(usersTable.getSelectionModel().getSelectedCells().isEmpty())
       {
         errorLabel.setText("Please first select a user from the table.");
-      } else {
+      }
+      else {
       /*
           Taking the selected row from the table, creating a user object,
           passing it to the next view.
@@ -130,6 +132,8 @@ public class AdministratorUsersPageController implements ViewController
 
         viewHandler.openAdministratorEditUserView(user);
       }
-  }
+    }
+    else if(actionEvent.getSource() == productsPageBtn)
+      viewHandler.openAdministratorView();
   }
 }
