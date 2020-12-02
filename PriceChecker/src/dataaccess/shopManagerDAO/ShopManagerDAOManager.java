@@ -2,13 +2,22 @@ package dataaccess.shopManagerDAO;
 
 import dataaccess.DatabaseConnection;
 import shared.util.Product;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+
+/**
+ * Class implementing the data access interface. Used for requesting data from
+ * the database.
+ *
+ * Providing methods for; getting all products for a specific manager from the database
+ * and deleting the product price.
+ *
+ * @author Gosia, Karlo
+ */
 
 public class ShopManagerDAOManager implements ShopManagerDAO
 {

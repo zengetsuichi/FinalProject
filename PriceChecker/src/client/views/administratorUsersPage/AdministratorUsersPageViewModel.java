@@ -6,10 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.util.EventType;
 import shared.util.User;
-
 import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Karlo
+ */
 
 public class AdministratorUsersPageViewModel
 {

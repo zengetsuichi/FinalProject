@@ -7,9 +7,15 @@ import java.sql.*;
 
 
 /**
- * Class used for retrieving necessary information from the database.
- * @author Gosia, Piotr
+ * Class implementing the data access interface. Used for requesting data from
+ * the database.
+ *
+ * Providing methods for; retrieving the data about the users, registering the user and
+ * searching for a specific email in the database.
+ *
+ * @author Gosia, Piotr, Dorin
  */
+
 public class LoginRegisterDAOManager implements LoginRegisterDAO
 {
 

@@ -4,15 +4,23 @@ import dataaccess.administratorDAO.AdministratorDAO;
 import shared.util.EventType;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 /**
- * A class model used for getting and authorizing the data from the database.
- * @author Gosia, Hadi
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object as well as firing the events.
+ *
+ * Providing methods for; getting all products from the database, requesting
+ * the data about specific product (such as shops proving the product and
+ * shop prices), getting all tags assigned to the specific product.
+ * Additionally it provides the method for deleting the specific product.
+ *
+ * @author Gosia, Karlo
  */
+
 public class AdministratorServerModelManager implements AdministratorServerModel
 {
   private AdministratorDAO administratorDAO;

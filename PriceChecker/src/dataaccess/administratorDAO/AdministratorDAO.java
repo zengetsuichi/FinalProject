@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An interface separating the data access objects from server models.
- * @author Gosia, Hadi
+ * Interface is used for separating the server model manager from the data access object as
+ * well as providing methods to the data access manager.
+ *
+ * @author Gosia, Karlo
  */
+
 public interface AdministratorDAO
 {
   ProductList giveAllProductData() throws SQLException;

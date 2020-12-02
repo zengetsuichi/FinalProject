@@ -14,8 +14,10 @@ import java.util.List;
 
 /**
  * An RMIServer interface is used for separating the Client
- * from the server networking layer.
- * @author Gosia, Piotr
+ * from the server networking layer, providing methods that client calls
+ * on the server.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public interface RMIServer extends Remote

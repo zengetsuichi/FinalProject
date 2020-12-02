@@ -3,11 +3,20 @@ package server.networking.servermodel.shopManagerServerModel;
 import dataaccess.shopManagerDAO.ShopManagerDAO;
 import shared.util.EventType;
 import shared.util.Product;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object and firing events.
+ *
+ * Providing methods for; getting all products for specific manager
+ * and deleting the product price.
+ *
+ * @author Gosia, Karlo
+ */
 
 public class ShopManagerServerModelManager implements ShopManagerServerModel
 {

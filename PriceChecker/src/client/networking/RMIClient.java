@@ -5,7 +5,6 @@ import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import shared.util.User;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;

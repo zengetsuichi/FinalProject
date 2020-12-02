@@ -5,6 +5,17 @@ import shared.util.Product;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Class implementing the data access interface. Used for requesting data from
+ * the database.
+ *
+ * Providing methods for; getting all product categories, getting all product
+ * tags, adding new products to the database, adding new categories and adding
+ * new tags for the products to the database.
+ *
+ * @author Gosia, Karlo
+ */
+
 public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
 {
   private DatabaseConnection databaseConnection;

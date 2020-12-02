@@ -8,7 +8,8 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Class used for launching the Price Checker Application
+ * Class used for launching the Price Checker Application.
+ *
  * @author Gosia, Piotr
  */
 

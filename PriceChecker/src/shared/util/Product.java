@@ -1,10 +1,13 @@
 package shared.util;
 
 import java.io.Serializable;
+
 /**
- * A class used for creating an product object.
- * @author Gosia, Hadi
+ * A class used for creating a product object.
+ *
+ * @author Gosia, Hadi, Karlo
  */
+
 public class Product implements Serializable
 {
   private String productName;

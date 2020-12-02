@@ -1,5 +1,12 @@
 package shared.util;
 
+/**
+ * A class used for defining the set of constants concerning
+ * different event types.
+ *
+ * @author Gosia, Karlo
+ */
+
 public enum EventType
 {
   NEW_PRODUCT,

@@ -9,7 +9,6 @@ import client.views.editProductAdmin.EditProductAdminViewModel;
 import client.views.editProductShopManager.EditProductShopManagerViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
-
 import client.views.shopManager.ShopManagerViewModel;
 
 /**

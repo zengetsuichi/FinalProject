@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+/**
+ * A class used for creating a product list object
+ * and storing products in an array.
+ *
+ * @author Gosia, Hadi, Karlo
+ */
+
 public class ProductList implements Serializable
 {
   private ArrayList<Product> products;

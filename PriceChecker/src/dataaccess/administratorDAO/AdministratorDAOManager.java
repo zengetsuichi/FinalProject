@@ -13,9 +13,19 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Class used for retrieving necessary information from the database.
- * @author Gosia, Hadi
+ * Class implementing the data access interface. Used for requesting data from
+ * the database.
+ *
+ * Providing methods for; getting all products from the database, requesting
+ * the data about specific product (such as shops providing the product and
+ * shop prices), getting all tags assigned to the specific product.
+ * Additionally it provides the method for deleting the specific product,
+ * editing the product, getting all user data, adding new manager,
+ * as well as, editing the user.
+ *
+ * @author Gosia, Karlo
  */
+
 public class AdministratorDAOManager implements AdministratorDAO
 {
 
@@ -25,10 +35,7 @@ public class AdministratorDAOManager implements AdministratorDAO
   {
     databaseConnection = DatabaseConnection.getInstance();
   }
-  /**
-   * Method retrieving data about all products stored in the database.
-   * @author Gosia, Hadi
-   */
+
   @Override public ProductList giveAllProductData() throws SQLException
   {
     try (Connection connection = databaseConnection.getConnection()){
@@ -46,12 +53,14 @@ public class AdministratorDAOManager implements AdministratorDAO
       return productList;
     }
   }
+
   /**
    * Method retrieving data about the shop offering the specified product, as well as,
    * the price the shop is offering.
    * @param productId - the specific product the method will retrieve data for.
    * @author Gosia, Hadi
    */
+
   @Override public ArrayList<ShopPrice> getShopPricesTableById(int productId)
       throws SQLException
   {

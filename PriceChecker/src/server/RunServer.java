@@ -1,7 +1,5 @@
 package server;
 
-import client.clientmodel.administratorModel.AdministratorModel;
-import client.clientmodel.administratorModel.AdministratorModelManager;
 import dataaccess.addNewProductAdminDAO.AddNewProductAdminDAO;
 import dataaccess.addNewProductAdminDAO.AddNewProductAdminDAOManager;
 import dataaccess.administratorDAO.AdministratorDAO;
@@ -28,13 +26,13 @@ import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServe
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModelManager;
 import shared.networking.RMIServer;
-
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.sql.SQLException;
 
 /**
  * Class used for starting the RMI server.
+ *
  * @author Gosia, Piotr
  */
 

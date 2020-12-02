@@ -27,9 +27,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class used for receiving, analyzing the request send from cient, as well as, sending the
- * back to the client.
- * @author Gosia, Piotr
+ * Class implementing RMI Server interface responsible for receiving the requests
+ * from client, as well as, processing them and responding back.
+ *
+ * Moreover, the class is in charge of updating all the clients that are active in case of events
+ * fired from server models.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public class RMIServerManager implements RMIServer

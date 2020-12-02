@@ -20,12 +20,13 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import shared.util.Product;
 import shared.util.User;
-
 import java.io.IOException;
+
  /**
  * Class that provides methods for opening specific views.
  * @author Gosia, Piotr, Karlo
  */
+
 public class ViewHandler
 {
   private ViewModelFactory viewModelFactory;
