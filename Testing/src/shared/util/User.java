@@ -1,6 +1,7 @@
 package shared.util;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A class used for creating the user object.
@@ -27,6 +28,17 @@ public class User implements Serializable
     this.type = type;
     this.userId = userId;
     this.isSubscribed = isSubscribed;
+  }
+
+  public User(String username, String email, String password,
+      String dob, String type, int userId)
+  {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.dob = dob;
+    this.type = type;
+    this.userId = userId;
   }
 
   public User(String username, String email, String password, String dob,
@@ -108,6 +120,26 @@ public class User implements Serializable
   public void setSubscribed(boolean subscribed)
   {
     isSubscribed = subscribed;
+  }
+
+  @Override public boolean equals(Object o)
+  {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    User user = (User) o;
+    return getUserId() == user.getUserId() && isSubscribed == user.isSubscribed
+        && getUsername().equals(user.getUsername()) && getEmail()
+        .equals(user.getEmail()) && getPassword().equals(user.getPassword())
+        && getDob().equals(user.getDob()) && getType().equals(user.getType());
+  }
+
+  @Override public int hashCode()
+  {
+    return Objects
+        .hash(getUserId(), getUsername(), getEmail(), getPassword(), getDob(),
+            getType(), isSubscribed);
   }
 
   @Override public String toString()

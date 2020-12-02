@@ -114,7 +114,7 @@ public class AdministratorDAOManager implements AdministratorDAO
       if(newProduct.equals(product))
       {
         if(allTagsById2.equals(parseTag))
-          return "Specified product already exists";
+          return "Specified product already exists.";
         else
         {
           updateTags(parseTag, productId);

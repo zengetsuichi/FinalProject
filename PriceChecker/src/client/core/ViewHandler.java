@@ -205,7 +205,7 @@ public class ViewHandler
     try
     {
       FXMLLoader loader = new FXMLLoader();
-      loader.setLocation(getClass().getResource("../views/addNewManagerAdmin/AdministratorEditUser.fxml"));
+      loader.setLocation(getClass().getResource("../views/addNewManagerAdmin/AddNewManagerAdmin.fxml"));
       Parent root = loader.load();
       AddNewManagerAdminController view = loader.getController();
 

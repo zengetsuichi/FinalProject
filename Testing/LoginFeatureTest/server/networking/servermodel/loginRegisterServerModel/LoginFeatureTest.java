@@ -3,8 +3,10 @@ package server.networking.servermodel.loginRegisterServerModel;
 
 import dataaccess.loginRegisterDAO.LoginRegisterDAO;
 import dataaccess.loginRegisterDAO.LoginRegisterDAOManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import server.DummyDatabase;
 
 import java.sql.SQLException;
 
@@ -20,12 +22,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginFeatureTest
 {
   private LoginRegisterServerModel loginRegisterServerModel;
+  private DummyDatabase dummyDatabase;
 
   @BeforeEach
   public void setup() throws SQLException
   {
     LoginRegisterDAO loginRegisterDAO = new LoginRegisterDAOManager();
     loginRegisterServerModel = new LoginRegisterServerModelManager(loginRegisterDAO);
+    dummyDatabase = new DummyDatabase();
+    dummyDatabase.createDummyDatabase();
+  }
+
+  @AfterEach
+  public void after()
+  {
+    dummyDatabase.dropDatabase();
   }
 
   /**
@@ -39,7 +50,7 @@ class LoginFeatureTest
     //arrange
     String username = "User1";
     String password = "user1";
-    String type = "User       "; //TODO WHAT THE ACTUAL FUCK
+    String type = "User";
     //assert
     assertEquals(type, loginRegisterServerModel.validateLogin(username, password));
   }
@@ -54,7 +65,7 @@ class LoginFeatureTest
     //arrange
     String username = "Admin";
     String password = "admin1";
-    String type = "Admin      "; //LOL
+    String type = "Admin";
     //assert
     assertEquals(type, loginRegisterServerModel.validateLogin(username, password));
   }

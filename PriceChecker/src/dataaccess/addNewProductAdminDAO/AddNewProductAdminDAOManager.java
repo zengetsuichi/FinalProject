@@ -85,7 +85,7 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       }
 
       if(!(category == null)){
-        return "Specified category already exists";
+        return "Specified category already exists.";
       }
       else{
         addNewCategoryNow(newCategory);
@@ -107,7 +107,7 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       }
 
       if(!(tag == null)){
-        return "Specified tag already exists";
+        return "Specified tag already exists.";
       }
       else{
         addNewTagNow(newTag);

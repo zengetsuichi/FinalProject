@@ -100,4 +100,54 @@ class AddNewProductAdminServerModelTest
         "Cola 330 ml, can, best for parties", "Beverages", tags));
   }
 
+  /*
+    The test method is testing whether the server model will return
+    a positive response when adding the category that does not exists in the
+    database.
+   */
+
+  @Test
+  public void addNewNonExistingCategory(){
+    String newCategory = "Fruits";
+
+    assertEquals("Category added.", addNewProductAdminServerModel.addNewCategory(newCategory));
+  }
+
+  /*
+    The test method is testing whether the server model will return
+    a negative response when adding the category that already exists in the
+    database.
+  */
+  @Test
+  public void addAnExistingCategory(){
+    String newCategory = "Meat";
+
+    assertEquals("Specified category already exists.", addNewProductAdminServerModel.addNewCategory(newCategory));
+  }
+
+  /*
+    The test method is testing whether the server model will return
+    a positive response when adding the tag that does not exists in the
+    database.
+   */
+
+  @Test
+  public void addNewNonExistingTag(){
+    String newTag = "candy";
+
+    assertEquals("Tag added.", addNewProductAdminServerModel.addNewTag(newTag));
+  }
+
+  /*
+    The test method is testing whether the server model will return
+    a negative response when adding the tag that already exists in the
+    database.
+  */
+
+  @Test
+  public void addAnExistingTag(){
+    String newTag = "beer";
+
+    assertEquals("Specified tag already exists.", addNewProductAdminServerModel.addNewTag(newTag));
+  }
 }

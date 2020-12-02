@@ -11,7 +11,7 @@ CREATE DOMAIN d_dob AS date;
 ALTER DOMAIN d_dob ADD CONSTRAINT d_con_dob
 CHECK (VALUE >= '01-JAN-1920');
 
-CREATE DOMAIN d_type AS char(11);
+CREATE DOMAIN d_type AS varchar;
 ALTER DOMAIN d_type ADD CONSTRAINT d_con_type
 CHECK (VALUE IN ('User', 'ShopManager', 'Admin'));
 

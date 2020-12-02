@@ -29,6 +29,17 @@ public class User implements Serializable
     this.isSubscribed = isSubscribed;
   }
 
+  public User(String username, String email, String password,
+      String dob, String type, int userId)
+  {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.dob = dob;
+    this.type = type;
+    this.userId = userId;
+  }
+
   public User(String username, String email, String password, String dob,
       String type)
   {

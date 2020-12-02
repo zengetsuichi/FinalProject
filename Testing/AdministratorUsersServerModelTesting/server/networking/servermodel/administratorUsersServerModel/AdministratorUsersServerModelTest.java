@@ -9,6 +9,7 @@ import server.DummyDatabase;
 import shared.util.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,6 +25,7 @@ class AdministratorUsersServerModelTest
     AdministratorDAO administratorDAO = new AdministratorDAOManager();
     administratorUsersServerModel = new AdministratorUsersServerModelManager(administratorDAO);
     dummyDatabase = new DummyDatabase();
+    dummyDatabase.createDummyDatabase();
   }
 
   @AfterEach
@@ -39,7 +41,21 @@ class AdministratorUsersServerModelTest
   @Test
   public void getAllUsersInDatabase(){
     //arrange
-    //TODO wait for update
+    User user1 = new User("Admin", "admin@gmail.com","admin1", "2003-01-02", "Admin", 1);
+    User user2 = new User("Netto", "netto@gmail.com","admin1", "2003-01-02", "ShopManager", 2);
+    User user3 = new User("Lidl", "lidl@gmail.com","lidl1", "2003-01-02", "ShopManager", 3);
+    User user4 = new User("User1", "user1@gmail.com","user1", "2003-01-02", "User", 4);
+    User user5 = new User("User2", "user2@gmail.com","user2", "2003-01-02", "User", 5);
+    ArrayList arrayList = new ArrayList<User>();
+    //arrayList.add(user1);
+    arrayList.add(user2);
+    arrayList.add(user3);
+    arrayList.add(user4);
+    arrayList.add(user5);
+
+    System.out.println(arrayList);
+    System.out.println(administratorUsersServerModel.getAllUsers());
+    assertEquals(arrayList, administratorUsersServerModel.getAllUsers());
   }
 
 
@@ -51,7 +67,6 @@ class AdministratorUsersServerModelTest
   @Test
   public void addNewManager(){
     //arrange
-    dummyDatabase.createDummyDatabase();
     User newManager = new User("Aldi", "aldi@gmail.com", "aldi123",
         "2003-01-12", "ShopManager");
     //assert
@@ -66,7 +81,6 @@ class AdministratorUsersServerModelTest
   @Test
   public void addAlreadyExistingManager(){
     //arrange
-    dummyDatabase.createDummyDatabase();
     User newManager = new User("Netto", "admin@gmail.com", "netto1",
         "2003-02-01", "ShopManager");
     //assert
@@ -81,7 +95,6 @@ class AdministratorUsersServerModelTest
   @Test
   public void addManagerWithAlreadyExistingEmail(){
     //arrange
-    dummyDatabase.createDummyDatabase();
     User newManager = new User("Neto", "admin@gmail.com", "netto1",
         "2003-02-01", "ShopManager");
     //assert
