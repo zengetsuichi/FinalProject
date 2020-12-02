@@ -15,6 +15,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Gosia
+ */
+
 public class AddNewManagerAdminController implements ViewController
 {
   @FXML
