@@ -11,7 +11,6 @@ import server.networking.servermodel.shopManagerServerModel.ShopManagerServerMod
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.util.*;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.rmi.AlreadyBoundException;
@@ -25,9 +24,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class used for receiving, analyzing the request send from cient, as well as, sending the
- * back to the client.
- * @author Gosia, Piotr
+ * Class implementing RMI Server interface responsible for receiving the requests
+ * from client, as well as, processing them and responding back.
+ *
+ * Moreover, the class is in charge of updating all the clients that are active in case of events
+ * fired from server models.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public class RMIServerManager implements RMIServer
@@ -166,21 +169,20 @@ public class RMIServerManager implements RMIServer
 
   /**
    * A method used for saving the client references into the pool of listeners.
+   *
    * @author Gosia
    */
 
   @Override public void registerClient(ClientCallback client) throws RemoteException
   {
-    PropertyChangeListener listener = new PropertyChangeListener() {
-      @Override
-      public void propertyChange(PropertyChangeEvent evt) {
-        try {
-          client.update(evt.getPropertyName(), evt.getNewValue());
-        } catch (RemoteException e) {
-          e.printStackTrace();
-        }
+    PropertyChangeListener listener = evt -> {
+      try {
+        client.update(evt.getPropertyName(), evt.getNewValue());
+      } catch (RemoteException e) {
+        e.printStackTrace();
       }
     };
+
     listeners.put(client, listener);
     addNewProductAdminServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     addNewProductAdminServerModel.addListener(EventType.NEW_CATEGORY.name(), listener);
@@ -190,5 +192,7 @@ public class RMIServerManager implements RMIServer
     shopManagerServerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), listener);
     administratorUsersServerModel.addListener(EventType.NEW_SHOP_MANAGER.name(), listener);
     administratorEditUserServerModel.addListener(EventType.EDIT_USER.name(), listener);
+
   }
+
 }

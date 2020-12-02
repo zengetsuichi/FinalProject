@@ -8,7 +8,6 @@ import client.views.administratorUsersPage.AdministratorUsersPageViewModel;
 import client.views.editProductAdmin.EditProductAdminViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
-
 import client.views.shopManager.ShopManagerViewModel;
 
 /**

@@ -162,9 +162,9 @@ public class ShopManagerController implements ViewController
       TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
       int row = pos.getRow();
       Product item = productTable.getItems().get(row);
+      productTable.getSelectionModel().select(-1);
       String response = shopManagerViewModel.deleteProductPrice(item.getProductId(), username);
       errorLabel.setText(response);
-
     }
   }
 

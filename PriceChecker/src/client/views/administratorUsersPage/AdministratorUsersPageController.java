@@ -11,6 +11,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.util.User;
 
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Karlo
+ */
 public class AdministratorUsersPageController implements ViewController
 {
   @FXML

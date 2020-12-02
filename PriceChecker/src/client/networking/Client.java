@@ -1,6 +1,6 @@
 package client.networking;
-import shared.util.*;
 
+import shared.util.*;
 import java.util.ArrayList;
 import java.util.List;
 

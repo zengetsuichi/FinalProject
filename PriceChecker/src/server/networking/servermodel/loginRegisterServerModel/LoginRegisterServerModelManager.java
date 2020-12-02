@@ -5,8 +5,13 @@ import shared.util.User;
 import java.sql.SQLException;
 
 /**
- * Class used for implementing the methods from LoginRegisterServerModel
- * @author Gosia, Piotr
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object and firing events.
+ *
+ * Providing methods for; validating the login process and
+ * validating register.
+ *
+ * @author Gosia, Karlo
  */
 
 public class LoginRegisterServerModelManager implements LoginRegisterServerModel

@@ -3,7 +3,8 @@ package shared.util;
 import java.io.Serializable;
 
 /**
- * A class used for creating the user object.
+ * A class used for creating an user object.
+ *
  * @author Gosia, Piotr
  */
 
@@ -127,4 +128,5 @@ public class User implements Serializable
         + '\'' + ", email='" + email + '\'' + ", password='" + password + '\''
         + ", dob='" + dob + '\'' + ", type='" + type + '\'' + '}';
   }
+
 }

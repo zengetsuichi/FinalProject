@@ -4,6 +4,7 @@ import client.clientmodel.loginRegisterModel.LoginRegisterModel;
 
 /**
  * Class used for pushing the request from controller class and sending back the responses.
+ *
  * @author Dorin, Piotr
  */
 

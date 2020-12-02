@@ -1,11 +1,9 @@
 package shared.networking;
 
-import client.networking.RMIClient;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import shared.util.User;
-
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -14,8 +12,10 @@ import java.util.List;
 
 /**
  * An RMIServer interface is used for separating the Client
- * from the server networking layer.
- * @author Gosia, Piotr
+ * from the server networking layer, providing methods that client calls
+ * on the server.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public interface RMIServer extends Remote
@@ -41,5 +41,4 @@ public interface RMIServer extends Remote
   List<User> getAllUsers() throws RemoteException;
   String addNewManager(User newManager) throws RemoteException;
   String validateUserEdit(String oldUsername, String oldEmail, String username, String email, String password, String dob) throws RemoteException;
-//  void editUser(RMIClient rmiClient) throws RemoteException;
 }

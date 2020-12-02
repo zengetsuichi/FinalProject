@@ -1,11 +1,12 @@
 package shared.networking;
 
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * A Client Callback interface. //TODO check it Gosia
+ * A Client Callback interface responsible for
+ * providing the client with an update method.
+ *
  * @author Gosia
  */
 

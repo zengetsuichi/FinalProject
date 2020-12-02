@@ -8,14 +8,15 @@ import shared.util.EventType;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
-
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
 /**
- * Class used for pushing the request from controller class and sending back the responses.
- * @author Gosia, Hadi
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Gosia, Karlo
  */
+
 public class AdministratorViewModel
 {
   private AdministratorModel administratorModel;
@@ -43,7 +44,6 @@ public class AdministratorViewModel
 
   public void loadProductData()
   {
-    //listOfAllProducts.clear();
     listOfAllProducts.setAll(administratorModel.loadProductData().getProducts());
   }
 
@@ -61,7 +61,6 @@ public class AdministratorViewModel
   public ObservableList<String> getAllTagsById(int productId)
   {
     ArrayList<String> tags = administratorModel.getAllTagsById(productId);
-    //tagsForSpecificProduct.clear();
     tagsForSpecificProduct.setAll(tags);
     return tagsForSpecificProduct;
   }

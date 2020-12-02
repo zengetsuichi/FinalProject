@@ -7,7 +7,15 @@ import shared.util.User;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
-
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; getting all users from the database and
+ * logging out of the session.
+ *
+ * @author Karlo
+ */
 public class AdministratorUsersPageModelManager
     implements AdministratorUsersPageModel
 {
