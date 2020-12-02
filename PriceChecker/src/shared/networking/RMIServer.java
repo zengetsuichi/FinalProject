@@ -42,4 +42,7 @@ public interface RMIServer extends Remote
   String addNewManager(User newManager) throws RemoteException;
   String validateUserEdit(String oldUsername, String oldEmail, String username, String email, String password, String dob) throws RemoteException;
 //  void editUser(RMIClient rmiClient) throws RemoteException;
+String editShopProduct(String productName, String productDescription, String category, ArrayList<String> parseTag,
+    int productId, int price,String username)
+    throws RemoteException;
 }

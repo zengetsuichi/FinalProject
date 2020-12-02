@@ -6,6 +6,7 @@ import client.views.administrator.AdministratorController;
 import client.views.administratorEditUser.AdministratorEditUserController;
 import client.views.administratorUsersPage.AdministratorUsersPageController;
 import client.views.editProductAdmin.EditProductAdminController;
+import client.views.editProductShopManager.EditProductShopManagerController;
 import client.views.login.LoginController;
 import client.views.register.RegisterController;
 import client.views.shopManager.ShopManagerController;
@@ -235,6 +236,28 @@ public class ViewHandler
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("Edit User");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+  public void openEditShopManagerProductView(Product product, ObservableList<String> tags)
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource(
+          "../views/editProductShopManager/EditProductShopManager.fxml"));
+      Parent root = loader.load();
+      EditProductShopManagerController view = loader.getController();
+
+      view.setProductData(product, tags);
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Edit Product Shop Manager");
       stage.show();
     }
     catch (IOException e)

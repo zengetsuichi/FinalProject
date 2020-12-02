@@ -24,6 +24,7 @@ public class ShopManagerViewModel
     tagsForSpecificProduct = FXCollections.observableArrayList();
 
     shopManagerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), this::reloadData);
+    shopManagerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
   }
 
   private void reloadData(PropertyChangeEvent propertyChangeEvent)
@@ -65,5 +66,11 @@ public class ShopManagerViewModel
   public String deleteProductPrice(int productId, String username)
   {
     return shopManagerModel.deleteProductPrice(productId, username);
+  }
+  private void newProduct(PropertyChangeEvent propertyChangeEvent)
+  {
+    Platform.runLater(()-> {
+      loadProductData(getLoggedInUser());
+    });
   }
 }

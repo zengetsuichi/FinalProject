@@ -11,6 +11,8 @@ import client.clientmodel.administratorUsersPageModel.AdministratorUsersPageMode
 import client.clientmodel.administratorUsersPageModel.AdministratorUsersPageModelManager;
 import client.clientmodel.editProductAdministratorModel.EditProductAdministratorModel;
 import client.clientmodel.editProductAdministratorModel.EditProductAdministratorModelManager;
+import client.clientmodel.editProductShopManagerModel.EditProductShopManagerModel;
+import client.clientmodel.editProductShopManagerModel.EditProductShopManagerModelManager;
 import client.clientmodel.loginRegisterModel.LoginRegisterModel;
 import client.clientmodel.loginRegisterModel.LoginRegisterModelManager;
 import client.clientmodel.shopManagerModel.ShopManagerModel;
@@ -34,6 +36,7 @@ public class ModelFactory
   private ClientFactory clientFactory;
   private AddNewManagerAdminModel addNewManagerAdminModel;
   private AdministratorEditUserModelManager administratorEditUserModelManager;
+  private EditProductShopManagerModel editProductShopManagerModel;
 
   public ModelFactory(ClientFactory clientFactory){
     this.clientFactory = clientFactory;
@@ -98,5 +101,12 @@ public class ModelFactory
       administratorEditUserModelManager = new AdministratorEditUserModelManager(clientFactory.getClient());
     }
     return administratorEditUserModelManager;
+  }
+  public EditProductShopManagerModel getEditProductShopManagerModel()
+  {
+    if (editProductShopManagerModel == null){
+      editProductShopManagerModel = new EditProductShopManagerModelManager(clientFactory.getClient());
+    }
+    return editProductShopManagerModel;
   }
 }

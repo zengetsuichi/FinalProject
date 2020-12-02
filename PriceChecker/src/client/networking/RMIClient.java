@@ -301,5 +301,16 @@ public class RMIClient implements Client, ClientCallback {
       throw new RuntimeException("Could not contact server");
     }
   }
+  @Override public String editShopProduct(String productName,
+      String productDescription, String category, ArrayList<String> parseTag,
+      int productId, int price,String username)
+  {
+    try {
+
+      return rmiServer.editShopProduct(productName, productDescription, category, parseTag, productId,price,clientUsername);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 
 }
