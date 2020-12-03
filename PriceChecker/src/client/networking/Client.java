@@ -41,4 +41,5 @@ public interface Client extends PropertyChangeSubject
   String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob);
   String editShopProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag, int productId,int price,String username);
+  String deleteUser(String username);
 }

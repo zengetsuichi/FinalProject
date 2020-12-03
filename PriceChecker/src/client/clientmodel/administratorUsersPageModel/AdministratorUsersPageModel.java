@@ -17,4 +17,5 @@ public interface AdministratorUsersPageModel extends PropertyChangeSubject
 {
   List<User> getAllUsers();
   void logOut();
+  String deleteUser(String username);
 }

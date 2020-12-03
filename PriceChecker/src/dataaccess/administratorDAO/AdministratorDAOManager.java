@@ -437,4 +437,16 @@ public class AdministratorDAOManager implements AdministratorDAO
       if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
+
+  @Override public String deleteUser(String username) throws SQLException
+  {
+    try (Connection connection = databaseConnection.getConnection()){
+      PreparedStatement statement = connection.prepareStatement("DELETE from users where username = ?");
+      statement.setString(1, username);
+      statement.executeUpdate();
+      return "User Deleted.";
+
+    }
+  }
+
 }

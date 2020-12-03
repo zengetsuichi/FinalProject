@@ -26,6 +26,7 @@ public class AdministratorUsersPageViewModel
     allUsers = FXCollections.observableArrayList();
     administratorUsersPageModel.addListener(EventType.NEW_SHOP_MANAGER.name(), this::newManager);
     administratorUsersPageModel.addListener(EventType.EDIT_USER.name(), this::newManager);
+    administratorUsersPageModel.addListener(EventType.DELETE_USER.name(), this::newManager);
   }
 
   private void newManager(PropertyChangeEvent propertyChangeEvent)
@@ -49,6 +50,9 @@ public class AdministratorUsersPageViewModel
   public void logOut()
   {
     administratorUsersPageModel.logOut();
+  }
+  public String deleteUser(String username){
+    return administratorUsersPageModel.deleteUser(username);
   }
 
 }

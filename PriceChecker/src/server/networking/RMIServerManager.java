@@ -201,6 +201,7 @@ public class RMIServerManager implements RMIServer
     administratorEditUserServerModel.addListener(EventType.EDIT_USER.name(), listener);
     editProductShopManagerServerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(),listener);
     editProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
+    administratorUsersServerModel.addListener(EventType.DELETE_USER.name(), listener);
   }
   @Override public String editShopProduct(String productName,
       String productDescription, String category, ArrayList<String> parseTag,
@@ -209,5 +210,10 @@ public class RMIServerManager implements RMIServer
   {
     return editProductShopManagerServerModel.editShopProduct(productName, productDescription,
         category, parseTag, productId,price,username);
+  }
+
+  @Override public String deleteUser(String username) throws RemoteException
+  {
+    return administratorUsersServerModel.deleteUser(username);
   }
 }

@@ -26,4 +26,5 @@ public interface AdministratorDAO
   List<User> getAllUsers() throws SQLException;
   String addNewManager(User newManager) throws SQLException;
   void editUser(String oldUsername, String oldEmail, String username, String email, String password, String dob) throws SQLException;
+  String deleteUser(String username) throws SQLException;
 }

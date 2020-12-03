@@ -312,4 +312,14 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  @Override public String deleteUser(String username)
+  {
+    try {
+
+      return rmiServer.deleteUser(username);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
 }
