@@ -1,8 +1,11 @@
 package client.core;
+
 import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModel;
 import client.clientmodel.addNewManagerAdmin.AddNewManagerAdminModelManager;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModel;
 import client.clientmodel.addNewProductAdministratorModel.AddNewProductAdminModelManager;
+import client.clientmodel.addNewProductShopManagerModel.AddNewProductShopManagerModel;
+import client.clientmodel.addNewProductShopManagerModel.AddNewProductShopManagerModelManager;
 import client.clientmodel.administratorEditUser.AdministratorEditUserModel;
 import client.clientmodel.administratorEditUser.AdministratorEditUserModelManager;
 import client.clientmodel.administratorModel.AdministratorModel;
@@ -25,88 +28,92 @@ import client.clientmodel.shopManagerModel.ShopManagerModelManager;
  * @author Gosia, Piotr, Karlo
  */
 
-public class ModelFactory
-{
+public class ModelFactory {
   private LoginRegisterModel loginRegisterModel;
   private AdministratorModel administratorModel;
   private AddNewProductAdminModel addNewProductAdminModel;
   private EditProductAdministratorModel editProductAdministratorModel;
   private ShopManagerModel shopManagerModel;
-  private AdministratorUsersPageModel administratorUsersPageModel;
+  private AddNewProductShopManagerModel addNewProductShopManagerModel;
   private ClientFactory clientFactory;
   private AddNewManagerAdminModel addNewManagerAdminModel;
-  private AdministratorEditUserModelManager administratorEditUserModelManager;
+  private AdministratorEditUserModelManager administratorEditUserModel;
   private EditProductShopManagerModel editProductShopManagerModel;
+  private AdministratorUsersPageModel administratorUsersPageModel;
 
-  public ModelFactory(ClientFactory clientFactory){
+  public ModelFactory(ClientFactory clientFactory) {
     this.clientFactory = clientFactory;
   }
 
-  public LoginRegisterModel getLoginRegisterModel(){
-    if(loginRegisterModel == null){
+  public LoginRegisterModel getLoginRegisterModel() {
+    if (loginRegisterModel == null) {
       loginRegisterModel = new LoginRegisterModelManager(clientFactory.getClient());
     }
     return loginRegisterModel;
   }
 
-  public AdministratorModel getAdministratorModel(){
-    if(administratorModel == null){
+  public AdministratorModel getAdministratorModel() {
+    if (administratorModel == null) {
       administratorModel = new AdministratorModelManager(clientFactory.getClient());
     }
     return administratorModel;
   }
 
-  public AddNewProductAdminModel getAddNewProductAdminModel()
-  {
-    if(addNewProductAdminModel == null){
+  public AddNewProductAdminModel getAddNewProductAdminModel() {
+    if (addNewProductAdminModel == null) {
       addNewProductAdminModel = new AddNewProductAdminModelManager(clientFactory.getClient());
     }
     return addNewProductAdminModel;
   }
 
-  public EditProductAdministratorModel getEditProductAdministratorModel()
-  {
-    if(editProductAdministratorModel == null){
+  public EditProductAdministratorModel getEditProductAdministratorModel() {
+    if (editProductAdministratorModel == null) {
       editProductAdministratorModel = new EditProductAdministratorModelManager(clientFactory.getClient());
     }
     return editProductAdministratorModel;
   }
 
-  public ShopManagerModel getShopManagerModel()
-  {
-    if(shopManagerModel == null){
+  public ShopManagerModel getShopManagerModel() {
+    if (shopManagerModel == null) {
       shopManagerModel = new ShopManagerModelManager(clientFactory.getClient());
     }
     return shopManagerModel;
   }
 
-  public AdministratorUsersPageModel getAdministratorUsersPageModel()
-  {
-    if(administratorUsersPageModel == null){
-      administratorUsersPageModel = new AdministratorUsersPageModelManager(clientFactory.getClient());
+  public AddNewProductShopManagerModel getAddNewProductShopManagerModel() {
+    if (addNewProductShopManagerModel == null) {
+      addNewProductShopManagerModel = new AddNewProductShopManagerModelManager(clientFactory.getClient());
     }
-    return administratorUsersPageModel;
+    return addNewProductShopManagerModel;
   }
 
-  public AddNewManagerAdminModel getAddNewManagerAdminModel(){
-    if(addNewManagerAdminModel == null){
+
+  public AddNewManagerAdminModel getAddNewManagerAdminModel() {
+    if (addNewManagerAdminModel == null) {
       addNewManagerAdminModel = new AddNewManagerAdminModelManager(clientFactory.getClient());
     }
     return addNewManagerAdminModel;
   }
 
-  public AdministratorEditUserModel getAdministratorEditUserModel()
-  {
-    if(administratorEditUserModelManager == null){
-      administratorEditUserModelManager = new AdministratorEditUserModelManager(clientFactory.getClient());
+  public AdministratorEditUserModel getAdministratorEditUserModel() {
+    if (administratorEditUserModel == null) {
+      administratorEditUserModel = new AdministratorEditUserModelManager(clientFactory.getClient());
     }
-    return administratorEditUserModelManager;
+    return administratorEditUserModel;
   }
-  public EditProductShopManagerModel getEditProductShopManagerModel()
-  {
-    if (editProductShopManagerModel == null){
+
+  public EditProductShopManagerModel getEditProductShopManagerModel() {
+    if (editProductShopManagerModel == null) {
       editProductShopManagerModel = new EditProductShopManagerModelManager(clientFactory.getClient());
     }
     return editProductShopManagerModel;
   }
+
+  public AdministratorUsersPageModel getAdministratorUsersPageModel() {
+    if (administratorUsersPageModel == null) {
+      administratorUsersPageModel = new AdministratorUsersPageModelManager(clientFactory.getClient());
+    }
+return administratorUsersPageModel;
+  }
 }
+

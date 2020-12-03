@@ -30,16 +30,7 @@ public class User implements Serializable
     this.isSubscribed = isSubscribed;
   }
 
-  public User(String username, String email, String password,
-      String dob, String type, int userId)
-  {
-    this.username = username;
-    this.email = email;
-    this.password = password;
-    this.dob = dob;
-    this.type = type;
-    this.userId = userId;
-  }
+
 
   public User(String username, String email, String password, String dob,
       String type)
@@ -50,6 +41,17 @@ public class User implements Serializable
     this.dob = dob;
     this.type = type;
   }
+
+  public User(String username, String email, String password, String dob, String type, int userId) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.dob = dob;
+    this.type = type;
+    this.userId = userId;
+
+  }
+
 
   public String getUsername()
   {

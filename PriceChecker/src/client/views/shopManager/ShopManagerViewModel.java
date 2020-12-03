@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.util.EventType;
 import shared.util.Product;
-import shared.util.ProductList;
 
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ public class ShopManagerViewModel
     this.shopManagerModel = shopManagerModel;
     listOfAllProductsForSpecificManager = FXCollections.observableArrayList();
     tagsForSpecificProduct = FXCollections.observableArrayList();
+    shopManagerModel.addListener(EventType.NEW_PRODUCT_FOR_MANAGER.name(), this::newProduct);
 
     shopManagerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), this::reloadData);
     shopManagerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
@@ -34,6 +34,13 @@ public class ShopManagerViewModel
       listOfAllProductsForSpecificManager.setAll(productList);
     });
   }
+
+    private void newProduct(PropertyChangeEvent propertyChangeEvent) {
+        Platform.runLater(() -> {
+            ArrayList<Product> products = (ArrayList<Product>) propertyChangeEvent.getNewValue();
+            listOfAllProductsForSpecificManager.setAll(products);
+        });
+    }
 
   public String getLoggedInUser()
   {
@@ -67,10 +74,5 @@ public class ShopManagerViewModel
   {
     return shopManagerModel.deleteProductPrice(productId, username);
   }
-  private void newProduct(PropertyChangeEvent propertyChangeEvent)
-  {
-    Platform.runLater(()-> {
-      loadProductData(getLoggedInUser());
-    });
-  }
+
 }

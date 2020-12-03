@@ -20,4 +20,5 @@ public interface AddNewProductAdminServerModel extends PropertyChangeSubject
   String addNewProduct(String productName, String productDescription, String category, ArrayList<String> parseTag);
   String addNewCategory(String newCategory);
   String addNewTag(String newTag);
+
 }

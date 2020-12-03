@@ -122,6 +122,7 @@ public class AddNewProductAdminController implements ViewController
           if(!tags.isEmpty()){
             ArrayList<String> parseTag = new ArrayList<>(tags);
             String response = addNewProductAdminViewModel.addNewProduct(productName, productDescription, category, parseTag);
+
             if(response.equals("Product added."))
               viewHandler.openAdministratorView();
             else

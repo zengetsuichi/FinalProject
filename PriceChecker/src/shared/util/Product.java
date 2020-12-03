@@ -34,7 +34,9 @@ public class Product implements Serializable
     this.price = price;
   }
 
-  public String getProductName()
+
+
+    public String getProductName()
   {
     return productName;
   }

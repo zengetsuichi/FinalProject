@@ -44,7 +44,7 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
        String password = resultSet.getString("password");
        String dob = resultSet.getString("dob");
        String type = resultSet.getString("type");
-       return new User(username, email, password, dob, type, userId, false);
+       return new User(username, email, password, dob, type, userId);
      }
      else{
        return null;
