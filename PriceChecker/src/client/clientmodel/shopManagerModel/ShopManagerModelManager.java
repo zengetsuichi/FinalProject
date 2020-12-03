@@ -27,7 +27,6 @@ public class ShopManagerModelManager implements ShopManagerModel
   public ShopManagerModelManager(Client client)
   {
     this.client = client;
-    client.addListener(EventType.NEW_PRODUCT_FOR_MANAGER.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.DELETED_PRODUCT_PRICE.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), evt -> support.firePropertyChange(evt));
   }

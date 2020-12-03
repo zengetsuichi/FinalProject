@@ -37,7 +37,6 @@ public class AdministratorViewModel
   private void newProduct(PropertyChangeEvent propertyChangeEvent)
   {
     Platform.runLater(()-> {
-      //listOfAllProducts.clear();
       ProductList productList = (ProductList) propertyChangeEvent.getNewValue();
       listOfAllProducts.setAll(productList.getProducts());
     });
@@ -55,7 +54,6 @@ public class AdministratorViewModel
   public ObservableList<ShopPrice> getShopPricesById(int productId)
   {
     ArrayList<ShopPrice> shopPrices = administratorModel.getShopPricesById(productId);
-    //shopPricesForSpecificProduct.clear();
     shopPricesForSpecificProduct.setAll(shopPrices);
     return shopPricesForSpecificProduct;
   }

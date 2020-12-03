@@ -40,7 +40,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
               + "price.productid inner join users on price.userid = users.userid where users.username = ?");
       statement.setString(1, username);
       ResultSet resultSet = statement.executeQuery();
-      ArrayList<Product> products = new ArrayList();
+      ArrayList<Product> products = new ArrayList<>();
       while (resultSet.next())
       {
         int productId2 = resultSet.getInt("productid");
@@ -51,7 +51,6 @@ public class ShopManagerDAOManager implements ShopManagerDAO
         Product product = new Product(productId2, name, description,
             categoryName, price);
         products.add(product);
-
       }
 
       return products;

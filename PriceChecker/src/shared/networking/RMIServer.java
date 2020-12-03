@@ -1,5 +1,6 @@
 package shared.networking;
 
+import client.networking.RMIClient;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
@@ -46,8 +47,4 @@ public interface RMIServer extends Remote
 String editShopProduct(String productName, String productDescription, String category, ArrayList<String> parseTag,
     int productId, int price,String username)
     throws RemoteException;
-  ArrayList<Product> getAllProducts() throws RemoteException;
-    ArrayList<Product> getAllProductsFor(String username) throws RemoteException;
-    String addNewProductShopManager(String clientUsername, String productName, String productDescription, String category, ArrayList<String> parseTag, int price) throws RemoteException;
-
 }

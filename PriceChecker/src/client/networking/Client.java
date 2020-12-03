@@ -1,7 +1,6 @@
 package client.networking;
 
 import shared.util.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +25,6 @@ public interface Client extends PropertyChangeSubject
   ArrayList<String> getAllTags();
   String addNewProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag);
-  String addNewProductShopManager(String productName, String productDescription,
-                       String category, ArrayList<String> parseTag, int price);
   String addNewCategory(String newCategory);
   String addNewTag(String newTag);
   String editProduct(String productName, String productDescription,
@@ -44,7 +41,4 @@ public interface Client extends PropertyChangeSubject
   String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob);
   String editShopProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag, int productId,int price,String username);
-  ArrayList<Product> getAllProducts();
-  ArrayList<Product> getAllProductsFor();
-
 }

@@ -1,12 +1,10 @@
 package client.networking;
-
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import shared.util.User;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -125,21 +123,10 @@ public class RMIClient implements Client, ClientCallback {
   }
 
   @Override
-  public String addNewProductShopManager(String productName, String productDescription, String category, ArrayList<String> parseTag, int price) {
-    try {
-      return rmiServer.addNewProductShopManager(clientUsername,productName,productDescription,category,parseTag,price);
-    } catch (RemoteException e) {
-      throw new RuntimeException("Could not contact server");
-    }
-  }
-
-  @Override
   public String addNewProduct(String productName,
                               String productDescription, String category, ArrayList<String> parseTag) {
     try {
-
-      String response = rmiServer.addNewProduct(productName, productDescription, category, parseTag);
-        return response;
+      return rmiServer.addNewProduct(productName, productDescription, category, parseTag);
     } catch (RemoteException e) {
       throw new RuntimeException("Could not contact server");
     }
@@ -232,26 +219,6 @@ public class RMIClient implements Client, ClientCallback {
       throw new RuntimeException("Could not contact server");
     }
   }
-
-    @Override
-    public ArrayList<Product> getAllProducts() {
-        try {
-            return rmiServer.getAllProducts();
-        }catch(RemoteException e){
-            throw new RuntimeException("Could not contact server");
-        }
-    }
-
-    @Override
-    public ArrayList<Product> getAllProductsFor() {
-        try {
-            return rmiServer.getAllProductsForSpecificManager(clientUsername);
-        }catch(RemoteException e){
-            throw new RuntimeException("Could not contact server");
-        }
-    }
-
-
 
 
   @Override public void update(String eventName, Object newValue)
