@@ -18,4 +18,5 @@ public interface AdministratorUsersServerModel extends PropertyChangeSubject
 {
   List<User> getAllUsers();
   String addNewManager(User newManager);
+  String deleteUser(String username);
 }

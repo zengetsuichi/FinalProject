@@ -27,6 +27,8 @@ public class AdministratorUsersPageModelManager
     this.client = client;
     client.addListener(EventType.NEW_SHOP_MANAGER.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.EDIT_USER.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.DELETE_USER.name(), evt -> support.firePropertyChange(evt));
+
   }
 
   @Override public List<User> getAllUsers()
@@ -39,6 +41,7 @@ public class AdministratorUsersPageModelManager
     client.logOut();
   }
 
+
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
   {
@@ -49,5 +52,9 @@ public class AdministratorUsersPageModelManager
       PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(eventName, listener);
+  }
+  @Override public String deleteUser(String username)
+  {
+    return client.deleteUser(username);
   }
 }

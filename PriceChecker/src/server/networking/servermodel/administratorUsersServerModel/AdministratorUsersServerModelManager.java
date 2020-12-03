@@ -75,4 +75,23 @@ public class AdministratorUsersServerModelManager implements AdministratorUsersS
   {
     support.removePropertyChangeListener(eventName, listener);
   }
+  @Override public String deleteUser(String username)
+  {
+    try
+    {
+      String response = administratorDAO.deleteUser(username);
+      if(response.equals("User Deleted.")){
+        support.firePropertyChange(EventType.DELETE_USER.name(), null, administratorDAO.getAllUsers());
+        return response;
+      }
+      else{
+        return response;
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
 }

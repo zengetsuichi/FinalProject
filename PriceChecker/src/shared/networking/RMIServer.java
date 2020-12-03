@@ -47,4 +47,5 @@ public interface RMIServer extends Remote
 String editShopProduct(String productName, String productDescription, String category, ArrayList<String> parseTag,
     int productId, int price,String username)
     throws RemoteException;
+  String deleteUser(String username) throws RemoteException;
 }
