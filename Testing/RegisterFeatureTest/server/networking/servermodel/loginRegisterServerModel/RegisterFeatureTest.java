@@ -16,8 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Dorin, Piotr
  */
 
-
-
 class RegisterFeatureTest
 {
   private LoginRegisterServerModel loginRegisterServerModel;

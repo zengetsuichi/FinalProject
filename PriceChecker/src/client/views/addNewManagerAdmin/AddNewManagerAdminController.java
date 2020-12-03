@@ -60,7 +60,7 @@ public class AddNewManagerAdminController implements ViewController
   @Override public void handleClickMe(ActionEvent actionEvent)
   {
     if(actionEvent.getSource() == goBackBtn){
-      viewHandler.openAdministratorUsersPage();
+      viewHandler.openShopManagerView();
     }
     else if(actionEvent.getSource() == addManagerBtn){
       addNewManager();
