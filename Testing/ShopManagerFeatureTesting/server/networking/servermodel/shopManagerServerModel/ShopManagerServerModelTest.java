@@ -47,4 +47,30 @@ class ShopManagerServerModelTest
 
     assertEquals(productList.getProducts(), arrayList);
   }
+
+
+
+  //Cannot finish the test because we cannot add the product to the shop
+  /**
+   * Testing method used for deleting the product from a shop
+   * system will return "Product deleted."
+   * @author Dorin
+   */
+  @Test void deleteProductForSpecificShop()
+  {
+
+    //arrange
+    Product product1 = new Product(1,"Cola 330", "Cola 330 ml, can, best for parties","Beverages", 105);
+    String response = "Product deleted.";
+    try
+    {
+      assertEquals(response, shopManagerDAO.deleteProductPrice(1,"Netto"));
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
+
+
 }

@@ -157,9 +157,9 @@ public class AdministratorEditUserController implements ViewController
       errorLabel.setText("Invalid entry into username field.");
     }
     else if (usernameTextField.getLength() > 20 || passwordTextField.getLength() > 20 || emailTextField.getLength() > 50
-        || usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || emailTextField.getText().equals(""))
+        || usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || emailTextField.getText().equals("") || dateOfBirthPicker.getValue() == null)
     {
-      errorLabel.setText("Invalid data");
+      errorLabel.setText("Invalid data or empty fields");
     }
     else
     {
