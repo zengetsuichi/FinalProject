@@ -135,7 +135,7 @@ public class ShopManagerController implements ViewController
       viewHandler.openLoginView();
     }
     else if(actionEvent.getSource() == addProductBtn){
-    //new view for adding products
+      viewHandler.openAddNewManagerView();
     }
     else if(actionEvent.getSource() == editProductBtn){
       editShopProduct();
