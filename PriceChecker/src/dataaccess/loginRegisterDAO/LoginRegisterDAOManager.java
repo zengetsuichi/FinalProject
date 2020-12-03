@@ -4,7 +4,7 @@ import dataaccess.DatabaseConnection;
 import shared.util.User;
 
 import java.sql.*;
-
+import java.util.ArrayList;
 
 /**
  * Class implementing the data access interface. Used for requesting data from
@@ -33,23 +33,33 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
    */
   @Override public User findUser(String username) throws SQLException
   {
-   try(Connection connection = databaseConnection.getConnection()){
-     PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
-     statement.setString(1, username);
-     ResultSet resultSet = statement.executeQuery();
-     if(resultSet.next()){
-       int userId = resultSet.getInt("userId");
-       username = resultSet.getString("username");
-       String email = resultSet.getString("email");
-       String password = resultSet.getString("password");
-       String dob = resultSet.getString("dob");
-       String type = resultSet.getString("type");
-       return new User(username, email, password, dob, type, userId, false);
-     }
-     else{
-       return null;
-     }
-   }
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    User user = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
+      statement.setString(1, username);
+      resultSet = statement.executeQuery();
+      if(resultSet.next()){
+        int userId = resultSet.getInt("userId");
+        username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String dob = resultSet.getString("dob");
+        String type = resultSet.getString("type");
+        user = new User(username, email, password, dob, type, userId, false);
+      }
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return user;
   }
 
   /**
@@ -63,22 +73,30 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
    */
 
   @Override
-  public User register(String username, String email, String password, String dob) throws SQLException {
-    try (Connection connection = databaseConnection.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO users(username, email, password, dob, type) VALUES(? , ? , ? , ? , ?)");
+  public User register(String username, String email, String password, String dob) throws SQLException
+  {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    User user = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("INSERT INTO users(username, email, password, dob, type) VALUES(? , ? , ? , ? , ?)");
       statement.setString(1, username);
       statement.setString(2, email);
       statement.setString(3, password);
-      Date date=Date.valueOf(dob);
-      // statement.setDate(4,new Date(622790105000L));
+      Date date = Date.valueOf(dob);
       statement.setDate(4,date);
-      //statement.setString(4,date);
       statement.setString(5,"User");
       statement.executeUpdate();
-
-      return null;
-
-    }}
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return user;
+  }
 
   /**
    * Method used for retrieving the data from database about the specific user to check if the email already exist
@@ -88,16 +106,27 @@ public class LoginRegisterDAOManager implements LoginRegisterDAO
    */
 
   @Override
-  public String findEmail(String email) throws SQLException {
-    try (Connection connection = databaseConnection.getConnection()) {
-      PreparedStatement statement = connection.prepareStatement("SELECT email FROM users WHERE email = ?");
+  public String findEmail(String email) throws SQLException
+  {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String returnStatement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT email FROM users WHERE email = ?");
       statement.setString(1, email);
-      ResultSet resultSet = statement.executeQuery();
-      if(resultSet.next()) {
-        return resultSet.getString("email");
-      } else {
-        return null;
-      }
+      resultSet = statement.executeQuery();
+      if(resultSet.next())
+        returnStatement = resultSet.getString("email");
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnStatement;
   }
 }
