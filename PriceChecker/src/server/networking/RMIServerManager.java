@@ -186,7 +186,7 @@ public class RMIServerManager implements RMIServer
         try {
           client.update(evt.getPropertyName(), evt.getNewValue());
         } catch (RemoteException e) {
-          e.printStackTrace();
+          listeners.remove(client);
         }
       }
     };
