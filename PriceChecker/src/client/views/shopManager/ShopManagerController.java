@@ -55,7 +55,6 @@ public class ShopManagerController implements ViewController
   @FXML
   private Label errorLabel;
 
-
   @FXML
   private TextField searchBar;
 
@@ -137,19 +136,21 @@ public class ShopManagerController implements ViewController
     }
     else if(actionEvent.getSource() == addProductBtn){
       // open add new manager
-    //new view for adding products
-      viewHandler.openShopManagerAddNewProductView();
     }
     else if(actionEvent.getSource() == editProductBtn){
-      //new view for editing buttons
       editShopProduct();
     }
     else if(actionEvent.getSource() == deleteProductBtn){
+      productTable.getSelectionModel().select(-1);
       deleteProduct();
     }
     
   }
 
+  /**
+   * Implementation of delete button
+   * @author Dorin
+   */
   private void deleteProduct()
   {
     if(productTable.getSelectionModel().getSelectedCells().isEmpty())
