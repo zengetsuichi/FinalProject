@@ -121,7 +121,7 @@ public class AdministratorEditUserController implements ViewController
     {
       subscribed = "Subscribed";
     }
-    oldUsername  = user.getUsername();
+    oldUsername = user.getUsername();
     oldEmail = user.getEmail();
 
     isSubscribedLabel.setText(subscribed);
@@ -157,7 +157,8 @@ public class AdministratorEditUserController implements ViewController
       errorLabel.setText("Invalid entry into username field.");
     }
     else if (usernameTextField.getLength() > 20 || passwordTextField.getLength() > 20 || emailTextField.getLength() > 50
-        || usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || emailTextField.getText().equals("") || dateOfBirthPicker.getValue() == null)
+        || usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || emailTextField.getText().equals("")
+        || dateOfBirthPicker.getValue() == null)
     {
       errorLabel.setText("Invalid data or empty fields");
     }
@@ -169,10 +170,12 @@ public class AdministratorEditUserController implements ViewController
       String dob = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
       String editResponse = administratorEditUserViewModel.validateEditUser(oldUsername, oldEmail, username, email, password, dob);
+
       if (editResponse.equals("User with this username already exist"))
       {
         errorLabel.setText("User with this username already exist");
       }
+
       else if (editResponse.equals("Email already used"))
       {
         errorLabel.setText("Email already used");

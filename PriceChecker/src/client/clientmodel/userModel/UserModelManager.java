@@ -16,6 +16,8 @@ public class UserModelManager implements UserModel
   public UserModelManager(Client client)
   {
     this.client = client;
+    client.addListener(EventType.NEW_CATEGORY.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.DELETED_PRODUCT.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public void logOut()
