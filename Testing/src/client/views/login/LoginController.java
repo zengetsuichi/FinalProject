@@ -8,9 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
 /**
  * Class used for initializing the view components based on
  * the data send from view model.
+ *
  * @author Gosia, Piotr
  */
 
@@ -58,10 +60,10 @@ public class LoginController implements ViewController
         {
           errorLabel.setText("Wrong credentials.");
         }
-        else if (loginResponse.equals("User"))
+        else if (loginResponse.contains("User"))
         {
           loginViewModel.setClientUsername(username);
-          viewHandler.openNormalUserView();
+          viewHandler.openUserView();
         }
         else if (loginResponse.contains("Admin"))
         {

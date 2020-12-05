@@ -1,15 +1,17 @@
 package client.core;
-import client.clientmodel.shopManagerModel.ShopManagerModel;
 
 import client.views.addNewManagerAdmin.AddNewManagerAdminViewModel;
 import client.views.addNewProductAdmin.AddNewProductAdminViewModel;
 import client.views.administrator.AdministratorViewModel;
+import client.views.administratorEditUser.AdministratorEditUserViewModel;
 import client.views.administratorUsersPage.AdministratorUsersPageViewModel;
 import client.views.editProductAdmin.EditProductAdminViewModel;
+import client.views.editProductShopManager.EditProductShopManagerViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
-
 import client.views.shopManager.ShopManagerViewModel;
+import client.views.shoppingListView.ShoppingListViewViewModel;
+import client.views.user.UserViewModel;
 
 /**
  * Class used for lazy instantiation of view model instances and passing
@@ -29,6 +31,10 @@ public class ViewModelFactory
   private ShopManagerViewModel shopManagerViewModel;
   private AdministratorUsersPageViewModel administratorUsersPageViewModel;
   private AddNewManagerAdminViewModel addNewManagerAdminViewModel;
+  private AdministratorEditUserViewModel administratorEditUserViewModel;
+  private EditProductShopManagerViewModel editProductShopManagerViewModel;
+  private ShoppingListViewViewModel shoppingListViewViewModel;
+  private UserViewModel userViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -93,5 +99,37 @@ public class ViewModelFactory
       addNewManagerAdminViewModel = new AddNewManagerAdminViewModel(modelFactory.getAddNewManagerAdminModel());
     }
     return addNewManagerAdminViewModel;
+  }
+
+  public AdministratorEditUserViewModel getAdministratorEditUserViewModel()
+  {
+    if(administratorEditUserViewModel == null){
+      administratorEditUserViewModel = new AdministratorEditUserViewModel(modelFactory.getAdministratorEditUserModel());
+    }
+    return administratorEditUserViewModel;
+  }
+
+  public EditProductShopManagerViewModel getEditProductShopManagerViewModel()
+  {
+    if (editProductShopManagerViewModel == null){
+      editProductShopManagerViewModel = new EditProductShopManagerViewModel(modelFactory.getEditProductShopManagerModel());
+    }
+    return editProductShopManagerViewModel;
+  }
+
+  public UserViewModel getUserViewModel()
+  {
+    if (userViewModel == null){
+      userViewModel = new UserViewModel(modelFactory.getUserModel());
+    }
+    return userViewModel;
+  }
+
+  public ShoppingListViewViewModel getShoppingListViewViewModel()
+  {
+    if (shoppingListViewViewModel == null){
+      shoppingListViewViewModel = new ShoppingListViewViewModel(modelFactory.getShoppingListModel());
+    }
+    return shoppingListViewViewModel;
   }
 }

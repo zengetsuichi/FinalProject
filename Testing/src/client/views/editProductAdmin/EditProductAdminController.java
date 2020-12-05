@@ -14,8 +14,15 @@ import javafx.scene.control.TextField;
 import org.controlsfx.control.CheckListView;
 import org.controlsfx.control.SearchableComboBox;
 import shared.util.Product;
-
 import java.util.ArrayList;
+
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Gosia, Karlo
+ */
 
 public class EditProductAdminController implements ViewController
 {
@@ -91,7 +98,7 @@ public class EditProductAdminController implements ViewController
 
     if(!productName.isEmpty() && productName.length() <= 40){
       if(!productDescription.isEmpty() && productDescription.length() <= 200){
-        if(!category.isEmpty()){
+        if(category != null){
           if(!tags.isEmpty()){
             ArrayList<String> parseTag = new ArrayList<>(tags);
             String response = editProductAdminViewModel.editProduct(productName, productDescription, category, parseTag, product.getProductId());

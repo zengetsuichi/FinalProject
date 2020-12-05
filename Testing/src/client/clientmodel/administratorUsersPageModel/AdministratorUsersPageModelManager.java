@@ -7,7 +7,15 @@ import shared.util.User;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
-
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; getting all users from the database and
+ * logging out of the session.
+ *
+ * @author Karlo
+ */
 public class AdministratorUsersPageModelManager
     implements AdministratorUsersPageModel
 {
@@ -18,6 +26,9 @@ public class AdministratorUsersPageModelManager
   {
     this.client = client;
     client.addListener(EventType.NEW_SHOP_MANAGER.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.EDIT_USER.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.DELETE_USER.name(), evt -> support.firePropertyChange(evt));
+
   }
 
   @Override public List<User> getAllUsers()
@@ -30,6 +41,7 @@ public class AdministratorUsersPageModelManager
     client.logOut();
   }
 
+
   @Override public void addListener(String eventName,
       PropertyChangeListener listener)
   {
@@ -40,5 +52,9 @@ public class AdministratorUsersPageModelManager
       PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(eventName, listener);
+  }
+  @Override public String deleteUser(String username)
+  {
+    return client.deleteUser(username);
   }
 }

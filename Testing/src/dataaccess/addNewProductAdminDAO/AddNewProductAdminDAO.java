@@ -3,6 +3,13 @@ package dataaccess.addNewProductAdminDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Interface is used for separating the server model manager from the data access object as
+ * well as providing methods to the data access manager.
+ *
+ * @author Gosia, Karlo
+ */
+
 public interface AddNewProductAdminDAO
 {
   ArrayList<String> getAllProductCategories() throws SQLException;

@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import shared.util.Product;
 import shared.util.ShopPrice;
+
 /**
  * Class implementing the view controller interface. Used for initializing
  * view components, retrieving data from them and providing functionality
@@ -82,7 +83,7 @@ public class AdministratorController implements ViewController
 
   /**
    * Method used to load the product data into the Product Table
-   * @author Gosia, Hadi
+   * @author Gosia, Karlo
    */
   private void loadProductTable()
   {

@@ -7,6 +7,17 @@ import shared.util.Product;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; getting the user name of the currently logged in shop manager,
+ * requesting all the products assigned to the specific shop manager,
+ * getting all tags assigned to a specific product, deleting the
+ * price from a product and logging out of the session.
+ *
+ * @author Gosia
+ */
 
 public class ShopManagerModelManager implements ShopManagerModel
 {
@@ -16,8 +27,9 @@ public class ShopManagerModelManager implements ShopManagerModel
   public ShopManagerModelManager(Client client)
   {
     this.client = client;
-
     client.addListener(EventType.DELETED_PRODUCT_PRICE.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.NEW_PRODUCT.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public void addListener(String eventName,

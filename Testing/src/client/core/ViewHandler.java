@@ -3,11 +3,15 @@ package client.core;
 import client.views.addNewManagerAdmin.AddNewManagerAdminController;
 import client.views.addNewProductAdmin.AddNewProductAdminController;
 import client.views.administrator.AdministratorController;
+import client.views.administratorEditUser.AdministratorEditUserController;
 import client.views.administratorUsersPage.AdministratorUsersPageController;
 import client.views.editProductAdmin.EditProductAdminController;
+import client.views.editProductShopManager.EditProductShopManagerController;
 import client.views.login.LoginController;
 import client.views.register.RegisterController;
 import client.views.shopManager.ShopManagerController;
+import client.views.shoppingListView.ShoppingListViewController;
+import client.views.user.UserController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -17,12 +21,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import shared.util.Product;
-
+import shared.util.User;
 import java.io.IOException;
+
  /**
  * Class that provides methods for opening specific views.
  * @author Gosia, Piotr, Karlo
  */
+
 public class ViewHandler
 {
   private ViewModelFactory viewModelFactory;
@@ -129,10 +135,7 @@ public class ViewHandler
     }
   }
 
-  public void openNormalUserView(){
-    //TODO change this method
-    System.out.println("User view opened.");
-  }
+
 
   public void openAddNewProductView()
   {
@@ -211,6 +214,91 @@ public class ViewHandler
       Scene scene = new Scene(root);
       stage.setScene(scene);
       stage.setTitle("Add shop manager");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openAdministratorEditUserView(User user)
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/administratorEditUser/AdministratorEditUser.fxml"));
+      Parent root = loader.load();
+      AdministratorEditUserController ctlr = loader.getController();
+      ctlr.setUser(user);
+
+      ctlr.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Edit User");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+  public void openEditShopManagerProductView(Product product, ObservableList<String> tags)
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource(
+          "../views/editProductShopManager/EditProductShopManager.fxml"));
+      Parent root = loader.load();
+      EditProductShopManagerController view = loader.getController();
+
+      view.setProductData(product, tags);
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Edit Product Shop Manager");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openUserView(){
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/user/User.fxml"));
+      Parent root = loader.load();
+      UserController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Price Checker");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+  public void openShoppingList(String thisUser){
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/shoppingListView/ShoppingListView.fxml"));
+      Parent root = loader.load();
+      ShoppingListViewController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      view.setUser(thisUser);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Shopping List");
       stage.show();
     }
     catch (IOException e)

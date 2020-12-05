@@ -1,10 +1,10 @@
 package shared.util;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
- * A class used for creating the user object.
+ * A class used for creating an user object.
+ *
  * @author Gosia, Piotr
  */
 
@@ -122,30 +122,11 @@ public class User implements Serializable
     isSubscribed = subscribed;
   }
 
-  @Override public boolean equals(Object o)
-  {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    User user = (User) o;
-    return getUserId() == user.getUserId() && isSubscribed == user.isSubscribed
-        && getUsername().equals(user.getUsername()) && getEmail()
-        .equals(user.getEmail()) && getPassword().equals(user.getPassword())
-        && getDob().equals(user.getDob()) && getType().equals(user.getType());
-  }
-
-  @Override public int hashCode()
-  {
-    return Objects
-        .hash(getUserId(), getUsername(), getEmail(), getPassword(), getDob(),
-            getType(), isSubscribed);
-  }
-
   @Override public String toString()
   {
     return "User{" + "userId='" + userId + '\'' + ", username='" + username
         + '\'' + ", email='" + email + '\'' + ", password='" + password + '\''
         + ", dob='" + dob + '\'' + ", type='" + type + '\'' + '}';
   }
+
 }

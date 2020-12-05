@@ -48,7 +48,7 @@ public class ShopManagerServerModelManager implements ShopManagerServerModel
     {
       String deleteProduct = shopManagerDAO.deleteProductPrice(productId, username);
       if(deleteProduct.equals("Product deleted."))
-        support.firePropertyChange(EventType.DELETED_PRODUCT_PRICE.name(), null, shopManagerDAO.getAllProductsForSpecificManager(username));
+        support.firePropertyChange(EventType.DELETED_PRODUCT_PRICE.name(), null,null);
       return deleteProduct;
     }
     catch (SQLException throwables)

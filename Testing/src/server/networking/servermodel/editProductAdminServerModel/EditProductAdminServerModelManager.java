@@ -2,11 +2,19 @@ package server.networking.servermodel.editProductAdminServerModel;
 
 import dataaccess.administratorDAO.AdministratorDAO;
 import shared.util.EventType;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object and firing events.
+ *
+ * Providing methods for; editing the product.
+ *
+ * @author Gosia, Karlo
+ */
 
 public class EditProductAdminServerModelManager implements EditProductAdminServerModel
 {

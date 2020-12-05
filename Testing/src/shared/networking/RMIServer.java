@@ -13,8 +13,10 @@ import java.util.List;
 
 /**
  * An RMIServer interface is used for separating the Client
- * from the server networking layer.
- * @author Gosia, Piotr
+ * from the server networking layer, providing methods that client calls
+ * on the server.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public interface RMIServer extends Remote
@@ -39,4 +41,14 @@ public interface RMIServer extends Remote
   String deleteProductPrice(int productId, String username) throws RemoteException;
   List<User> getAllUsers() throws RemoteException;
   String addNewManager(User newManager) throws RemoteException;
+  String validateUserEdit(String oldUsername, String oldEmail, String username, String email, String password, String dob) throws RemoteException;
+//  void editUser(RMIClient rmiClient) throws RemoteException;
+String editShopProduct(String productName, String productDescription, String category, ArrayList<String> parseTag,
+    int productId, int price,String username)
+    throws RemoteException;
+  String deleteUser(String username) throws RemoteException;
+
+  ArrayList<Product> getThisUserShoppingList(String clientUsername) throws RemoteException;
+  Boolean clearSL(String clientUsername) throws RemoteException;
+  boolean addProductToSL(Product item, String clientUsername) throws RemoteException;
 }

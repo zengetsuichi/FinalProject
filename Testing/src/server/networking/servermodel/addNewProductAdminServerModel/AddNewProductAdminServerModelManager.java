@@ -7,6 +7,17 @@ import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object and firing events.
+ *
+ * Providing methods for; getting all product categories, getting all product
+ * tags, adding new products to the database, adding new categories and adding
+ * new tags for the products.
+ *
+ * @author Gosia, Karlo
+ */
+
 public class AddNewProductAdminServerModelManager implements AddNewProductAdminServerModel
 {
   private AddNewProductAdminDAO addNewProductAdminDAO;

@@ -2,11 +2,14 @@ package server.networking;
 
 
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
+import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
 import server.networking.servermodel.editProductAdminServerModel.EditProductAdminServerModel;
+import server.networking.servermodel.editProductShopManagerModel.EditProductShopManagerServerModel;
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
+import server.networking.servermodel.userShoppingListServerModel.UserShoppingListServerModel;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.util.*;
@@ -24,9 +27,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Class used for receiving, analyzing the request send from cient, as well as, sending the
- * back to the client.
- * @author Gosia, Piotr
+ * Class implementing RMI Server interface responsible for receiving the requests
+ * from client, as well as, processing them and responding back.
+ *
+ * Moreover, the class is in charge of updating all the clients that are active in case of events
+ * fired from server models.
+ *
+ * @author Gosia, Piotr, Karlo, Dorin, Hadi
  */
 
 public class RMIServerManager implements RMIServer
@@ -37,14 +44,20 @@ public class RMIServerManager implements RMIServer
   private EditProductAdminServerModel editProductAdminServerModel;
   private ShopManagerServerModel shopManagerServerModel;
   private AdministratorUsersServerModel administratorUsersServerModel;
+  private AdministratorEditUserServerModel administratorEditUserServerModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
+  private EditProductShopManagerServerModel editProductShopManagerServerModel;
+  private UserShoppingListServerModel userShoppingListServerModel;
 
   public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
       AdministratorServerModel administratorServerModel,
       AddNewProductAdminServerModel addNewProductAdminServerModel,
       EditProductAdminServerModel editProductAdminServerModel,
       ShopManagerServerModel shopManagerServerModel,
-      AdministratorUsersServerModel administratorUsersServerModel) throws RemoteException
+      AdministratorUsersServerModel administratorUsersServerModel,
+      AdministratorEditUserServerModel administratorEditUserServerModel,
+      EditProductShopManagerServerModel editProductShopManagerServerModel,
+      UserShoppingListServerModel userShoppingListServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
@@ -53,6 +66,9 @@ public class RMIServerManager implements RMIServer
     this.editProductAdminServerModel = editProductAdminServerModel;
     this.shopManagerServerModel = shopManagerServerModel;
     this.administratorUsersServerModel = administratorUsersServerModel;
+    this.administratorEditUserServerModel= administratorEditUserServerModel;
+    this.editProductShopManagerServerModel = editProductShopManagerServerModel;
+    this.userShoppingListServerModel = userShoppingListServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -158,6 +174,11 @@ public class RMIServerManager implements RMIServer
     return administratorUsersServerModel.addNewManager(newManager);
   }
 
+  @Override public String validateUserEdit(String oldUsername, String oldEmail, String username, String email, String password, String dob)
+  {
+    return administratorEditUserServerModel.validateUserEdit(oldUsername, oldEmail, username,email,password,dob);
+  }
+
   /**
    * A method used for saving the client references into the pool of listeners.
    * @author Gosia
@@ -171,7 +192,7 @@ public class RMIServerManager implements RMIServer
         try {
           client.update(evt.getPropertyName(), evt.getNewValue());
         } catch (RemoteException e) {
-          e.printStackTrace();
+          listeners.remove(client);
         }
       }
     };
@@ -183,5 +204,39 @@ public class RMIServerManager implements RMIServer
     administratorServerModel.addListener(EventType.DELETED_PRODUCT.name(), listener);
     shopManagerServerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), listener);
     administratorUsersServerModel.addListener(EventType.NEW_SHOP_MANAGER.name(), listener);
+    administratorEditUserServerModel.addListener(EventType.EDIT_USER.name(), listener);
+    editProductShopManagerServerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(),listener);
+    editProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
+    administratorUsersServerModel.addListener(EventType.DELETE_USER.name(), listener);
+  }
+
+  @Override public String editShopProduct(String productName,
+      String productDescription, String category, ArrayList<String> parseTag,
+      int productId, int price,String username)
+      throws RemoteException
+  {
+    return editProductShopManagerServerModel.editShopProduct(productName, productDescription,
+        category, parseTag, productId,price,username);
+  }
+
+  @Override public String deleteUser(String username) throws RemoteException
+  {
+    return administratorUsersServerModel.deleteUser(username);
+  }
+
+  @Override public ArrayList<Product> getThisUserShoppingList(
+      String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.getThisUserShoppingList(clientUsername);
+  }
+
+  @Override public Boolean clearSL(String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.clearSL(clientUsername);
+  }
+
+  @Override public boolean addProductToSL(Product item, String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.addProductToSL(item, clientUsername);
   }
 }

@@ -3,9 +3,12 @@ package shared.util;
 import java.io.Serializable;
 
 /**
- * A class used for creating an shop price object, with the shopName and price as attributes.
- * @author Gosia, Hadi
+ * A class used for creating a shopPrice object
+ * and shopName and price as one object.
+ *
+ * @author Gosia, Hadi, Karlo
  */
+
 public class ShopPrice implements Serializable
 {
   private String shopName;
@@ -42,13 +45,5 @@ public class ShopPrice implements Serializable
   {
     return "ShopPrice{" + "shopName='" + shopName + '\'' + ", price=" + price
         + '}';
-  }
-
-  public boolean equals(Object obj)
-  {
-    if(!(obj instanceof ShopPrice))
-      return false;
-    ShopPrice other = (ShopPrice) obj;
-    return shopName.equals(other.shopName) && price == other.price;
   }
 }

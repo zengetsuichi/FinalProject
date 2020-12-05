@@ -33,7 +33,7 @@ public class AdministratorModelManager implements AdministratorModel
 
   /**
    * Method used to request and return back all product data.
-   * @author Gosia, Karlo, Hadi
+   * @author Gosia, Karlo
    */
   @Override public ProductList loadProductData()
   {

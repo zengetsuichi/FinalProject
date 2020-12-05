@@ -1,10 +1,13 @@
 package shared.util;
 
 import java.io.Serializable;
+
 /**
- * A class used for creating an product object.
- * @author Gosia, Hadi
+ * A class used for creating a product object.
+ *
+ * @author Gosia, Hadi, Karlo
  */
+
 public class Product implements Serializable
 {
   private String productName;
@@ -12,6 +15,7 @@ public class Product implements Serializable
   private String description;
   private String category;
   private int price;
+  private int quantity;
 
   public Product( int productId, String productName, String description,
       String category)
@@ -21,6 +25,7 @@ public class Product implements Serializable
     this.description = description;
     this.category = category;
   }
+
   public Product( int productId, String productName, String description,
       String category, int price)
   {
@@ -29,6 +34,26 @@ public class Product implements Serializable
     this.description = description;
     this.category = category;
     this.price = price;
+  }
+
+  public Product(int quantity, int productId, String productName, String description,
+      String category)
+  {
+    this.productName = productName;
+    this.productId = productId;
+    this.description = description;
+    this.category = category;
+    this.quantity = quantity;
+  }
+
+  public int getQuantity()
+  {
+    return quantity;
+  }
+
+  public void setQuantity(int quantity)
+  {
+    this.quantity = quantity;
   }
 
   public String getProductName()

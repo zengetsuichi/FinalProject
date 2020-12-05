@@ -135,10 +135,13 @@ public class ShopManagerController implements ViewController
       viewHandler.openLoginView();
     }
     else if(actionEvent.getSource() == addProductBtn){
+      // open add new manager
     //new view for adding products
+     // viewHandler.openAddNewManagerView();
     }
     else if(actionEvent.getSource() == editProductBtn){
-      //new view for editing buttons  
+      //new view for editing buttons
+      editShopProduct();
     }
     else if(actionEvent.getSource() == deleteProductBtn){
       productTable.getSelectionModel().select(-1);
@@ -164,7 +167,6 @@ public class ShopManagerController implements ViewController
       Product item = productTable.getItems().get(row);
       String response = shopManagerViewModel.deleteProductPrice(item.getProductId(), username);
       errorLabel.setText(response);
-
     }
   }
 
@@ -186,5 +188,25 @@ public class ShopManagerController implements ViewController
       for (int i = 0; i < tags.size(); i++)
         tagListTable.getItems().add(tags.get(i));
     });
+  }
+  private void editShopProduct()
+  {
+    if(productTable.getSelectionModel().getSelectedCells().isEmpty())
+    {
+      errorLabel.setText("Please first select a product in a table.");
+    }
+    else
+    {
+      /*
+          Taking the selected row from the table, creating a product object,
+          getting all tags assigned to the selected product, a passing it
+          to the next view.
+       */
+      TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
+      int row = pos.getRow();
+      Product item = productTable.getItems().get(row);
+      ObservableList<String> tags = shopManagerViewModel.getAllTagsById(item.getProductId());
+      viewHandler.openEditShopManagerProductView(item, tags);
+    }
   }
 }

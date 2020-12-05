@@ -5,6 +5,17 @@ import shared.util.Product;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Class implementing the data access interface. Used for requesting data from
+ * the database.
+ *
+ * Providing methods for; getting all product categories, getting all product
+ * tags, adding new products to the database, adding new categories and adding
+ * new tags for the products to the database.
+ *
+ * @author Gosia, Karlo
+ */
+
 public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
 {
   private DatabaseConnection databaseConnection;
@@ -17,40 +28,68 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
   @Override public ArrayList<String> getAllProductCategories()
       throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM category");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<String> category = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    ArrayList<String> category = new ArrayList<>();
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM category");
+      resultSet = statement.executeQuery();
       while(resultSet.next()){
         String categoryname = resultSet.getString("categoryname");
         category.add(categoryname);
       }
-      return category;
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return category;
   }
 
   @Override public ArrayList<String> getAllTags() throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM tag");
-      ResultSet resultSet = statement.executeQuery();
-      ArrayList<String> tags = new ArrayList<>();
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    ArrayList<String> tags = new ArrayList<>();
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM tag");
+      resultSet = statement.executeQuery();
       while(resultSet.next()){
         String tagName = resultSet.getString("tagname");
         tags.add(tagName);
       }
-      return tags;
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return tags;
   }
 
   @Override public String addNewProduct(String productName,
       String productDescription, String category, ArrayList<String> parseTag)
       throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM product where productName = ?");
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String returnStatement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM product where productName = ?");
       statement.setString(1, productName);
-      ResultSet resultSet = statement.executeQuery();
+      resultSet = statement.executeQuery();
       Product product = null;
       while(resultSet.next())
       {
@@ -62,22 +101,35 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       }
 
      if(!(product == null)){
-       return "Specified product already exists";
+       returnStatement = "Specified product already exists";
      }
      else{
        int id = addToTheProductTable(productName, productDescription, category);
        addToTheProductTagTable(id, parseTag);
-       return "Product added.";
+       returnStatement = "Product added.";
      }
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnStatement;
   }
 
   @Override public String addNewCategory(String newCategory) throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM category where categoryname = ?");
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String returnStatement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM category where categoryname = ?");
       statement.setString(1, newCategory);
-      ResultSet resultSet = statement.executeQuery();
+      resultSet = statement.executeQuery();
       String category = null;
       while(resultSet.next())
       {
@@ -85,21 +137,34 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       }
 
       if(!(category == null)){
-        return "Specified category already exists.";
+        returnStatement = "Specified category already exists.";
       }
       else{
         addNewCategoryNow(newCategory);
-        return "Category added.";
+        returnStatement = "Category added.";
       }
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnStatement;
   }
 
   @Override public String addNewTag(String newTag) throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("SELECT * FROM tag where tagname = ?");
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String returnStatement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM tag where tagname = ?");
       statement.setString(1, newTag);
-      ResultSet resultSet = statement.executeQuery();
+      resultSet = statement.executeQuery();
       String tag = null;
       while(resultSet.next())
       {
@@ -107,51 +172,91 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       }
 
       if(!(tag == null)){
-        return "Specified tag already exists.";
+        returnStatement = "Specified tag already exists.";
       }
       else{
         addNewTagNow(newTag);
-        return "Tag added.";
+        returnStatement = "Tag added.";
       }
     }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnStatement;
   }
 
   private void addNewTagNow(String newTag) throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO tag (tagname) VALUES(?)");
+    Connection connection = null;
+    PreparedStatement statement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("INSERT INTO tag (tagname) VALUES(?)");
       statement.setString(1, newTag);
       statement.executeUpdate();
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
 
   private void addNewCategoryNow(String newCategory) throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("INSERT INTO category (categoryname) VALUES(?)");
+    Connection connection = null;
+    PreparedStatement statement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("INSERT INTO category (categoryname) VALUES(?)");
       statement.setString(1, newCategory);
       statement.executeUpdate();
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
 
   private void addToTheProductTagTable(int id, ArrayList<String> parseTag) throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
+    Connection connection = null;
+    PreparedStatement statement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
       for (int i = 0; i < parseTag.size(); i++)
       {
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO producttag(productid, tagname) VALUES(?,?)");
+        statement = connection.prepareStatement("INSERT INTO producttag(productid, tagname) VALUES(?,?)");
         statement.setInt(1, id);
         statement.setString(2, parseTag.get(i));
         statement.executeUpdate();
       }
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
 
   private int addToTheProductTable(String productName, String productDescription, String category)
       throws SQLException
   {
-    try (Connection connection = databaseConnection.getConnection()){
-      PreparedStatement statement = connection.prepareStatement("INSERT into product(productname, productdescription, categoryname)  values (?, ?, ?)",
+    Connection connection = null;
+    PreparedStatement statement = null;
+    int returnInt = 0;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement
+          ("INSERT into product(productname, productdescription, categoryname)  values (?, ?, ?)",
           PreparedStatement.RETURN_GENERATED_KEYS);
       statement.setString(1, productName);
       statement.setString(2, productDescription);
@@ -159,9 +264,14 @@ public class AddNewProductAdminDAOManager implements AddNewProductAdminDAO
       statement.executeUpdate();
       ResultSet keys = statement.getGeneratedKeys();
       if(keys.next()){
-        return keys.getInt("productid");
+        returnInt = keys.getInt("productid");
       }
     }
-    return 0;
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnInt;
   }
 }

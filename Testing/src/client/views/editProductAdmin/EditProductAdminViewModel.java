@@ -9,6 +9,12 @@ import shared.util.EventType;
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Gosia, Karlo
+ */
+
 public class EditProductAdminViewModel
 {
   private EditProductAdministratorModel editProductAdministratorModel;

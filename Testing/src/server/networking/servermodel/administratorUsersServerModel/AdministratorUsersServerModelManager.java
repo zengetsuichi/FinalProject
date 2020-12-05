@@ -9,6 +9,16 @@ import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object as well as firing the events.
+ *
+ * Providing methods for; getting all users from the database and adding
+ * new manager.
+ *
+ * @author Karlo
+ */
+
 public class AdministratorUsersServerModelManager implements AdministratorUsersServerModel
 {
   private AdministratorDAO administratorDAO;
@@ -64,5 +74,24 @@ public class AdministratorUsersServerModelManager implements AdministratorUsersS
       PropertyChangeListener listener)
   {
     support.removePropertyChangeListener(eventName, listener);
+  }
+  @Override public String deleteUser(String username)
+  {
+    try
+    {
+      String response = administratorDAO.deleteUser(username);
+      if(response.equals("User Deleted.")){
+        support.firePropertyChange(EventType.DELETE_USER.name(), null, administratorDAO.getAllUsers());
+        return response;
+      }
+      else{
+        return response;
+      }
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 }

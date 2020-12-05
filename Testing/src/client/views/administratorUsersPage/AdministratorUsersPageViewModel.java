@@ -6,10 +6,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.util.EventType;
 import shared.util.User;
-
 import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Karlo
+ */
 
 public class AdministratorUsersPageViewModel
 {
@@ -21,6 +25,7 @@ public class AdministratorUsersPageViewModel
     this.administratorUsersPageModel = administratorUsersPageModel;
     allUsers = FXCollections.observableArrayList();
     administratorUsersPageModel.addListener(EventType.NEW_SHOP_MANAGER.name(), this::newManager);
+    administratorUsersPageModel.addListener(EventType.EDIT_USER.name(), this::newManager);
   }
 
   private void newManager(PropertyChangeEvent propertyChangeEvent)
@@ -45,4 +50,5 @@ public class AdministratorUsersPageViewModel
   {
     administratorUsersPageModel.logOut();
   }
+
 }

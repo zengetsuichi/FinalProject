@@ -5,7 +5,6 @@ import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import shared.util.User;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -27,6 +26,7 @@ import java.util.List;
  */
 
 public class RMIClient implements Client, ClientCallback {
+
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
   private String clientUsername;
@@ -261,7 +261,8 @@ public class RMIClient implements Client, ClientCallback {
               response.equals("Houston we have a problem someone fucked up the code.")) {
         return response;
       } else {
-        rmiServer.registerClient(this);
+
+       rmiServer.registerClient(this);
         return response;
       }
 
@@ -281,4 +282,80 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  @Override public String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob)
+  {
+
+    try {
+      String response = rmiServer.validateUserEdit(oldUsername, oldEmail, username, email, password, dob);
+      if (response.equals("User with this username already exist") ||
+          response.equals("Email already used") ||
+          response.equals("Houston we have a problem someone fucked up the code.")) {
+        return response;
+      } else {
+
+         //register as listener
+        rmiServer.registerClient(this);
+        return response;
+      } }
+    catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+  @Override public String editShopProduct(String productName,
+      String productDescription, String category, ArrayList<String> parseTag,
+      int productId, int price,String username)
+  {
+    try {
+
+      return rmiServer.editShopProduct(productName, productDescription, category, parseTag, productId,price,clientUsername);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public String deleteUser(String username)
+  {
+    try {
+
+      return rmiServer.deleteUser(username);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public ArrayList<Product> getThisUserShoppingList()
+  {
+    try
+    {
+      return rmiServer.getThisUserShoppingList(clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public Boolean clearSL()
+  {
+    try
+    {
+      return rmiServer.clearSL(clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public boolean addProductToSL(Product item)
+  {
+    try
+    {
+      return rmiServer.addProductToSL(item, clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 }

@@ -9,9 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.util.Product;
 import shared.util.User;
 
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Karlo
+ */
 public class AdministratorUsersPageController implements ViewController
 {
   @FXML
@@ -68,6 +74,7 @@ public class AdministratorUsersPageController implements ViewController
     userTypeColumn.setCellValueFactory(new PropertyValueFactory<User, String>("type"));
     isSubscribedColumn.setCellValueFactory(new PropertyValueFactory<User, Boolean>("isSubscribed"));
 
+
     // Initialize the filtered list with an observable list of all users.
     FilteredList<User> filteredData = new FilteredList<>(
         administratorUsersPageViewModel.getAllUsers(), p -> true);
@@ -113,8 +120,27 @@ public class AdministratorUsersPageController implements ViewController
       administratorUsersPageViewModel.logOut();
       viewHandler.openLoginView();
     }
-    else if (actionEvent.getSource() == addUserBtn){
+    else if (actionEvent.getSource() == addUserBtn)
       viewHandler.openAddNewManagerView();
+    else if (actionEvent.getSource() == editUserBtn)
+    {
+      if(usersTable.getSelectionModel().getSelectedCells().isEmpty())
+      {
+        errorLabel.setText("Please first select a user from the table.");
+      }
+      else {
+      /*
+          Taking the selected row from the table, creating a user object,
+          passing it to the next view.
+       */
+        TablePosition pos = usersTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        User user = usersTable.getItems().get(row);
+
+        viewHandler.openAdministratorEditUserView(user);
+      }
     }
+    else if(actionEvent.getSource() == productsPageBtn)
+      viewHandler.openAdministratorView();
   }
 }
