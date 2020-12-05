@@ -10,6 +10,7 @@ import client.views.editProductShopManager.EditProductShopManagerController;
 import client.views.login.LoginController;
 import client.views.register.RegisterController;
 import client.views.shopManager.ShopManagerController;
+import client.views.user.UserController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -133,10 +134,7 @@ public class ViewHandler
     }
   }
 
-  public void openNormalUserView(){
-    //TODO change this method
-    System.out.println("User view opened.");
-  }
+
 
   public void openAddNewProductView()
   {
@@ -266,4 +264,26 @@ public class ViewHandler
       e.printStackTrace();
     }
   }
+
+  public void openUserView(){
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/user/User.fxml"));
+      Parent root = loader.load();
+      UserController view = loader.getController();
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Price Checker");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
+
 }

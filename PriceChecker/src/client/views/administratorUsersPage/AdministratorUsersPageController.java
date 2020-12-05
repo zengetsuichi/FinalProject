@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import shared.util.Product;
 import shared.util.User;
 
 /**
@@ -143,23 +142,5 @@ public class AdministratorUsersPageController implements ViewController
     }
     else if(actionEvent.getSource() == productsPageBtn)
       viewHandler.openAdministratorView();
-    else if(actionEvent.getSource() == deleteUserBtn)
-      deleteUser();
-  }
-  private void deleteUser()
-  {
-    if(usersTable.getSelectionModel().getSelectedCells().isEmpty())
-    {
-      errorLabel.setText("Please first select a User in the table to remove.");
-    }
-    else
-    {
-      TablePosition pos = usersTable.getSelectionModel().getSelectedCells().get(0);
-      int row = pos.getRow();
-      User user = usersTable.getItems().get(row);
-      usersTable.getSelectionModel().select(-1);
-      String response = administratorUsersPageViewModel.deleteUser(user.getUsername());
-      errorLabel.setText(response);
-    }
   }
 }

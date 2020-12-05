@@ -17,6 +17,8 @@ import client.clientmodel.loginRegisterModel.LoginRegisterModel;
 import client.clientmodel.loginRegisterModel.LoginRegisterModelManager;
 import client.clientmodel.shopManagerModel.ShopManagerModel;
 import client.clientmodel.shopManagerModel.ShopManagerModelManager;
+import client.clientmodel.userModel.UserModel;
+import client.clientmodel.userModel.UserModelManager;
 
 /**
  * Class used for lazy instantiation of model instances and passing
@@ -35,8 +37,9 @@ public class ModelFactory
   private AdministratorUsersPageModel administratorUsersPageModel;
   private ClientFactory clientFactory;
   private AddNewManagerAdminModel addNewManagerAdminModel;
-  private AdministratorEditUserModelManager administratorEditUserModelManager;
+  private AdministratorEditUserModel administratorEditUserModel;
   private EditProductShopManagerModel editProductShopManagerModel;
+  private UserModel userModel;
 
   public ModelFactory(ClientFactory clientFactory){
     this.clientFactory = clientFactory;
@@ -97,10 +100,10 @@ public class ModelFactory
 
   public AdministratorEditUserModel getAdministratorEditUserModel()
   {
-    if(administratorEditUserModelManager == null){
-      administratorEditUserModelManager = new AdministratorEditUserModelManager(clientFactory.getClient());
+    if(administratorEditUserModel == null){
+      administratorEditUserModel = new AdministratorEditUserModelManager(clientFactory.getClient());
     }
-    return administratorEditUserModelManager;
+    return administratorEditUserModel;
   }
   public EditProductShopManagerModel getEditProductShopManagerModel()
   {
@@ -108,5 +111,13 @@ public class ModelFactory
       editProductShopManagerModel = new EditProductShopManagerModelManager(clientFactory.getClient());
     }
     return editProductShopManagerModel;
+  }
+
+  public UserModel getUserModel()
+  {
+    if (userModel == null){
+      userModel = new UserModelManager(clientFactory.getClient());
+    }
+    return userModel;
   }
 }

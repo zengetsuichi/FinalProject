@@ -10,6 +10,7 @@ import client.views.editProductShopManager.EditProductShopManagerViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
 import client.views.shopManager.ShopManagerViewModel;
+import client.views.user.UserViewModel;
 
 /**
  * Class used for lazy instantiation of view model instances and passing
@@ -31,6 +32,7 @@ public class ViewModelFactory
   private AddNewManagerAdminViewModel addNewManagerAdminViewModel;
   private AdministratorEditUserViewModel administratorEditUserViewModel;
   private EditProductShopManagerViewModel editProductShopManagerViewModel;
+  private UserViewModel userViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -110,5 +112,13 @@ public class ViewModelFactory
       editProductShopManagerViewModel = new EditProductShopManagerViewModel(modelFactory.getEditProductShopManagerModel());
     }
     return editProductShopManagerViewModel;
+  }
+
+  public UserViewModel getUserViewModel()
+  {
+    if (userViewModel == null){
+      userViewModel = new UserViewModel(modelFactory.getUserModel());
+    }
+    return userViewModel;
   }
 }

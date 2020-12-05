@@ -27,7 +27,7 @@ public class AdministratorEditUserServerModelManager implements AdministratorEdi
   {
     String result = null;
     try {
-      User user = loginRegisterDAO.findUser(oldUsername);
+      User user = loginRegisterDAO.findUser(username);
       String userEmail = loginRegisterDAO.findEmail(email);
 
       Boolean isSameUser = oldUsername.equals(username);

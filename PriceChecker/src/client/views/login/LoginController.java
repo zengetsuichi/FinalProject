@@ -60,10 +60,10 @@ public class LoginController implements ViewController
         {
           errorLabel.setText("Wrong credentials.");
         }
-        else if (loginResponse.equals("User"))
+        else if (loginResponse.contains("User"))
         {
           loginViewModel.setClientUsername(username);
-          viewHandler.openNormalUserView();
+          viewHandler.openUserView();
         }
         else if (loginResponse.contains("Admin"))
         {

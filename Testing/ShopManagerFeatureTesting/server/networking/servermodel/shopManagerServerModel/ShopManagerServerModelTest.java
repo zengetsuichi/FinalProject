@@ -61,15 +61,11 @@ class ShopManagerServerModelTest
 
     //arrange
     Product product1 = new Product(1,"Cola 330", "Cola 330 ml, can, best for parties","Beverages", 105);
+
     String response = "Product deleted.";
-    try
-    {
-      assertEquals(response, shopManagerDAO.deleteProductPrice(1,"Netto"));
-    }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
-    }
+
+      assertEquals(response, shopManagerServerModel.deleteProductPrice(1,"Netto"));
+
   }
 
 
