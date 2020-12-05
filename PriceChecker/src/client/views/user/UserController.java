@@ -3,7 +3,7 @@ package client.views.user;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
-import client.views.login.LoginViewModel;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -36,18 +36,22 @@ public class UserController implements ViewController
 
   private ViewHandler viewHandler;
   private UserViewModel userViewModel;
-  private ProductList productList;
+  private String thisUser;
+  private ObservableList<Product> shoppinglist = FXCollections.observableArrayList();
 
   @Override public void init(ViewHandler viewHandler, ViewModelFactory viewModelFactory)
   {
-
     this.viewHandler = viewHandler;
     userViewModel = viewModelFactory.getUserViewModel();
 
-    usernameLabel.setText(userViewModel.getLoggedInUser());
-    productList = new ProductList();
+    thisUser = userViewModel.getLoggedInUser();
+    usernameLabel.setText(thisUser);
+
     userViewModel.loadProductData();
-    productCountLabel.setText("Products: " + productList.getProducts().size());
+    userViewModel.loadShoppingList();
+
+    shoppinglist = userViewModel.getThisUserShoppingList();
+    productCountLabel.setText("Products: " + shoppinglist.size());
     loadProductTable();
   }
 
@@ -121,22 +125,23 @@ public class UserController implements ViewController
       TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
       int row = pos.getRow();
       Product item = productTable.getItems().get(row);
-      if (productList.getProducts().contains(item))
-      {
+
+      if (shoppinglist.contains(item))
         errorLabel.setText("Product already in the shopping list!");
-      }
       else
       {
-        productList.addProduct(item);
+        userViewModel.addProductToSL(item);
       }
 
-      productCountLabel.setText("Products: " + productList.getProducts().size());
+      productCountLabel.setText("Products: " + shoppinglist.size());
 
+      /*
       for (int i = 0; i < productList.getProducts().size(); i++)
       {
         System.out.println(productList.getProducts().get(i).getProductName());
       }
       System.out.println();
+      */
 
     }
   }
@@ -159,9 +164,7 @@ public class UserController implements ViewController
 
   @FXML void openShopingListBtn(ActionEvent event)
   {
-    //  Gosia and Karlo
-    // smth like this
-    //  viewHandler.openShoppingList(productList)
+    viewHandler.openShoppingList(thisUser);
   }
 
 }

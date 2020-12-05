@@ -26,6 +26,7 @@ import java.util.List;
  */
 
 public class RMIClient implements Client, ClientCallback {
+
   private RMIServer rmiServer;
   private PropertyChangeSupport support;
   private String clientUsername;
@@ -322,4 +323,39 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  @Override public ArrayList<Product> getThisUserShoppingList()
+  {
+    try
+    {
+      return rmiServer.getThisUserShoppingList(clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public Boolean clearSL()
+  {
+    try
+    {
+      return rmiServer.clearSL(clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public boolean addProductToSL(Product item)
+  {
+    try
+    {
+      return rmiServer.addProductToSL(item, clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
 }

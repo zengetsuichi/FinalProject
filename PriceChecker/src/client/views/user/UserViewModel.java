@@ -2,6 +2,7 @@ package client.views.user;
 
 import client.clientmodel.userModel.UserModel;
 import javafx.application.Platform;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -15,11 +16,13 @@ public class UserViewModel
 {
   private UserModel userModel;
   private ObservableList<Product> listOfAllProducts;
+  private ObservableList<Product> shoppingList;
 
   public UserViewModel(UserModel userModel)
   {
     this.userModel = userModel;
     listOfAllProducts = FXCollections.observableArrayList();
+    shoppingList = FXCollections.observableArrayList();
     userModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.NEW_CATEGORY.name(), this::newProduct);
@@ -52,5 +55,22 @@ public class UserViewModel
   public String getLoggedInUser()
   {
     return userModel.getLoggedInUser();
+  }
+
+  public void loadShoppingList()
+  {
+    shoppingList.setAll(userModel.getThisUserShoppingList());
+  }
+
+  public ObservableList<Product> getThisUserShoppingList()
+  {
+    return shoppingList;
+  }
+
+  public void addProductToSL(Product item)
+  {
+    boolean added = userModel.addProductToSL(item);
+    if(added)
+      loadShoppingList();
   }
 }

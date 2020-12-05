@@ -10,6 +10,7 @@ import client.views.editProductShopManager.EditProductShopManagerViewModel;
 import client.views.login.LoginViewModel;
 import client.views.register.RegisterViewModel;
 import client.views.shopManager.ShopManagerViewModel;
+import client.views.shoppingListView.ShoppingListViewViewModel;
 import client.views.user.UserViewModel;
 
 /**
@@ -32,6 +33,7 @@ public class ViewModelFactory
   private AddNewManagerAdminViewModel addNewManagerAdminViewModel;
   private AdministratorEditUserViewModel administratorEditUserViewModel;
   private EditProductShopManagerViewModel editProductShopManagerViewModel;
+  private ShoppingListViewViewModel shoppingListViewViewModel;
   private UserViewModel userViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
@@ -106,6 +108,7 @@ public class ViewModelFactory
     }
     return administratorEditUserViewModel;
   }
+
   public EditProductShopManagerViewModel getEditProductShopManagerViewModel()
   {
     if (editProductShopManagerViewModel == null){
@@ -120,5 +123,13 @@ public class ViewModelFactory
       userViewModel = new UserViewModel(modelFactory.getUserModel());
     }
     return userViewModel;
+  }
+
+  public ShoppingListViewViewModel getShoppingListViewViewModel()
+  {
+    if (shoppingListViewViewModel == null){
+      shoppingListViewViewModel = new ShoppingListViewViewModel(modelFactory.getShoppingListModel());
+    }
+    return shoppingListViewViewModel;
   }
 }

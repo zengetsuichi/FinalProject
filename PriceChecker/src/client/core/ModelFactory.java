@@ -17,6 +17,8 @@ import client.clientmodel.loginRegisterModel.LoginRegisterModel;
 import client.clientmodel.loginRegisterModel.LoginRegisterModelManager;
 import client.clientmodel.shopManagerModel.ShopManagerModel;
 import client.clientmodel.shopManagerModel.ShopManagerModelManager;
+import client.clientmodel.shoppingListModel.ShoppingListModel;
+import client.clientmodel.shoppingListModel.ShoppingListModelManager;
 import client.clientmodel.userModel.UserModel;
 import client.clientmodel.userModel.UserModelManager;
 
@@ -39,6 +41,7 @@ public class ModelFactory
   private AddNewManagerAdminModel addNewManagerAdminModel;
   private AdministratorEditUserModel administratorEditUserModel;
   private EditProductShopManagerModel editProductShopManagerModel;
+  private ShoppingListModel shoppingListModel;
   private UserModel userModel;
 
   public ModelFactory(ClientFactory clientFactory){
@@ -105,6 +108,7 @@ public class ModelFactory
     }
     return administratorEditUserModel;
   }
+
   public EditProductShopManagerModel getEditProductShopManagerModel()
   {
     if (editProductShopManagerModel == null){
@@ -119,5 +123,13 @@ public class ModelFactory
       userModel = new UserModelManager(clientFactory.getClient());
     }
     return userModel;
+  }
+
+  public ShoppingListModel getShoppingListModel()
+  {
+    if (shoppingListModel == null){
+      shoppingListModel = new ShoppingListModelManager(clientFactory.getClient());
+    }
+    return shoppingListModel;
   }
 }

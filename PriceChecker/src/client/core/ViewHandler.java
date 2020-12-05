@@ -10,6 +10,7 @@ import client.views.editProductShopManager.EditProductShopManagerController;
 import client.views.login.LoginController;
 import client.views.register.RegisterController;
 import client.views.shopManager.ShopManagerController;
+import client.views.shoppingListView.ShoppingListViewController;
 import client.views.user.UserController;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -285,5 +286,24 @@ public class ViewHandler
     }
   }
 
+  public void openShoppingList(String thisUser){
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/shoppingListView/ShoppingListView.fxml"));
+      Parent root = loader.load();
+      ShoppingListViewController view = loader.getController();
 
+      view.init(this, viewModelFactory);
+      view.setUser(thisUser);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Shopping List");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
 }

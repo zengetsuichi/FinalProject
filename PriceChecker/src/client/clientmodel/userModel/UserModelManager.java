@@ -2,10 +2,12 @@ package client.clientmodel.userModel;
 
 import client.networking.Client;
 import shared.util.EventType;
+import shared.util.Product;
 import shared.util.ProductList;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 
 public class UserModelManager implements UserModel
 {
@@ -23,6 +25,16 @@ public class UserModelManager implements UserModel
   @Override public void logOut()
   {
     client.logOut();
+  }
+
+  @Override public ArrayList<Product> getThisUserShoppingList()
+  {
+    return client.getThisUserShoppingList();
+  }
+
+  @Override public boolean addProductToSL(Product item)
+  {
+    return client.addProductToSL(item);
   }
 
   @Override public ProductList loadProductData()

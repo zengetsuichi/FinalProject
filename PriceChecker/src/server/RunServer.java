@@ -8,6 +8,8 @@ import dataaccess.loginRegisterDAO.LoginRegisterDAO;
 import dataaccess.loginRegisterDAO.LoginRegisterDAOManager;
 import dataaccess.shopManagerDAO.ShopManagerDAO;
 import dataaccess.shopManagerDAO.ShopManagerDAOManager;
+import dataaccess.userDAO.UserDAO;
+import dataaccess.userDAO.UserDAOManager;
 import server.networking.RMIServerManager;
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModelManager;
@@ -25,6 +27,8 @@ import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServe
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModelManager;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModelManager;
+import server.networking.servermodel.userShoppingListServerModel.UserShoppingListServerModel;
+import server.networking.servermodel.userShoppingListServerModel.UserShoppingListServerModelManager;
 import shared.networking.RMIServer;
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
@@ -46,6 +50,7 @@ public class RunServer
     AdministratorDAO administratorDAO = new AdministratorDAOManager();
     AddNewProductAdminDAO addNewProductAdminDAO = new AddNewProductAdminDAOManager();
     ShopManagerDAO shopManagerDAO = new ShopManagerDAOManager();
+    UserDAO userDAO = new UserDAOManager();
     //Server models
     AdministratorServerModel administratorServerModel = new AdministratorServerModelManager(administratorDAO);
     LoginRegisterServerModel loginRegisterServerModel = new LoginRegisterServerModelManager(loginRegisterDAO);
@@ -55,10 +60,11 @@ public class RunServer
     AdministratorUsersServerModel administratorUsersServerModel = new AdministratorUsersServerModelManager(administratorDAO);
     AdministratorEditUserServerModel administratorEditUserServerModel = new AdministratorEditUserServerModelManager(administratorDAO, loginRegisterDAO);
     EditProductShopManagerServerModel editProductShopManagerServerModel = new EditProductShopManagerServerModelManager(administratorDAO,shopManagerDAO);
+    UserShoppingListServerModel userShoppingListServerModel = new UserShoppingListServerModelManager(userDAO);
 
     RMIServer rmiServer = new RMIServerManager(loginRegisterServerModel, administratorServerModel,
         addNewProductAdminServerModel, editProductAdminServerModel, shopManagerServerModel,
-        administratorUsersServerModel, administratorEditUserServerModel,editProductShopManagerServerModel);
+        administratorUsersServerModel, administratorEditUserServerModel,editProductShopManagerServerModel, userShoppingListServerModel);
     rmiServer.startServer();
   }
 }

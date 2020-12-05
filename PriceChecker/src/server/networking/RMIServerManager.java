@@ -1,7 +1,6 @@
 package server.networking;
 
 
-import client.clientmodel.editProductShopManagerModel.EditProductShopManagerModel;
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
 import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
@@ -10,6 +9,7 @@ import server.networking.servermodel.editProductAdminServerModel.EditProductAdmi
 import server.networking.servermodel.editProductShopManagerModel.EditProductShopManagerServerModel;
 import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
 import server.networking.servermodel.shopManagerServerModel.ShopManagerServerModel;
+import server.networking.servermodel.userShoppingListServerModel.UserShoppingListServerModel;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
 import shared.util.*;
@@ -47,12 +47,17 @@ public class RMIServerManager implements RMIServer
   private AdministratorEditUserServerModel administratorEditUserServerModel;
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
   private EditProductShopManagerServerModel editProductShopManagerServerModel;
+  private UserShoppingListServerModel userShoppingListServerModel;
 
-  public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel, AdministratorServerModel administratorServerModel,
-      AddNewProductAdminServerModel addNewProductAdminServerModel, EditProductAdminServerModel editProductAdminServerModel,
-      ShopManagerServerModel shopManagerServerModel, AdministratorUsersServerModel administratorUsersServerModel,
+  public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
+      AdministratorServerModel administratorServerModel,
+      AddNewProductAdminServerModel addNewProductAdminServerModel,
+      EditProductAdminServerModel editProductAdminServerModel,
+      ShopManagerServerModel shopManagerServerModel,
+      AdministratorUsersServerModel administratorUsersServerModel,
       AdministratorEditUserServerModel administratorEditUserServerModel,
-      EditProductShopManagerServerModel editProductShopManagerServerModel) throws RemoteException
+      EditProductShopManagerServerModel editProductShopManagerServerModel,
+      UserShoppingListServerModel userShoppingListServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
@@ -63,6 +68,7 @@ public class RMIServerManager implements RMIServer
     this.administratorUsersServerModel = administratorUsersServerModel;
     this.administratorEditUserServerModel= administratorEditUserServerModel;
     this.editProductShopManagerServerModel = editProductShopManagerServerModel;
+    this.userShoppingListServerModel = userShoppingListServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -203,6 +209,7 @@ public class RMIServerManager implements RMIServer
     editProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     administratorUsersServerModel.addListener(EventType.DELETE_USER.name(), listener);
   }
+
   @Override public String editShopProduct(String productName,
       String productDescription, String category, ArrayList<String> parseTag,
       int productId, int price,String username)
@@ -215,5 +222,21 @@ public class RMIServerManager implements RMIServer
   @Override public String deleteUser(String username) throws RemoteException
   {
     return administratorUsersServerModel.deleteUser(username);
+  }
+
+  @Override public ArrayList<Product> getThisUserShoppingList(
+      String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.getThisUserShoppingList(clientUsername);
+  }
+
+  @Override public Boolean clearSL(String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.clearSL(clientUsername);
+  }
+
+  @Override public boolean addProductToSL(Product item, String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.addProductToSL(item, clientUsername);
   }
 }
