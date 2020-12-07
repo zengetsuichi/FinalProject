@@ -11,4 +11,6 @@ public interface UserDAO
       SQLException;
   Boolean clearSL(String clientUsername) throws SQLException;
   boolean addProductToSL(Product item, String clientUsername) throws SQLException;
+  Boolean deleteTheProductFromSL(String clientUsername, int productId) throws SQLException;
+  void changeQuantityForThisProduct(String clientUsername, int productId, int quantity) throws SQLException;
 }

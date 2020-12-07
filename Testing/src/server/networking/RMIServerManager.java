@@ -239,4 +239,17 @@ public class RMIServerManager implements RMIServer
   {
     return userShoppingListServerModel.addProductToSL(item, clientUsername);
   }
+
+  @Override public Boolean deleteTheProductFromSL(String clientUsername,
+      int productId) throws RemoteException
+  {
+    return userShoppingListServerModel.deleteTheProductFromSL(clientUsername,
+    productId);
+  }
+
+  @Override public void changeQuantityForThisProduct(String clientUsername,
+      int productId, int quantity) throws RemoteException
+  {
+    userShoppingListServerModel.changeQuantityForThisProduct(clientUsername, productId, quantity);
+  }
 }

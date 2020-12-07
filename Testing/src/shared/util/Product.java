@@ -1,5 +1,10 @@
 package shared.util;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.io.Serializable;
 
 /**
@@ -121,6 +126,5 @@ public class Product implements Serializable
         + productId + ", description='" + description + '\'' + ", category='"
         + category + '\'' + ", price=" + price + '}';
   }
-
 
 }

@@ -87,4 +87,47 @@ class UserShoppingListServerModelTest
     assertTrue(userShoppingListServerModel.addProductToSL(product, "User1"));
     assertEquals(products, userShoppingListServerModel.getThisUserShoppingList("User1"));
   }
+
+  /*
+  Test method prepared for checking if the method will delete the product from the shopping list
+  of the specific user.
+  */
+
+  @Test
+  void deleteOneProductFromShoppingList()
+  {
+    //arrange
+    Product product = new Product(1, 3, "Nescafe 1kg",
+        "Nescafe, worst coffe for even worser times", "Coffee");
+    //act
+    Product product1 = new Product(1, 1, "Cola 330",
+        "Cola 330 ml, can, best for parties", "Beverages");
+    ArrayList<Product> products = new ArrayList<>();
+    products.add(product1);
+    //assert
+    assertTrue(userShoppingListServerModel.deleteTheProductFromSL("User1", product.getProductId()));
+    assertEquals(products, userShoppingListServerModel.getThisUserShoppingList("User1"));
+  }
+
+  /*
+  Test method prepared for checking if the method will edit the specific product quantity in the shopping list
+  of the specific user.
+  */
+
+  @Test
+  void editQuantityOfAProduct()
+  {
+    //arrange
+    Product product = new Product(10, 3, "Nescafe 1kg",
+        "Nescafe, worst coffe for even worser times", "Coffee");
+    Product product1 = new Product(1, 1, "Cola 330",
+        "Cola 330 ml, can, best for parties", "Beverages");
+    ArrayList<Product> products = new ArrayList<>();
+    //act
+    userShoppingListServerModel.changeQuantityForThisProduct("User1", product.getProductId(), 10);
+    products.add(product1);
+    products.add(product);
+    //assert
+    assertEquals(products, userShoppingListServerModel.getThisUserShoppingList("User1"));
+  }
 }

@@ -17,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Gosia, Piotr
  */
 
-//TODO we need to create dummy database for testing purposes later
-
 class LoginFeatureTest
 {
   private LoginRegisterServerModel loginRegisterServerModel;

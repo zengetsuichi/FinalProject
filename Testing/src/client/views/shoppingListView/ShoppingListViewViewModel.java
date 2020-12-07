@@ -32,4 +32,20 @@ public class ShoppingListViewViewModel
     if(clear)
       shoppingList.clear();
   }
+
+  public void deleteTheProductFromSL(int productId)
+  {
+    Boolean response = shoppingListModel.deleteTheProductFromSL(productId);
+    if(response){
+      loadShoppingList();
+    }
+    else{
+      System.out.println("Doesnt work");
+    }
+  }
+
+  public void changeQuantityForThisProduct(int productId, int quantity)
+  {
+    shoppingListModel.changeQuantityForThisProduct(productId, quantity);
+  }
 }

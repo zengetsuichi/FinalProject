@@ -47,8 +47,9 @@ String editShopProduct(String productName, String productDescription, String cat
     int productId, int price,String username)
     throws RemoteException;
   String deleteUser(String username) throws RemoteException;
-
   ArrayList<Product> getThisUserShoppingList(String clientUsername) throws RemoteException;
   Boolean clearSL(String clientUsername) throws RemoteException;
   boolean addProductToSL(Product item, String clientUsername) throws RemoteException;
+  Boolean deleteTheProductFromSL(String clientUsername, int productId) throws RemoteException;
+  void changeQuantityForThisProduct(String clientUsername, int productId, int quantity) throws RemoteException;
 }

@@ -11,6 +11,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderImage;
 import javafx.util.Callback;
 import shared.util.Product;
 
@@ -47,11 +52,12 @@ public class ShoppingListViewController implements ViewController
   private void addComboBox()
   {
     shoppingListTable.setEditable(true);
-    ObservableList<Integer> quantityList = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+    ObservableList<Integer> quantityList = FXCollections.observableArrayList(1,2,3,4,5,6,7,8,9,10,
+        11,12,13,14,15,16,17,18,19,20);
 
     quantityColumn.setCellValueFactory(param -> {
       Product product = param.getValue();
-      return new SimpleObjectProperty<Integer>(product.getQuantity());
+      return new SimpleObjectProperty<>(product.getQuantity());
     });
 
     quantityColumn.setCellFactory(ComboBoxTableCell.forTableColumn(quantityList));
@@ -71,14 +77,12 @@ public class ShoppingListViewController implements ViewController
   {
     TableColumn<Product, Void> colBtn = new TableColumn();
 
-
-    Callback<TableColumn<Product, Void>, TableCell<Product, Void>> cellFactory = new Callback<TableColumn<Product, Void>, TableCell<Product, Void>>() {
+    Callback<TableColumn<Product, Void>, TableCell<Product, Void>> cellFactory = new Callback<>() {
       @Override
       public TableCell<Product, Void> call(final TableColumn<Product, Void> param) {
-        final TableCell<Product, Void> cell = new TableCell<Product, Void>() {
+        return new TableCell<>() {
 
-          private final Button btn = new Button("Delete product");
-
+          private final Button btn = new Button();
           {
             btn.setOnAction((ActionEvent event) -> {
               Product data = getTableView().getItems().get(getIndex());
@@ -93,15 +97,20 @@ public class ShoppingListViewController implements ViewController
               setGraphic(null);
             } else {
               setGraphic(btn);
-
+              ImageView view = new ImageView(new Image("file:PriceChecker/src/client/views/shoppingListView/Trashcan.png"));
+              btn.setGraphic(view);
+              btn.setBackground(Background.EMPTY);
             }
           }
         };
-        return cell;
       }
     };
+    ImageView view = new ImageView(new Image("file:PriceChecker/src/client/views/shoppingListView/Trashcan.png"));
 
+    colBtn.setGraphic(view);
+    colBtn.setStyle("-fx-alignment: CENTER;");
     colBtn.setCellFactory(cellFactory);
+    colBtn.setMinWidth(50); colBtn.setMaxWidth(50);
 
     shoppingListTable.getColumns().add(colBtn);
   }
