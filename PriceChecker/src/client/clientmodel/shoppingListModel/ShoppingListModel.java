@@ -9,4 +9,6 @@ public interface ShoppingListModel extends PropertyChangeSubject
 {
   ArrayList<Product> loadShoppingList();
   Boolean clearSL();
+  Boolean deleteTheProductFromSL(int productId);
+  void changeQuantityForThisProduct(int productId, int quantity);
 }

@@ -83,6 +83,7 @@ public class RMIClient implements Client, ClientCallback {
     try {
       return rmiServer.loadProductData();
     } catch (RemoteException e) {
+      e.printStackTrace();
       throw new RuntimeException("Could not contact server");
     }
   }
@@ -352,6 +353,31 @@ public class RMIClient implements Client, ClientCallback {
     try
     {
       return rmiServer.addProductToSL(item, clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public Boolean deleteTheProductFromSL(int productId)
+  {
+    try
+    {
+      return rmiServer.deleteTheProductFromSL(clientUsername, productId);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public void changeQuantityForThisProduct(int productId,
+      int quantity)
+  {
+    try
+    {
+      rmiServer.changeQuantityForThisProduct(clientUsername, productId, quantity);
     }
     catch (RemoteException e)
     {
