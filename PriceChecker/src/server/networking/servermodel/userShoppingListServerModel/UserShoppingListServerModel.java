@@ -12,4 +12,6 @@ public interface UserShoppingListServerModel extends PropertyChangeSubject
   Boolean clearSL(String clientUsername);
   boolean addProductToSL(Product item, String clientUsername);
   ArrayList<ShopPrice> getThisUserPriceList(String clientUsername);
+  Boolean deleteTheProductFromSL(String clientUsername, int productId);
+  void changeQuantityForThisProduct(String clientUsername, int productId, int quantity);
 }

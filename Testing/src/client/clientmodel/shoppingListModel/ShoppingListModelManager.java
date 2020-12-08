@@ -36,4 +36,15 @@ public class ShoppingListModelManager implements ShoppingListModel
   {
     return client.clearSL();
   }
+
+  @Override public Boolean deleteTheProductFromSL(int productId)
+  {
+    return client.deleteTheProductFromSL(productId);
+  }
+
+  @Override public void changeQuantityForThisProduct(int productId,
+      int quantity)
+  {
+    client.changeQuantityForThisProduct(productId, quantity);
+  }
 }

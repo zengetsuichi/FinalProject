@@ -86,4 +86,31 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
     return null;
   }
 
+
+  @Override public Boolean deleteTheProductFromSL(String clientUsername,
+      int productId)
+  {
+    try
+    {
+      return userDAO.deleteTheProductFromSL(clientUsername, productId);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return false;
+  }
+
+  @Override public void changeQuantityForThisProduct(String clientUsername,
+      int productId, int quantity)
+  {
+    try
+    {
+      userDAO.changeQuantityForThisProduct(clientUsername, productId, quantity);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+  }
 }

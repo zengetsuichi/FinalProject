@@ -47,4 +47,6 @@ public interface Client extends PropertyChangeSubject
   Boolean clearSL();
   boolean addProductToSL(Product item);
   ArrayList<ShopPrice> getThisUserPricesList();
+  Boolean deleteTheProductFromSL(int productId);
+  void changeQuantityForThisProduct(int productId, int quantity);
 }

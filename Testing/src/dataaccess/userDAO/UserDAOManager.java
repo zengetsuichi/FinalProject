@@ -141,4 +141,76 @@ public class UserDAOManager implements UserDAO
     }
     return response;
   }
+
+  @Override public Boolean deleteTheProductFromSL(String clientUsername,
+      int productId) throws SQLException
+  {
+    Connection connection = null;
+    ResultSet resultSet = null;
+    PreparedStatement statement = null;
+    PreparedStatement statement1 = null;
+    int shopListId = 0;
+    boolean response = false;
+
+    try
+    {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT shoplistid FROM shoppinglist INNER JOIN users "
+          + "ON shoppinglist.userid = users.userid WHERE username = ?");
+      statement.setString(1, clientUsername);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        shopListId = resultSet.getInt("shoplistid");
+      }
+
+      statement1 = connection.prepareStatement("DELETE FROM shoppinglistitem WHERE shoplistid = ? AND productid = ?");
+      statement1.setInt(1, shopListId);
+      statement1.setInt(2, productId);
+      statement1.executeUpdate();
+      response = true;
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement1 != null) try { statement1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return response;
+  }
+
+  @Override public void changeQuantityForThisProduct(String clientUsername,
+      int productId, int quantity) throws SQLException
+  {
+    Connection connection = null;
+    ResultSet resultSet = null;
+    PreparedStatement statement = null;
+    PreparedStatement statement1 = null;
+    int shopListId = 0;
+    try
+    {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT shoplistid FROM shoppinglist INNER JOIN users "
+          + "ON shoppinglist.userid = users.userid WHERE username = ?");
+      statement.setString(1, clientUsername);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        shopListId = resultSet.getInt("shoplistid");
+      }
+      statement1 = connection.prepareStatement("UPDATE shoppinglistitem SET quantity = ? WHERE shoplistid = ? AND productid = ?");
+      statement1.setInt(1, quantity);
+      statement1.setInt(2, shopListId);
+      statement1.setInt(3, productId);
+      statement1.executeUpdate();
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement1 != null) try { statement1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+  }
 }
