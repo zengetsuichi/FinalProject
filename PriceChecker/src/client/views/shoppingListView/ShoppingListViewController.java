@@ -11,6 +11,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import shared.util.Product;
+import shared.util.ProductList;
+import shared.util.ShopPrice;
 
 public class ShoppingListViewController implements ViewController
 {
@@ -24,6 +26,12 @@ public class ShoppingListViewController implements ViewController
   private TableColumn<Product, String> productNameColumn;
   @FXML
   private TableColumn<Product, Integer> quantityColumn;
+  @FXML
+  private TableColumn<ShopPrice,String> shopNameColumn;
+  @FXML
+  private TableColumn<Product,Integer> totalPriceColumn;
+  @FXML
+  private TableView<ShopPrice> totalPriceTable;
 
   private ViewHandler viewHandler;
   private ShoppingListViewViewModel shoppingListViewViewModel;
@@ -37,6 +45,10 @@ public class ShoppingListViewController implements ViewController
     shoppingListViewViewModel.loadShoppingList();
     loadTable();
     shoppingListTable.setPlaceholder(new Label("No products in the table."));
+
+    shoppingListViewViewModel.loadPriceList();
+    loadPricesTable();
+    totalPriceTable.setPlaceholder(new Label("No Products selected."));
   }
 
   private void loadTable()
@@ -61,5 +73,12 @@ public class ShoppingListViewController implements ViewController
   public void setUser(String thisUser)
   {
     this.thisUser = thisUser;
+  }
+  private void loadPricesTable()
+  {
+    totalPriceTable.getItems().clear();
+    totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    shopNameColumn.setCellValueFactory(new PropertyValueFactory<>("shopName"));
+    totalPriceTable.setItems(shoppingListViewViewModel.getTotalPricesList());
   }
 }

@@ -46,4 +46,5 @@ public interface Client extends PropertyChangeSubject
   ArrayList<Product> getThisUserShoppingList();
   Boolean clearSL();
   boolean addProductToSL(Product item);
+  ArrayList<ShopPrice> getThisUserPricesList();
 }

@@ -2,6 +2,7 @@ package client.clientmodel.shoppingListModel;
 
 import client.networking.Client;
 import shared.util.Product;
+import shared.util.ShopPrice;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -36,4 +37,10 @@ public class ShoppingListModelManager implements ShoppingListModel
   {
     return client.clearSL();
   }
+
+  @Override public ArrayList<ShopPrice> loadPricesList()
+  {
+    return client.getThisUserPricesList();
+  }
+
 }

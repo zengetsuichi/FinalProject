@@ -1,10 +1,8 @@
 package client.networking;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.ShopPrice;
-import shared.util.User;
+import shared.util.*;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.rmi.NotBoundException;
@@ -352,6 +350,18 @@ public class RMIClient implements Client, ClientCallback {
     try
     {
       return rmiServer.addProductToSL(item, clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public ArrayList<ShopPrice> getThisUserPricesList()
+  {
+    try
+    {
+      return rmiServer.getThisUserPriceList(clientUsername);
     }
     catch (RemoteException e)
     {

@@ -2,6 +2,7 @@ package server.networking.servermodel.userShoppingListServerModel;
 
 import dataaccess.userDAO.UserDAO;
 import shared.util.Product;
+import shared.util.ShopPrice;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -70,4 +71,19 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
     }
     return false;
   }
+
+  @Override public ArrayList<ShopPrice> getThisUserPriceList(
+      String clientUsername)
+  {
+    try
+    {
+      return userDAO.getThisUserPriceList(clientUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
 }

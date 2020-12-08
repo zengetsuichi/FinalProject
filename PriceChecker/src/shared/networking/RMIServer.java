@@ -1,9 +1,6 @@
 package shared.networking;
 
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.ShopPrice;
-import shared.util.User;
+import shared.util.*;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.Remote;
@@ -51,4 +48,5 @@ String editShopProduct(String productName, String productDescription, String cat
   ArrayList<Product> getThisUserShoppingList(String clientUsername) throws RemoteException;
   Boolean clearSL(String clientUsername) throws RemoteException;
   boolean addProductToSL(Product item, String clientUsername) throws RemoteException;
+  ArrayList<ShopPrice> getThisUserPriceList(String clientUsername)throws RemoteException;
 }

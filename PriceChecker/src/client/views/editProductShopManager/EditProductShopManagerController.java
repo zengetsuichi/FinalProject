@@ -157,7 +157,6 @@ public class EditProductShopManagerController implements ViewController
     this.product = productId;
     this.tags = tags;
   }
-
   private void addNewCategory()
   {
     String newCategory = newCategoryTextField.getText();

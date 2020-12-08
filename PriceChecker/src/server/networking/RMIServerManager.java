@@ -239,4 +239,10 @@ public class RMIServerManager implements RMIServer
   {
     return userShoppingListServerModel.addProductToSL(item, clientUsername);
   }
+
+  @Override public ArrayList<ShopPrice> getThisUserPriceList(
+      String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.getThisUserPriceList(clientUsername);
+  }
 }

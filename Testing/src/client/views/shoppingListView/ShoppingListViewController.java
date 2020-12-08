@@ -15,6 +15,8 @@ import shared.util.Product;
 public class ShoppingListViewController implements ViewController
 {
   @FXML
+  private TableColumn<Product,String> productsUnavailable;
+  @FXML
   private Button backButton;
   @FXML
   private Button clearShoppingListButton;
