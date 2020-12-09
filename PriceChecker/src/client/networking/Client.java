@@ -42,13 +42,18 @@ public interface Client extends PropertyChangeSubject
   String editShopProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag, int productId,int price,String username);
   String deleteUser(String username);
-
   ArrayList<Product> getThisUserShoppingList();
   Boolean clearSL();
   boolean addProductToSL(Product item);
-  ArrayList<ShopPrice> getThisUserPricesList();
   Boolean deleteTheProductFromSL(int productId);
   void changeQuantityForThisProduct(int productId, int quantity);
+  ArrayList<Product> getAllProducts();
+  ArrayList<Product> getAllProductsFor();
+  String editNewProduct(int userId,int price, int productid);
+  int getUserId(String username);
+  String addNewProductShopManager(String productName, String productDescription,
+                                  String category, ArrayList<String> parseTag, int price);
   ArrayList<Product> getAvailableProducts(String shopName,String clientUsername);
   ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername);
+  ArrayList<ShopPrice> getThisUserPricesList();
 }

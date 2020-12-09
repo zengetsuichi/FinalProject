@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import org.controlsfx.control.CheckListView?>
+<?import org.controlsfx.control.SearchableComboBox?>
+
+<AnchorPane prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.addNewProductShopManager.AddNewProductShopManagerController">
+    <children>
+        <Text layoutX="33.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new product" wrappingWidth="263.91015625">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Text>
+        <TextField fx:id="productNameTextField" layoutX="33.0" layoutY="130.0" prefHeight="26.0" prefWidth="428.0" />
+        <TextArea fx:id="productDescriptionTextField" layoutX="33.0" layoutY="186.0" prefHeight="200.0" prefWidth="428.0" />
+        <TextField fx:id="newTagTextField" layoutX="537.0" layoutY="104.0" prefHeight="26.0" prefWidth="241.0" />
+        <Button fx:id="addNewTagBtn" layoutX="822.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Add a new tag" />
+        <Button fx:id="addProductBtn" layoutX="905.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Add product" />
+        <SearchableComboBox fx:id="categoryBox" layoutX="33.0" layoutY="492.0" prefHeight="26.0" prefWidth="428.0" />
+        <TextField fx:id="newCategoryTextField" layoutX="32.0" layoutY="439.0" prefHeight="26.0" prefWidth="242.0" />
+        <Button fx:id="addNewCategoryBtn" layoutX="338.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Add a new category" />
+        <Button fx:id="goBackBtn" layoutX="32.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Go back to product page" />
+        <CheckListView fx:id="checkListViewTags" layoutX="537.0" layoutY="161.0" prefHeight="318.0" prefWidth="202.0" />
+        <Label fx:id="errorLabel" layoutX="537.0" layoutY="34.0" prefHeight="18.0" prefWidth="242.0" />
+        <SearchableComboBox fx:id="productBox" layoutX="33.0" layoutY="64.0" prefHeight="25.0" prefWidth="428.0" />
+        <Button fx:id="editProdButton" layoutX="759.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Add existing product" />
+        <TextField fx:id="priceTextField" layoutX="33.0" layoutY="406.0" prefHeight="26.0" prefWidth="242.0" />
+        <Label layoutX="378.0" layoutY="411.0" text="Price" />
+        <Button fx:id="modifyProductButton" layoutX="503.0" layoutY="64.0" mnemonicParsing="false" onAction="#handleClickMe1" text="Modify product" />
+        <Label fx:id="loggedInAs" layoutX="933.0" layoutY="45.0" />
+    </children>
+</AnchorPane>
+

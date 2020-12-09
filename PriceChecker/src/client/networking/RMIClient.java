@@ -397,6 +397,52 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+
+  @Override
+  public String addNewProductShopManager(String productName, String productDescription, String category, ArrayList<String> parseTag, int price) {
+    try {
+      return rmiServer.addNewProductShopManager(clientUsername,productName,productDescription,category,parseTag,price);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public ArrayList<Product> getAllProducts() {
+    try {
+      return rmiServer.getAllProducts();
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public ArrayList<Product> getAllProductsFor() {
+    try {
+      return rmiServer.getAllProductsForSpecificManager(clientUsername);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public String editNewProduct(int userId,int price, int productid) {
+    try {
+      return rmiServer.editNewProduct(userId,price,productid);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public int getUserId(String username) {
+    try {
+      return rmiServer.getUserId(username);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
   @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
   {
     try
