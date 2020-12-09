@@ -324,6 +324,10 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  /**
+   * Methods used from the shopping list.
+   * @author Gosia, Karlo
+   */
   @Override public ArrayList<Product> getThisUserShoppingList()
   {
     try
@@ -466,4 +470,5 @@ public class RMIClient implements Client, ClientCallback {
       throw new RuntimeException("Could not contact server");
     }
   }
+  /*--------------------------------------------------------------------------------*/
 }

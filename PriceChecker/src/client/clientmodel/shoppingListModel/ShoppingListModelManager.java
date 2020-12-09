@@ -1,13 +1,20 @@
 package client.clientmodel.shoppingListModel;
-
 import client.networking.Client;
 import shared.util.Product;
 import shared.util.ShopPrice;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; loading the shopping list for current user, clearing
+ * the shopping list of that current user, deleting chosen product from the
+ * shopping list and changing the quantity of chosen product.
+ *
+ * @author Karlo, Gosia
+ */
 public class ShoppingListModelManager implements ShoppingListModel
 {
   private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -38,12 +45,6 @@ public class ShoppingListModelManager implements ShoppingListModel
     return client.clearSL();
   }
 
-  @Override public ArrayList<ShopPrice> loadPricesList()
-  {
-    return client.getThisUserPricesList();
-  }
-
-
   @Override public Boolean deleteTheProductFromSL(int productId)
   {
     return client.deleteTheProductFromSL(productId);
@@ -53,6 +54,11 @@ public class ShoppingListModelManager implements ShoppingListModel
       int quantity)
   {
     client.changeQuantityForThisProduct(productId, quantity);
+  }
+
+  @Override public ArrayList<ShopPrice> loadPricesList()
+  {
+    return client.getThisUserPricesList();
   }
 
   @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)

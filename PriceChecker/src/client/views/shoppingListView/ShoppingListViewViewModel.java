@@ -1,5 +1,4 @@
 package client.views.shoppingListView;
-
 import client.clientmodel.shoppingListModel.ShoppingListModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,7 +6,11 @@ import shared.util.Product;
 import shared.util.ShopPrice;
 
 import java.util.ArrayList;
-
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Gosia, Karlo
+ */
 public class ShoppingListViewViewModel
 {
   private ObservableList<ShopPrice> totalPricesList;

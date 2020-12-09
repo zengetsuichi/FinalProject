@@ -12,5 +12,9 @@ public interface UserModel extends PropertyChangeSubject
   String getLoggedInUser();
   void logOut();
   ArrayList<Product> getThisUserShoppingList();
+  /**
+   *  Adding the product to the shopping list
+   *  @author Karlo, Gosia
+  */
   boolean addProductToSL(Product item);
 }

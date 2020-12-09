@@ -32,6 +32,11 @@ public class UserModelManager implements UserModel
     return client.getThisUserShoppingList();
   }
 
+  /**
+   *  Adding the product to the shopping list by passing the product object
+   *  to the client, which passes it further.
+   *  @author Karlo, Gosia
+   */
   @Override public boolean addProductToSL(Product item)
   {
     return client.addProductToSL(item);

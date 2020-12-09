@@ -214,11 +214,6 @@ public class AddNewProductShopManagerController implements ViewController {
         }
     }
 
-
-
-
-
-
     private void addNewCategory() {
         String newCategory = newCategoryTextField.getText();
         if (!newCategory.isEmpty() && newCategory.length() <= 40) {
@@ -312,6 +307,7 @@ public class AddNewProductShopManagerController implements ViewController {
 
 
                                     System.out.println(userId+ " " +price + " " +productId);
+                                    ArrayList<String> parseTag = new ArrayList<>(tags);
                                     String response = addNewProductShopManagerViewModel.editNewProduct(userId, Integer.parseInt(price), productId);
 
                                     if (response.equals("Price added"))

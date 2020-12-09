@@ -29,7 +29,6 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
         databaseConnection = DatabaseConnection.getInstance();
     }
 
-
     @Override
     public String addNewProduct(String clientUsername, String productName, String productDescription, String category, ArrayList<String> parseTag, int price) throws SQLException {
 

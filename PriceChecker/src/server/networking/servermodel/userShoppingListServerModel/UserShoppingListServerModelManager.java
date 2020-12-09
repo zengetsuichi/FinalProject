@@ -1,14 +1,22 @@
 package server.networking.servermodel.userShoppingListServerModel;
-
 import dataaccess.userDAO.UserDAO;
 import shared.util.Product;
 import shared.util.ShopPrice;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the data access object and firing events.
+ *
+ * Providing methods for; getting the shopping list for a specific user,
+ * clearing the shopping list, adding a product to the shopping list of a
+ * specific user, deleting one product for a specific user and changing the
+ * quantity for a specific product.
+ *
+ * @author Gosia, Karlo
+ */
 public class UserShoppingListServerModelManager implements UserShoppingListServerModel
 {
   private PropertyChangeSupport support = new PropertyChangeSupport(this);
@@ -72,21 +80,6 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
     return false;
   }
 
-  @Override public ArrayList<ShopPrice> getThisUserPriceList(
-      String clientUsername)
-  {
-    try
-    {
-      return userDAO.getThisUserPriceList(clientUsername);
-    }
-    catch (SQLException throwables)
-    {
-      throwables.printStackTrace();
-    }
-    return null;
-  }
-
-
   @Override public Boolean deleteTheProductFromSL(String clientUsername,
       int productId)
   {
@@ -112,6 +105,20 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
     {
       throwables.printStackTrace();
     }
+  }
+
+  @Override public ArrayList<ShopPrice> getThisUserPriceList(
+      String clientUsername)
+  {
+    try
+    {
+      return userDAO.getThisUserPriceList(clientUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
   }
 
   @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)

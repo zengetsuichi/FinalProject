@@ -1,5 +1,4 @@
 package client.views.shoppingListView;
-
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
@@ -19,15 +18,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderImage;
 import javafx.util.Callback;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTableCell;
-
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Gosia, Karlo
+ */
 public class ShoppingListViewController implements ViewController
 {
   @FXML

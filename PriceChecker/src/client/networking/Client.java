@@ -18,30 +18,42 @@ public interface Client extends PropertyChangeSubject
 {
   void startClient();
   String validateLogin(String username, String password);
+  void logOut();
+  String validateRegister(String username, String email, String password, String dob);
+
   ProductList loadProductData();
   ArrayList<ShopPrice> getShopPricesById(int productId);
   ArrayList<String> getAllTagsById(int productId);
   ArrayList<String> getAllProductCategories();
   ArrayList<String> getAllTags();
+
   String addNewProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag);
   String addNewCategory(String newCategory);
   String addNewTag(String newTag);
+
   String editProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag, int productId);
   String deleteProduct(int productId);
-  void logOut();
-  String validateRegister(String username, String email, String password, String dob);
+
   void setClientUsername(String username);
+
   String getLoggedInUser();
+
   ArrayList<Product> getAllProductsForSpecificManager(String username);
   String deleteProductPrice(int productId, String username);
   List<User> getAllUsers();
+
   String addNewManager(User newManager);
   String validateEditUser(String oldUsername, String oldEmail, String username, String email, String password, String dob);
   String editShopProduct(String productName, String productDescription,
       String category, ArrayList<String> parseTag, int productId,int price,String username);
   String deleteUser(String username);
+
+  /**
+   * Methods used from the shopping list.
+   * @author Gosia, Karlo
+   */
   ArrayList<Product> getThisUserShoppingList();
   Boolean clearSL();
   boolean addProductToSL(Product item);

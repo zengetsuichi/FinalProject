@@ -58,6 +58,10 @@ public class ModelFactory
     return loginRegisterModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator model.
+   * @author Gosia, Karlo
+   */
   public AdministratorModel getAdministratorModel(){
     if(administratorModel == null){
       administratorModel = new AdministratorModelManager(clientFactory.getClient());
@@ -65,6 +69,10 @@ public class ModelFactory
     return administratorModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator add new product model.
+   * @author Gosia, Karlo
+   */
   public AddNewProductAdminModel getAddNewProductAdminModel()
   {
     if(addNewProductAdminModel == null){
@@ -73,6 +81,10 @@ public class ModelFactory
     return addNewProductAdminModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator edit product model.
+   * @author Gosia, Karlo
+   */
   public EditProductAdministratorModel getEditProductAdministratorModel()
   {
     if(editProductAdministratorModel == null){
@@ -89,6 +101,10 @@ public class ModelFactory
     return shopManagerModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator user model.
+   * @author Karlo
+   */
   public AdministratorUsersPageModel getAdministratorUsersPageModel()
   {
     if(administratorUsersPageModel == null){
@@ -128,6 +144,10 @@ public class ModelFactory
     return userModel;
   }
 
+  /**
+   * Lazy instantiation of the Shopping list model.
+   * @author Gosia, Karlo
+   */
   public ShoppingListModel getShoppingListModel()
   {
     if (shoppingListModel == null){
