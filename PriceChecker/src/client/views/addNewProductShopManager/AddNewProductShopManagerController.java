@@ -71,9 +71,7 @@ public class AddNewProductShopManagerController implements ViewController {
 
     private ViewHandler viewHandler;
     private AddNewProductShopManagerViewModel addNewProductShopManagerViewModel;
-    private ObservableList<Product> allProducts;
     private String username;
-    private String productName;
 
     /**
      * Method used; for initializing the controller, loading the initial
@@ -110,19 +108,6 @@ public class AddNewProductShopManagerController implements ViewController {
             productNamesForSpecificManager.add(addNewProductShopManagerViewModel.getAllProductsInfoForSpecificManager().get(i).getProductName());
         }
 
-
-//        Platform.runLater(() -> {
-////            int count = productNames.size();
-////            int count2= 0;
-////            for (int i = 0; i < count-count2; i++) {
-////                for (int j = 0; j < productNamesForSpecificManager.size(); j++) {
-////                    if (productNamesForSpecificManager.get(j).equals(productNames.get(i))) {
-////
-////                        productNames.remove(i);
-////                        count2++;
-////                    }
-////                }
-////            }
 
                 Platform.runLater(() -> {
         if(productNames.size() == productNamesForSpecificManager.size()) {
@@ -191,7 +176,11 @@ public class AddNewProductShopManagerController implements ViewController {
         }
     }
 
-// Gets selected product and autofill data
+    /**
+     * Method used for selecting the existing the product and setting fields
+     *
+     * @author Piotr
+     */
 
     private void getThisProduct() {
 
@@ -245,50 +234,15 @@ public class AddNewProductShopManagerController implements ViewController {
     }
 
 
-//    private void selectAllTagsForThisProduct()
-//    {
-//        for (int i = 0; i < addNewProductShopManagerViewModel.getAllTags().size(); i++)
-//        {
-//            for (int j = 0; j < tags.size(); j++)
-//            {
-//                if(tags.get(j).equals(addNewProductShopManagerViewModel.getAllTags().get(i)))
-//                {
-//                    checkListViewTags.getCheckModel().check(i);
-//                }
-//            }
-//        }
-//    }
 
 
-//    private void loadTags() {
-//
-//        String selected = productBox.selectionModelProperty().get().getSelectedItem();
-//
-//        for (int i = 0; i < addNewProductShopManagerViewModel.getAllProducts().size(); i++) {
-//            if (addNewProductShopManagerViewModel.getAllProducts().get(i).getProductName().equals(selected)) {
-//                Product productSelected = addNewProductShopManagerViewModel.getAllProducts().get(i);
-//
-//                ObservableList<String> tags = addNewProductShopManagerViewModel.getAllTagsById(productSelected.getProductId());
-//
-//                for (int k = 0; k < addNewProductShopManagerViewModel.getAllTags().size(); k++) {
-//                    for (int j = 0; j < tags.size(); j++) {
-//                        if (tags.get(j).equals(addNewProductShopManagerViewModel.getAllTags().get(k))) {
-//                            checkListViewTags.getCheckModel().check(k);
-//                        }
-//                    }
-//                }
-//
-//            }
-//        }
-//
-//    }
 
 
     private void addNewCategory() {
         String newCategory = newCategoryTextField.getText();
         if (!newCategory.isEmpty() && newCategory.length() <= 40) {
-//            String response =  addNewProductShopManagerViewModel.addNewCategory(newCategory);
-//            errorLabel.setText(response);
+            String response =  addNewProductShopManagerViewModel.addNewCategory(newCategory);
+            errorLabel.setText(response);
             newCategoryTextField.clear();
         } else
             errorLabel.setText("Category name is too long or category field is empty.");
@@ -303,6 +257,12 @@ public class AddNewProductShopManagerController implements ViewController {
             errorLabel.setText("Tag name is too long or tag field is empty.");
     }
 
+
+    /**
+     * Method used for adding the new Product to ShopManager list
+     *
+     * @author Piotr
+     */
     private void addNewProduct() {
         String productName = productNameTextField.getText();
         String productDescription = productDescriptionTextField.getText();
@@ -340,6 +300,11 @@ public class AddNewProductShopManagerController implements ViewController {
 
 
 
+    /**
+     * Method used for adding the existing Product to ShopManager list with different price
+     *
+     * @author Piotr
+     */
     private void editProd() {
 
         String selected = productBox.selectionModelProperty().get().getSelectedItem();
@@ -365,7 +330,7 @@ public class AddNewProductShopManagerController implements ViewController {
                             if (!price.isEmpty()) {
                                 if (!tags.isEmpty()) {
 
-                                    ArrayList<String> parseTag = new ArrayList<>(tags);
+
                                     System.out.println(userId+ " " +price + " " +productId);
                                     String response = addNewProductShopManagerViewModel.editNewProduct(userId, Integer.parseInt(price), productId);
 

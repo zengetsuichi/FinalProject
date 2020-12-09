@@ -11,6 +11,17 @@ import java.util.ArrayList;
 
 public class AddNewProductShopManagerDAOManager implements AddNewProductShopManagerDAO {
 
+    /**
+     * Class implementing the data access interface. Used for requesting data from
+     * the database.
+     *
+     * Providing methods for; getting all product categories, getting all product
+     * tags, adding new products to the database, adding existing product to the shop manager price table,adding new categories and adding
+     * new tags for the products to the database.
+     *
+     * @author Piotr
+     */
+
     private DatabaseConnection databaseConnection;
 
     public AddNewProductShopManagerDAOManager() throws SQLException
@@ -173,7 +184,6 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
                     String name = resultSet.getString("productname");
                     String description = resultSet.getString("productdescription");
                     String categoryName = resultSet.getString("categoryname");
-//                    int price2 = resultSet.getInt("price");
                     Product product = new Product(productId,name,description,categoryName);
 
                     products.add(product);
@@ -260,36 +270,7 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
 
     }
 
-    private void updateProduct(String productName,
-                               String productDescription, String category) throws SQLException
-    {
-        try (Connection connection = databaseConnection.getConnection())
-        {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT into product(productname, productdescription, categoryname)  values (?, ?, ?)");
-            statement.setString(1, productName);
-            statement.setString(2, productDescription);
-            statement.setString(3, category);
-            statement. executeUpdate();
-        }
-    }
 
-    private void updateTags(ArrayList<String> parseTag, int productId) throws SQLException
-    {
-        try (Connection connection = databaseConnection.getConnection()){
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM producttag WHERE productid =?");
-            statement.setInt(1, productId);
-            statement.execute();
-
-            for (String tag : parseTag)
-            {
-                PreparedStatement statement2 = connection.prepareStatement("INSERT INTO producttag (productid, tagname) VALUES (?,?)");
-                statement2.setInt(1, productId);
-                statement2.setString(2, tag);
-                statement2. executeUpdate();
-            }
-        }
-    }
 
     @Override public ArrayList<String> getAllTagsById(int productId)
             throws SQLException

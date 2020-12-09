@@ -53,6 +53,12 @@ public class AddNewProductShopManagerViewModel {
 
     public ObservableList<Product> getAllProducts() {return allProducts;}
 
+
+    /**
+     * Method used for loading all product names
+     *
+     * @author Piotr
+     */
     public void loadDataForProductsNames() {
         allProductCategories.setAll(addNewProductShopManagerModel.getAllProductCategories());
         allTags.setAll(addNewProductShopManagerModel.getAllTags());
