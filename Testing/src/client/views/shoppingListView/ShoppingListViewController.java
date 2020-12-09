@@ -13,6 +13,7 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderImage;
@@ -139,5 +140,10 @@ public class ShoppingListViewController implements ViewController
   public void setUser(String thisUser)
   {
     this.thisUser = thisUser;
+  }
+
+  public void loadProductShopInfo(MouseEvent mouseEvent)
+  {
+
   }
 }

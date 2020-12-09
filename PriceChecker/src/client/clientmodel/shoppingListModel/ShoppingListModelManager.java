@@ -54,4 +54,14 @@ public class ShoppingListModelManager implements ShoppingListModel
   {
     client.changeQuantityForThisProduct(productId, quantity);
   }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+  {
+    return client.getAvailableProducts(shopName,clientUsername);
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+  {
+    return client.getUnavailableProducts(shopName,clientUsername);
+  }
 }

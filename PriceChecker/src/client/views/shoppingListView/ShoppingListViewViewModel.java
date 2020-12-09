@@ -6,17 +6,23 @@ import javafx.collections.ObservableList;
 import shared.util.Product;
 import shared.util.ShopPrice;
 
+import java.util.ArrayList;
+
 public class ShoppingListViewViewModel
 {
   private ObservableList<ShopPrice> totalPricesList;
   private ShoppingListModel shoppingListModel;
   private ObservableList<Product> shoppingList;
+  private ObservableList<Product> unavailableProductsList;
+  private ObservableList<Product> availableProductsList;
 
   public ShoppingListViewViewModel(ShoppingListModel shoppingListModel)
   {
     this.shoppingListModel = shoppingListModel;
     shoppingList = FXCollections.observableArrayList();
     totalPricesList = FXCollections.observableArrayList();
+    unavailableProductsList = FXCollections.observableArrayList();
+    availableProductsList = FXCollections.observableArrayList();
   }
 
   public void loadShoppingList()
@@ -61,5 +67,19 @@ public class ShoppingListViewViewModel
   public void changeQuantityForThisProduct(int productId, int quantity)
   {
     shoppingListModel.changeQuantityForThisProduct(productId, quantity);
+  }
+
+  public ObservableList<Product> getAvailableProducts(String shopName,String clientUsername)
+  {
+    ArrayList<Product> availableProducts = shoppingListModel.getAvailableProducts(shopName,clientUsername);
+    availableProductsList.setAll(availableProducts);
+    return availableProductsList;
+  }
+
+  public ObservableList<Product> getUnavailableProducts(String shopName,String clientUsername)
+  {
+    ArrayList<Product> unavailableProducts = shoppingListModel.getUnavailableProducts(shopName, clientUsername);
+    unavailableProductsList.setAll(unavailableProducts);
+    return unavailableProductsList;
   }
 }

@@ -113,4 +113,30 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
       throwables.printStackTrace();
     }
   }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+  {
+    try
+    {
+      return userDAO.getAvailableProducts(shopName,clientUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+  {
+    try
+    {
+      return userDAO.getUnavailableProducts(shopName,clientUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
 }

@@ -258,4 +258,16 @@ public class RMIServerManager implements RMIServer
   {
     userShoppingListServerModel.changeQuantityForThisProduct(clientUsername, productId, quantity);
   }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+      throws RemoteException
+  {
+    return userShoppingListServerModel.getAvailableProducts(shopName,clientUsername);
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+      throws RemoteException
+  {
+    return userShoppingListServerModel.getUnavailableProducts(shopName,clientUsername);
+  }
 }

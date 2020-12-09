@@ -13,4 +13,6 @@ public interface ShoppingListModel extends PropertyChangeSubject
   ArrayList<ShopPrice> loadPricesList();
   Boolean deleteTheProductFromSL(int productId);
   void changeQuantityForThisProduct(int productId, int quantity);
+  ArrayList<Product> getAvailableProducts(String shopName,String clientUsername);
+  ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername);
 }

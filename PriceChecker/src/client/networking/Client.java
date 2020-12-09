@@ -49,4 +49,6 @@ public interface Client extends PropertyChangeSubject
   ArrayList<ShopPrice> getThisUserPricesList();
   Boolean deleteTheProductFromSL(int productId);
   void changeQuantityForThisProduct(int productId, int quantity);
+  ArrayList<Product> getAvailableProducts(String shopName,String clientUsername);
+  ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername);
 }

@@ -3,7 +3,9 @@ package client.views.shoppingListView;
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderImage;
@@ -43,6 +46,16 @@ public class ShoppingListViewController implements ViewController
   private TableColumn<Product,Integer> totalPriceColumn;
   @FXML
   private TableView<ShopPrice> totalPriceTable;
+  @FXML
+  private TableView<Product> productsPriceTable;
+  @FXML
+  private TableColumn<Product,String> productsAvailableColumn;
+  @FXML
+  private TableColumn<Product,Integer> shopPricesColumn;
+  @FXML
+  private TableView<Product> unavailableProductsTable;
+  @FXML
+  private TableColumn<Product,String> unavailableProductsColumn;
 
   private ViewHandler viewHandler;
   private ShoppingListViewViewModel shoppingListViewViewModel;
@@ -160,5 +173,33 @@ public class ShoppingListViewController implements ViewController
     totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     shopNameColumn.setCellValueFactory(new PropertyValueFactory<>("shopName"));
     totalPriceTable.setItems(shoppingListViewViewModel.getTotalPricesList());
+  }
+  public void loadProductShopInfo(MouseEvent mouseEvent)
+  {
+    productsPriceTable.getItems().clear();
+    Platform.runLater(()-> {
+      TablePosition pos = totalPriceTable.getSelectionModel().getSelectedCells().get(0);
+      int row = pos.getRow();
+      ShopPrice item = totalPriceTable.getItems().get(row);
+      String shopName= item.getShopName();
+
+      //get available products for each shop by shop name
+      ObservableList<Product> availableProductList = shoppingListViewViewModel.getAvailableProducts(shopName,thisUser);
+      productsPriceTable.getItems().clear();
+      productsAvailableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
+      shopPricesColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
+
+
+      for (int i = 0; i < availableProductList.size(); i++)
+        productsPriceTable.getItems().add(availableProductList.get(i));
+
+      //get unavailable products for each shop by shop name
+      ObservableList<Product> unavailableProducts = shoppingListViewViewModel.getUnavailableProducts(shopName,thisUser);
+      unavailableProductsTable.getItems().clear();
+      unavailableProductsColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
+
+      for (int i = 0; i < unavailableProducts.size(); i++)
+        unavailableProductsTable.getItems().add(unavailableProducts.get(i));
+    });
   }
 }

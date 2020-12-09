@@ -8,9 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class UserDAOManager implements UserDAO
 {
@@ -177,7 +175,7 @@ public class UserDAOManager implements UserDAO
       {
         shopManagers.put(resultSet1.getInt("userid"), resultSet1.getString("username"));
       }
-      ;
+
       for (Map.Entry<Integer, String> entry : shopManagers.entrySet())
       {
         statement2 = connection.prepareStatement(
@@ -287,5 +285,121 @@ public class UserDAOManager implements UserDAO
       if (statement1 != null) try { statement1.close(); } catch (Exception e) { e.printStackTrace(); }
       if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
+  }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+      throws SQLException
+  {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    PreparedStatement statement1 = null;
+    ResultSet resultSet1 = null;
+    ArrayList<Product> availableProducts = new ArrayList<>();
+    int shopListId = 0;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement(
+          "SELECT shoplistid FROM shoppinglist WHERE userid = (select userid FROM users WHERE username = ?)");
+      statement.setString(1, clientUsername);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        shopListId = resultSet.getInt("shoplistid");
+      }
+
+      statement1 = connection.prepareStatement(
+          "SELECT shoppinglistitem.shoplistid,shoppinglistitem.quantity,shoppinglistitem.productid,price.price,price.userid, users.username ,product.productname,product.productdescription,product.categoryname\n"
+              + "FROM shoppinglistitem inner join price on \n"
+              + "shoppinglistitem.productid = price.productid inner join \n"
+              + "users on price.userid = users.userid   inner join product on shoppinglistitem.productid = product.productid\n"
+              + "where shoplistid = ? and users.userid=(select userid FROM users WHERE username = ?)");
+      statement1.setInt(1, shopListId);
+      statement1.setString(2,shopName);
+      resultSet1 = statement1.executeQuery();
+      while (resultSet1.next())
+      {
+        String productName = resultSet1.getString("productname");
+        String productDescription = resultSet1.getString("productdescription");
+        int productid = resultSet1.getInt("productid");
+        String category = resultSet1.getString("categoryname");
+        int price = resultSet1.getInt("price");
+        Product product = new Product(productid,productName,productDescription,category,price);
+        availableProducts.add(product);
+      }
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (resultSet1 != null) try { resultSet1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement1 != null) try { statement1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    return availableProducts;
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+      throws SQLException
+  {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    PreparedStatement statement1 = null;
+    ResultSet resultSet1 = null;
+    ArrayList<Product> allSelectedProducts = new ArrayList<>();
+    ArrayList<Product> unavailableProducts = new ArrayList<>();
+    int shopListId = 0;
+
+    try
+    {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement(
+          "SELECT shoplistid FROM shoppinglist WHERE userid = (select userid FROM users WHERE username = ?)");
+      statement.setString(1, clientUsername);
+      resultSet = statement.executeQuery();
+      while (resultSet.next())
+      {
+        shopListId = resultSet.getInt("shoplistid");
+      }
+
+      statement1 = connection.prepareStatement(
+          "select product.productid, product.productname, product.productdescription, product.categoryname, \n"
+              + "quantity from product inner join shoppingListItem on shoppingListItem.productid =  product.productid where shoplistid = ?");
+      statement1.setInt(1, shopListId);
+      resultSet1 = statement1.executeQuery();
+      while (resultSet1.next())
+      {
+        String productName = resultSet1.getString("productname");
+        String productDescription = resultSet1.getString("productdescription");
+        int productid = resultSet1.getInt("productid");
+        String category = resultSet1.getString("categoryname");
+        Product product = new Product(productid, productName, productDescription,
+            category);
+        allSelectedProducts.add(product);
+      }
+
+      ArrayList<Product> availableshopProducts = getAvailableProducts(shopName,
+          clientUsername);
+      for (int i = 0; i < allSelectedProducts.size(); i++) {
+        if (!(availableshopProducts.contains(allSelectedProducts.get(i)))) {
+          unavailableProducts.add(allSelectedProducts.get(i));
+        }
+      }
+    }
+
+
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (resultSet1 != null) try { resultSet1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement1 != null) try { statement1.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    return unavailableProducts;
   }
 }
