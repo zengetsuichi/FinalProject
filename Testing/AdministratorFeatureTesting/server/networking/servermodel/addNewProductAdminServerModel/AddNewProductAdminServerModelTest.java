@@ -86,8 +86,8 @@ class AddNewProductAdminServerModelTest
 
    /*
   The test method is testing whether the server model will return
-  a negative response when adding the product that already exists in the
-  database.
+  a positive response when adding the product that already exists in the
+  database with different price.
    */
 
   @Test

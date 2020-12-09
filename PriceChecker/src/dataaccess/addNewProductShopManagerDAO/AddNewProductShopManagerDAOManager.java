@@ -200,8 +200,59 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
 
 
     @Override
-    public String addNewCategory(String newCategory) {
-        return null;
+    public String addNewCategory(String newCategory) throws SQLException{
+        {
+            Connection connection = null;
+            PreparedStatement statement = null;
+            ResultSet resultSet = null;
+            String returnStatement = null;
+
+            try {
+                connection = databaseConnection.getConnection();
+                statement = connection.prepareStatement("SELECT * FROM category where categoryname = ?");
+                statement.setString(1, newCategory);
+                resultSet = statement.executeQuery();
+                String category = null;
+                while(resultSet.next())
+                {
+                    category = resultSet.getString("categoryName");
+                }
+
+                if(!(category == null)){
+                    returnStatement = "Specified category already exists.";
+                }
+                else{
+                    addNewCategoryNow(newCategory);
+                    returnStatement = "Category added.";
+                }
+            }
+            catch (SQLException ex) { ex.printStackTrace(); }
+            finally {
+                if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+                if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+                if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+            }
+            return returnStatement;
+        }
+
+    }
+
+    private void addNewCategoryNow(String newCategory) throws SQLException
+    {
+        Connection connection = null;
+        PreparedStatement statement = null;
+
+        try {
+            connection = databaseConnection.getConnection();
+            statement = connection.prepareStatement("INSERT INTO category (categoryname) VALUES(?)");
+            statement.setString(1, newCategory);
+            statement.executeUpdate();
+        }
+        catch (SQLException ex) { ex.printStackTrace(); }
+        finally {
+            if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+            if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+        }
     }
 
     @Override
@@ -217,7 +268,7 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
             }
 
             if(!(tag == null)){
-                return "Specified tag already exists";
+                return "Specified tag already exists.";
             }
             else{
                 addNewTagNow(newTag);
