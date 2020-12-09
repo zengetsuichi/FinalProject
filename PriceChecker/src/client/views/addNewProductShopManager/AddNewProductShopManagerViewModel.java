@@ -22,8 +22,6 @@ public class AddNewProductShopManagerViewModel {
     private ObservableList<Product> listOfAllProductsForSpecificManager;
     private ObservableList<String> tagsForSpecificProduct;
 
-
-
     public AddNewProductShopManagerViewModel(AddNewProductShopManagerModel addNewProductShopManagerModel){
         this.addNewProductShopManagerModel = addNewProductShopManagerModel;
         allProductCategories = FXCollections.observableArrayList();
@@ -31,7 +29,6 @@ public class AddNewProductShopManagerViewModel {
         allProducts = FXCollections.observableArrayList();
         listOfAllProductsForSpecificManager = FXCollections.observableArrayList();
         tagsForSpecificProduct = FXCollections.observableArrayList();
-
     }
 
     public ObservableList<String> getAllProductCategories()
@@ -53,30 +50,22 @@ public class AddNewProductShopManagerViewModel {
 
     public ObservableList<Product> getAllProducts() {return allProducts;}
 
-
     /**
      * Method used for loading all product names
      *
      * @author Piotr
      */
+
     public void loadDataForProductsNames() {
         allProductCategories.setAll(addNewProductShopManagerModel.getAllProductCategories());
         allTags.setAll(addNewProductShopManagerModel.getAllTags());
-
-
 
         ArrayList<Product> products2 = addNewProductShopManagerModel.getAllProductsFor();
         listOfAllProductsForSpecificManager.setAll(products2);
 
         ArrayList<Product> products = addNewProductShopManagerModel.getAllProducts();
-
-
         allProducts.setAll(products);
-
-
     }
-
-
 
 
     public String addNewProduct(String productName, String productDescription, String category, ArrayList<String> parseTag, int price) {
@@ -93,22 +82,17 @@ public class AddNewProductShopManagerViewModel {
         return addNewProductShopManagerModel.addNewTag(newTag);
     }
 
-
-
     public String getLoggedInUser() {
         return addNewProductShopManagerModel.getLoggedInUser();
     }
-
 
     public ObservableList<Product> getAllProductsInfoForSpecificManager() {
         return  listOfAllProductsForSpecificManager;
     }
 
-
     public String editNewProduct(int userId, int price, int productid) {
         return addNewProductShopManagerModel.editNewProduct(userId,price,productid);
     }
-
 
     public int getUserId(String username) {
         return addNewProductShopManagerModel.getUserId(username);

@@ -36,4 +36,3 @@
         <Label fx:id="loggedInAs" layoutX="933.0" layoutY="45.0" />
     </children>
 </AnchorPane>
-

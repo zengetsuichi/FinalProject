@@ -266,7 +266,6 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
             {
                 tag = resultSet.getString("tagname");
             }
-
             if(!(tag == null)){
                 return "Specified tag already exists.";
             }
@@ -318,7 +317,6 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
                 return "Price added";
             }
         }
-
     }
 
 

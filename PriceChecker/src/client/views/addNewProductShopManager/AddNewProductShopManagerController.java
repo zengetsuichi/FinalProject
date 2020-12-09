@@ -88,12 +88,10 @@ public class AddNewProductShopManagerController implements ViewController {
         categoryBox.setItems(addNewProductShopManagerViewModel.getAllProductCategories());
         checkListViewTags.setItems(addNewProductShopManagerViewModel.getAllTags());
 
-
         username = addNewProductShopManagerViewModel.getLoggedInUser();
         loggedInAs.setText(username);
 
         addNewProductShopManagerViewModel.loadDataForProductsNames();
-
 
         ArrayList<String> productNames = new ArrayList<>();
         ArrayList<String> productNamesForSpecificManager = new ArrayList<>();
@@ -101,14 +99,10 @@ public class AddNewProductShopManagerController implements ViewController {
 
         for (int i = 0; i < addNewProductShopManagerViewModel.getAllProducts().size(); i++) {
             productNames.add(addNewProductShopManagerViewModel.getAllProducts().get(i).getProductName());
-
         }
-
         for (int i = 0; i < addNewProductShopManagerViewModel.getAllProductsInfoForSpecificManager().size(); i++) {
             productNamesForSpecificManager.add(addNewProductShopManagerViewModel.getAllProductsInfoForSpecificManager().get(i).getProductName());
         }
-
-
                 Platform.runLater(() -> {
         if(productNames.size() == productNamesForSpecificManager.size()) {
             productNamesStrings.setAll("");
@@ -121,17 +115,8 @@ public class AddNewProductShopManagerController implements ViewController {
             }
             productNamesStrings.setAll(productNames);
         }
-
                 productBox.setItems(productNamesStrings);
         });
-
-
-
-
-
-
-
-
     }
 
 
@@ -224,12 +209,8 @@ public class AddNewProductShopManagerController implements ViewController {
                 categoryBox.setDisable(true);
                 checkListViewTags.setDisable(true);
 
-
                 break;
             }
-
-
-
         }
     }
 
@@ -314,7 +295,6 @@ public class AddNewProductShopManagerController implements ViewController {
             if (addNewProductShopManagerViewModel.getAllProducts().get(i).getProductName().equals(selected)) {
                 Product productSelected = addNewProductShopManagerViewModel.getAllProducts().get(i);
 
-
                 int userId = addNewProductShopManagerViewModel.getUserId(username);
                 System.out.println(username);
                 int productId = productSelected.getProductId();
@@ -355,11 +335,7 @@ public class AddNewProductShopManagerController implements ViewController {
                 }
             }
         }
-
-
-
     }
-
 }
 
 
