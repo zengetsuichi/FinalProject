@@ -8,6 +8,8 @@ import shared.util.ProductList;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UserModelManager implements UserModel
 {
@@ -40,6 +42,16 @@ public class UserModelManager implements UserModel
   @Override public boolean addProductToSL(Product item)
   {
     return client.addProductToSL(item);
+  }
+
+  @Override public ArrayList<String> getAllProductCategories()
+  {
+    return client.getAllProductCategories();
+  }
+
+  @Override public ArrayList<String> getTagsById(int productId)
+  {
+    return client.getAllTagsById(productId);
   }
 
   @Override public ProductList loadProductData()

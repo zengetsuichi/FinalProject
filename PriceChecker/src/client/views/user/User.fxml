@@ -38,5 +38,6 @@
       <Button fx:id="subscribeButton" layoutX="770.0" layoutY="84.0" mnemonicParsing="false" onAction="#subscribeButton" prefHeight="25.0" prefWidth="114.0" text="Subscribe" />
       <Label fx:id="usernameLabel" layoutX="952.0" layoutY="51.0" text="Username" textAlignment="CENTER" />
       <CheckListView fx:id="categoryTable" layoutX="14.0" layoutY="114.0" prefHeight="512.0" prefWidth="178.0" />
+      <Button layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#resetCategoriesBtn" prefHeight="25.0" prefWidth="178.0" text="Reset Categories" />
    </children>
 </AnchorPane>

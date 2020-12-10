@@ -113,7 +113,7 @@ public class AdministratorDAOManager implements AdministratorDAO
 
     try {
       connection = databaseConnection.getConnection();
-      statement = connection.prepareStatement("select * from producttag where productid =?");
+      statement = connection.prepareStatement("select * from productTag where productid =?");
       statement.setInt(1, productId);
       resultSet = statement.executeQuery();
       while(resultSet.next()){
