@@ -131,7 +131,6 @@ public class UserController implements ViewController
         return false; // Does not match.
       });
     });
-    System.out.println(userViewModel.getTagsById(1));
 
     // Initialize the filtered list with a sorted list.
     SortedList<Product> sortedData = new SortedList<>(filteredData);
