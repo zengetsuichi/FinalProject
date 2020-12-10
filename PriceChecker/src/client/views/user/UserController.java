@@ -210,6 +210,7 @@ public class UserController implements ViewController
 
     categoryTable.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>()
     {
+      String textInSearchBar;
       @Override public void onChanged(ListChangeListener.Change<? extends String> c)
       {
         c.next();
@@ -225,8 +226,9 @@ public class UserController implements ViewController
         }
 
         // Trigger the search bar to get the newest changes in category selection
-        searchBar.setText("!");
+        textInSearchBar =  searchBar.getCharacters().toString();
         searchBar.setText("");
+        searchBar.setText(textInSearchBar);
       }
     });
 
