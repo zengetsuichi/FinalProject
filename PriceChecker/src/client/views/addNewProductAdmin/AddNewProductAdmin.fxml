@@ -10,23 +10,50 @@
 <?import org.controlsfx.control.CheckListView?>
 <?import org.controlsfx.control.SearchableComboBox?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.addNewProductAdmin.AddNewProductAdminController">
+<AnchorPane prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.addNewProductAdmin.AddNewProductAdminController">
    <children>
-      <Text layoutX="33.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new product" wrappingWidth="263.91015625">
+      <Text fill="WHITE" layoutX="33.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new product" wrappingWidth="263.91015625">
          <font>
-            <Font size="30.0" />
+            <Font name="Trirong ExtraLight" size="30.0" />
          </font>
       </Text>
-      <TextField fx:id="productNameTextField" layoutX="33.0" layoutY="104.0" prefHeight="26.0" prefWidth="428.0" />
-      <TextArea fx:id="productDescriptionTextField" layoutX="33.0" layoutY="186.0" prefHeight="200.0" prefWidth="428.0" />
-      <TextField fx:id="newTagTextField" layoutX="537.0" layoutY="104.0" prefHeight="26.0" prefWidth="241.0" />
-      <Button fx:id="addNewTagBtn" layoutX="822.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add a new tag" />
-      <Button fx:id="addProductBtn" layoutX="905.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add product" />
+      <TextField fx:id="productNameTextField" layoutX="33.0" layoutY="104.0" prefHeight="26.0" prefWidth="428.0">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></TextField>
+      <TextArea fx:id="productDescriptionTextField" layoutX="33.0" layoutY="186.0" prefHeight="200.0" prefWidth="428.0">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></TextArea>
+      <TextField fx:id="newTagTextField" layoutX="537.0" layoutY="104.0" prefHeight="26.0" prefWidth="241.0">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></TextField>
+      <Button fx:id="addNewTagBtn" layoutX="822.0" layoutY="104.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add a new tag">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
+      <Button fx:id="addProductBtn" layoutX="905.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add product">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
       <SearchableComboBox fx:id="categoryBox" layoutX="33.0" layoutY="491.0" prefHeight="26.0" prefWidth="428.0" />
-      <TextField fx:id="newCategoryTextField" layoutX="32.0" layoutY="439.0" prefHeight="26.0" prefWidth="242.0" />
-      <Button fx:id="addNewCategoryBtn" layoutX="338.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add a new category" />
-      <Button fx:id="goBackBtn" layoutX="32.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe" text="Go back to product page" />
+      <TextField fx:id="newCategoryTextField" layoutX="32.0" layoutY="439.0" prefHeight="26.0" prefWidth="242.0">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></TextField>
+      <Button fx:id="addNewCategoryBtn" layoutX="338.0" layoutY="439.0" mnemonicParsing="false" onAction="#handleClickMe" text="Add a new category">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
+      <Button fx:id="goBackBtn" layoutX="32.0" layoutY="582.0" mnemonicParsing="false" onAction="#handleClickMe" text="Go back to product page">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
       <CheckListView fx:id="checkListViewTags" layoutX="537.0" layoutY="161.0" prefHeight="318.0" prefWidth="202.0" />
-      <Label fx:id="errorLabel" layoutX="537.0" layoutY="34.0" prefHeight="18.0" prefWidth="478.0" />
+      <Label fx:id="errorLabel" layoutX="537.0" layoutY="34.0" prefHeight="18.0" prefWidth="478.0" textFill="WHITE">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
