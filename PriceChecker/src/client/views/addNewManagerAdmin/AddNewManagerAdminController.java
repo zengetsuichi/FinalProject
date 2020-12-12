@@ -72,34 +72,29 @@ public class AddNewManagerAdminController implements ViewController
     String username = usernameTextField.getText();
     String email = emailTextField.getText();
     String password = passwordTextField.getText();
-
     Pattern pattern = Pattern.compile("^.+@.+\\..+$");
     Matcher emailValidation = pattern.matcher(email);
-
     if (username.isEmpty() || email.isEmpty() || (dateOfBirthPicker.getValue()
         == null) || passwordTextField.getText().isEmpty())
-    {
       errorLabel.setText("Fill out all the fields.");
-    }
     else
     {
       if (username.length() <= 20)
       {
         if (email.length() <= 50 && emailValidation.matches())
         {
-          //TODO Gosia add length password
-          String dateOfBirth = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-          User newManager = new User(username, email, password, dateOfBirth,
-              "ShopManager");
-          String response = addNewManagerAdminViewModel.addNewManager(newManager);
-          if (response.equals("Shop manager added."))
+          if(password.length() <= 20)
           {
-            viewHandler.openAdministratorUsersPage();
+            String dateOfBirth = dateOfBirthPicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            User newManager = new User(username, email, password, dateOfBirth, "ShopManager");
+            String response = addNewManagerAdminViewModel.addNewManager(newManager);
+            if (response.equals("Shop manager added."))
+              viewHandler.openAdministratorUsersPage();
+            else
+              errorLabel.setText(response);
           }
           else
-          {
-            errorLabel.setText(response);
-          }
+            errorLabel.setText("Password is too long.");
         }
         else
           errorLabel.setText("Email field is invalid or too long.");
