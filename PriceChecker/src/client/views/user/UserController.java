@@ -25,6 +25,9 @@ import java.util.*;
 public class UserController implements ViewController
 {
 
+  @FXML private Button resetCategoriesBtn;
+  @FXML private Button mainPage;
+  @FXML private Button shoppingHistory;
   @FXML private TableView<Product> productTable;
   @FXML private TableColumn<Product, String> productNameColumn;
   @FXML private TableColumn<Product, String> productDescriptionColumn;
@@ -35,8 +38,6 @@ public class UserController implements ViewController
   @FXML private Button addProduct;
   @FXML private Button openShopingList;
   @FXML private Label productCountLabel;
-  @FXML private Button MainPage;
-  @FXML private Button shoppingHistory;
   @FXML private Button subscribeButton;
   @FXML private Label usernameLabel;
   @FXML private CheckListView<String> categoryTable;
@@ -84,6 +85,7 @@ public class UserController implements ViewController
     // Checks for changes in the category table and saves to a variable that is used into loadProductTable()
     categorySorting();
   }
+
 
   private void loadProductTable()
   {
@@ -143,16 +145,11 @@ public class UserController implements ViewController
 
   }
 
-  @Override public void handleClickMe(ActionEvent actionEvent)
+  private void mainPageBtn()
   {
   }
 
-  @FXML void MainPageBtn(ActionEvent event)
-  {
-
-  }
-
-  @FXML void addProductBtn(ActionEvent event)
+  private void addProductBtn()
   {
     errorLabel.setText("");
     if (productTable.getSelectionModel().getSelectedCells().isEmpty())
@@ -182,23 +179,23 @@ public class UserController implements ViewController
     }
   }
 
-  @FXML void logOutBtn(ActionEvent event)
+  private void logOutBtn()
   {
     userViewModel.logOut();
     viewHandler.openLoginView();
   }
 
-  @FXML void shoppingHistoryBtn(ActionEvent event)
+  private void shoppingHistoryBtn()
   {
 
   }
 
-  @FXML void subscribeButton(ActionEvent event)
+  private void subscribeButton()
   {
 
   }
 
-  @FXML void openShopingListBtn(ActionEvent event)
+  private void openShopingListBtn()
   {
     viewHandler.openShoppingList(thisUser);
   }
@@ -210,6 +207,7 @@ public class UserController implements ViewController
     categoryTable.getCheckModel().getCheckedItems().addListener(new ListChangeListener<String>()
     {
       String textInSearchBar;
+
       @Override public void onChanged(ListChangeListener.Change<? extends String> c)
       {
         c.next();
@@ -225,15 +223,15 @@ public class UserController implements ViewController
         }
 
         // Trigger the search bar to get the newest changes in category selection
-        textInSearchBar =  searchBar.getCharacters().toString();
-        searchBar.setText("");
+        textInSearchBar = searchBar.getCharacters().toString();
+        searchBar.setText("!");
         searchBar.setText(textInSearchBar);
       }
     });
 
   }
 
-  public void resetCategoriesBtn(ActionEvent actionEvent)
+  private void resetCategoriesBtn()
   {
 
     //   clears category selection
@@ -242,5 +240,38 @@ public class UserController implements ViewController
       categoryTable.getCheckModel().clearCheck(i);
     }
 
+  }
+
+
+  @Override public void handleClickMe(ActionEvent actionEvent)
+  {
+    if (actionEvent.getSource() == resetCategoriesBtn)
+    {
+      resetCategoriesBtn();
+    }
+    else if (actionEvent.getSource() == logOut)
+    {
+      logOutBtn();
+    }
+    else if (actionEvent.getSource() == subscribeButton)
+    {
+      subscribeButton();
+    }
+    else if (actionEvent.getSource() == addProduct)
+    {
+      addProductBtn();
+    }
+    else if (actionEvent.getSource() == openShopingList)
+    {
+      openShopingListBtn();
+    }
+    else if (actionEvent.getSource() == mainPage)
+    {
+      mainPageBtn();
+    }
+    else if (actionEvent.getSource() == shoppingHistory)
+    {
+      shoppingHistoryBtn();
+    }
   }
 }

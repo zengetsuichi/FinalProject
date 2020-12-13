@@ -19,12 +19,12 @@
          </font>
       </Label>
       <DatePicker fx:id="dobDateField" layoutX="312.0" layoutY="460.0" maxHeight="35.0" maxWidth="400.0" minHeight="35.0" minWidth="400.0" prefHeight="35.0" prefWidth="400.0" promptText="dd/mm/yyyy" />
-      <Button layoutX="458.0" layoutY="574.0" mnemonicParsing="false" onAction="#onRegisterButton" text="Register">
+      <Button fx:id="onRegisterButton" layoutX="458.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleClickMe" text="Register">
          <font>
             <Font name="Trirong ExtraLight" size="20.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="574.0" mnemonicParsing="false" onAction="#onBackButton" text="Back">
+      <Button fx:id="obBackButton" layoutX="14.0" layoutY="574.0" mnemonicParsing="false" onAction="#handleClickMe" text="Back">
          <font>
             <Font name="Trirong ExtraLight" size="20.0" />
          </font>

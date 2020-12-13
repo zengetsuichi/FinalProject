@@ -86,7 +86,7 @@
                </font>
             </Text>
             <DatePicker fx:id="dateOfBirthPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button mnemonicParsing="false" onAction="#goBackButton" text="Go back" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+            <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleClickMe" text="Go back" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
@@ -108,7 +108,7 @@
                <font>
                   <Font name="Trirong ExtraLight" size="26.0" />
                </font></Label>
-            <Button mnemonicParsing="false" onAction="#editButton" text="Edit user" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleClickMe" text="Edit user" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="Trirong ExtraLight" size="23.0" />
                </font>
