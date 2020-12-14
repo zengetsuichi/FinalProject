@@ -52,9 +52,9 @@
          <font>
             <Font name="Trirong ExtraLight" size="12.0" />
          </font></Label>
-      <TextField fx:id="searchBar" layoutX="127.0" layoutY="83.0" prefHeight="20.0" prefWidth="297.0" promptText="Search for products">
+      <TextField fx:id="searchBar" layoutX="127.0" layoutY="83.0" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="297.0" promptText="Search for products">
          <font>
-            <Font name="Trirong ExtraLight" size="11.0" />
+            <Font name="Trirong ExtraLight" size="13.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -88,14 +88,14 @@
          <children>
             <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="250.0" text="Product page">
                <font>
-                  <Font name="Trirong ExtraLight" size="12.0" />
+                  <Font name="Trirong ExtraLight" size="18.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
             <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="250.0" text="Newsletter page">
                <font>
-                  <Font name="Trirong ExtraLight" size="12.0" />
+                  <Font name="Trirong ExtraLight" size="18.0" />
                </font></Button>
          </children>
       </HBox>
