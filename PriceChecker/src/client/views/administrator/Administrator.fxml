@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.administrator.AdministratorController">
+<AnchorPane maxHeight="640.0" maxWidth="1024.0" minHeight="640.0" minWidth="1024.0" prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.administrator.AdministratorController">
    <children>
       <TableView id="tableviewcss" fx:id="productTable" layoutX="127.0" layoutY="120.0" onMouseClicked="#loadShopPriceTable" prefHeight="510.0" prefWidth="634.0">
         <columns>
@@ -48,7 +48,7 @@
         </columns>
       </TableView>
       <Label fx:id="errorLabel" layoutX="444.0" layoutY="87.0" prefHeight="18.0" prefWidth="571.0" />
-      <TextField fx:id="searchBar" layoutX="126.0" layoutY="77.0" prefHeight="26.0" prefWidth="297.0" promptText="Search for products">
+      <TextField fx:id="searchBar" layoutX="126.0" layoutY="86.0" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="297.0" promptText="Search for products">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
