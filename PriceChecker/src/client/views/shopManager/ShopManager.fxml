@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.shopManager.ShopManagerController">
+<AnchorPane prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.shopManager.ShopManagerController">
    <children>
       <TableView fx:id="productTable" layoutX="127.0" layoutY="118.0" onMouseClicked="#loadTags" prefHeight="512.0" prefWidth="724.0">
          <columns>

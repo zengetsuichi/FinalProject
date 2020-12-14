@@ -14,7 +14,7 @@ public class DatabaseConnection
   private static DatabaseConnection instance;
   private String url = "jdbc:postgresql://localhost:5432/postgres?currentSchema=pricechecker"; //TODO add current schema
   private String username = "postgres";
-  private String password = "Chelmenciuc01"; //to be changed
+  private String password = "Lolek123 "; //to be changed
 
 
   private DatabaseConnection() throws SQLException{
