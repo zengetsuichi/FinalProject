@@ -389,7 +389,10 @@ public class UserDAOManager implements UserDAO
           username = resultSet2.getString("username");
         }
         ShopPrice shopPrice = new ShopPrice(username,totalprice);
-        priceList.add(i, shopPrice);
+        if (!(shopPrice.getPrice()==0))
+        {
+          priceList.add(i, shopPrice);
+        }
         i++;
       }
     }
