@@ -87,3 +87,21 @@
 .table-row-cell{
     -fx-background-color: white;
 }
+
+.text-area {
+  -fx-background-color: transparent;
+  -fx-border-color: #A3F5E9;
+  -fx-border-radius: 10px;
+  -fx-border-width: 2.5px;
+  -fx-text-fill: white;
+}
+
+.text-area .content{
+  -fx-background-color: #282C34;
+}
+
+#searchablecombobox .text-field{
+  -fx-border-radius: 0px;
+  -fx-border-width: 0px;
+  -fx-text-fill: black;
+}

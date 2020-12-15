@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,31 +16,19 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.administratorEditUser.AdministratorEditUserController">
+<AnchorPane maxHeight="640.0" maxWidth="1024.0" minHeight="640.0" minWidth="1024.0" prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.administratorEditUser.AdministratorEditUserController">
    <children>
-      <GridPane prefHeight="640.0" prefWidth="1024.0">
+      <GridPane layoutX="456.0" layoutY="38.0" maxHeight="640.0" maxWidth="512.0" minHeight="84.0" minWidth="512.0" prefHeight="84.0" prefWidth="512.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="85.0" minHeight="10.0" prefHeight="78.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="216.0" minHeight="0.0" prefHeight="87.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="320.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit user" wrappingWidth="140.91015625" GridPane.halignment="CENTER">
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="User Type:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="User Type:" GridPane.halignment="RIGHT">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
@@ -45,7 +36,7 @@
                   <Font name="Trirong ExtraLight" size="26.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Is subscribed:" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Is subscribed:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="30.0" />
                </GridPane.margin>
@@ -53,115 +44,113 @@
                   <Font name="Trirong ExtraLight" size="26.0" />
                </font>
             </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font>
-            </Text>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font>
-            </Text>
-            <DatePicker fx:id="dateOfBirthPicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Button fx:id="goBackButton" mnemonicParsing="false" onAction="#handleClickMe" text="Go back" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
-               <GridPane.margin>
-                  <Insets right="30.0" />
-               </GridPane.margin>
-               <font>
-                  <Font name="Trirong ExtraLight" size="23.0" />
-               </font>
-            </Button>
-            <Label fx:id="userTypeLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label fx:id="userTypeLabel" alignment="CENTER" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font name="Trirong ExtraLight" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="isSubscribedLabel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label fx:id="isSubscribedLabel" alignment="CENTER" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Trirong ExtraLight" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="errorLabel" prefHeight="18.0" prefWidth="242.0" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8">
-               <font>
-                  <Font name="Trirong ExtraLight" size="26.0" />
-               </font></Label>
-            <Button fx:id="editButton" mnemonicParsing="false" onAction="#handleClickMe" text="Edit user" GridPane.columnIndex="1" GridPane.rowIndex="7">
-               <font>
-                  <Font name="Trirong ExtraLight" size="23.0" />
-               </font>
-            </Button>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <TextField fx:id="usernameTextField" prefHeight="26.0" prefWidth="258.0">
-                     <VBox.margin>
-                        <Insets right="250.0" top="35.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label fx:id="userCharLabel" textFill="WHITE">
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font></Label>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <children>
-                  <TextField fx:id="emailTextField" prefHeight="26.0" prefWidth="428.0">
-                     <VBox.margin>
-                        <Insets right="250.0" top="27.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label fx:id="emailCharLabel" textFill="WHITE">
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font></Label>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <children>
-                  <TextField fx:id="passwordTextField" prefHeight="26.0" prefWidth="428.0">
-                     <VBox.margin>
-                        <Insets right="250.0" top="30.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font>
-                  </TextField>
-                  <Label fx:id="passwordCharLabel" textFill="WHITE">
-                     <font>
-                        <Font name="Trirong ExtraLight" size="12.0" />
-                     </font></Label>
-               </children>
-            </VBox>
          </children>
       </GridPane>
+      <Button fx:id="goBackButton" layoutX="14.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleClickMe" text="Go back">
+         <font>
+            <Font name="Trirong ExtraLight" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="editButton" layoutX="919.0" layoutY="581.0" mnemonicParsing="false" onAction="#handleClickMe" text="Edit user">
+         <font>
+            <Font name="Trirong ExtraLight" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="312.0" layoutY="584.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" textFill="WHITE">
+         <font>
+            <Font name="Trirong ExtraLight" size="26.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="165.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit user" wrappingWidth="123.47401428222656">
+         <font>
+            <Font name="Trirong ExtraLight" size="30.0" />
+         </font>
+      </Text>
+      <VBox layoutX="27.0" layoutY="173.0" prefHeight="90.0" prefWidth="650.0">
+         <children>
+            <TextField fx:id="usernameTextField" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" promptText="Username">
+               <VBox.margin>
+                  <Insets right="250.0" top="35.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Trirong ExtraLight" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TextField>
+            <Label fx:id="userCharLabel" maxHeight="25.0" maxWidth="400.0" minHeight="25.0" minWidth="400.0" prefHeight="25.0" prefWidth="400.0" textFill="WHITE">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="27.0" layoutY="267.0" prefHeight="90.0" prefWidth="650.0">
+         <children>
+            <TextField fx:id="emailTextField" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" promptText="Email">
+               <VBox.margin>
+                  <Insets right="250.0" top="27.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Trirong ExtraLight" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TextField>
+            <Label fx:id="emailCharLabel" maxHeight="25.0" maxWidth="400.0" minHeight="25.0" minWidth="400.0" prefHeight="25.0" prefWidth="400.0" textFill="WHITE">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="27.0" layoutY="359.0" prefHeight="93.0" prefWidth="435.0">
+         <children>
+            <TextField fx:id="passwordTextField" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" promptText="Password">
+               <VBox.margin>
+                  <Insets right="250.0" top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Trirong ExtraLight" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </TextField>
+            <Label fx:id="passwordCharLabel" maxHeight="25.0" maxWidth="400.0" minHeight="25.0" minWidth="400.0" prefHeight="25.0" prefWidth="400.0" textFill="WHITE">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <DatePicker fx:id="dateOfBirthPicker" layoutX="27.0" layoutY="468.0" maxHeight="40.0" maxWidth="400.0" minHeight="40.0" minWidth="400.0" prefHeight="40.0" prefWidth="400.0" promptText="dd/mm/yyyy">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </DatePicker>
+      <ImageView fitHeight="99.0" fitWidth="200.0" layoutX="27.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../LoginAvatar.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
