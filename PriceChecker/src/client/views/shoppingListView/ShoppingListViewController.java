@@ -181,28 +181,34 @@ public class ShoppingListViewController implements ViewController
   {
     productsPriceTable.getItems().clear();
     Platform.runLater(()-> {
-      TablePosition pos = totalPriceTable.getSelectionModel().getSelectedCells().get(0);
-      int row = pos.getRow();
-      ShopPrice item = totalPriceTable.getItems().get(row);
-      String shopName= item.getShopName();
 
-      //get available products for each shop by shop name
-      ObservableList<Product> availableProductList = shoppingListViewViewModel.getAvailableProducts(shopName,thisUser);
-      productsPriceTable.getItems().clear();
-      productsAvailableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
-      shopPricesColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
+      if (!totalPriceTable.getItems().isEmpty())
+      {
+        TablePosition pos = totalPriceTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        ShopPrice item = totalPriceTable.getItems().get(row);
+        String shopName = item.getShopName();
 
+        //get available products for each shop by shop name
+        ObservableList<Product> availableProductList = shoppingListViewViewModel
+            .getAvailableProducts(shopName, thisUser);
+        productsPriceTable.getItems().clear();
+        productsAvailableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
+        shopPricesColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
 
-      for (int i = 0; i < availableProductList.size(); i++)
-        productsPriceTable.getItems().add(availableProductList.get(i));
+        for (int i = 0; i < availableProductList.size(); i++)
+          productsPriceTable.getItems().add(availableProductList.get(i));
 
-      //get unavailable products for each shop by shop name
-      ObservableList<Product> unavailableProducts = shoppingListViewViewModel.getUnavailableProducts(shopName,thisUser);
-      unavailableProductsTable.getItems().clear();
-      unavailableProductsColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("productName"));
+        //get unavailable products for each shop by shop name
+        ObservableList<Product> unavailableProducts = shoppingListViewViewModel
+            .getUnavailableProducts(shopName, thisUser);
+        unavailableProductsTable.getItems().clear();
+        unavailableProductsColumn.setCellValueFactory(
+            new PropertyValueFactory<Product, String>("productName"));
 
-      for (int i = 0; i < unavailableProducts.size(); i++)
-        unavailableProductsTable.getItems().add(unavailableProducts.get(i));
+        for (int i = 0; i < unavailableProducts.size(); i++)
+          unavailableProductsTable.getItems().add(unavailableProducts.get(i));
+      }
     });
   }
 }

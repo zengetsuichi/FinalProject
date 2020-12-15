@@ -174,20 +174,22 @@ public class ShopManagerController implements ViewController
   @FXML
   void loadTags(MouseEvent event) {
     Platform.runLater(()-> {
-      TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
-      int row = pos.getRow();
-      Product item = productTable.getItems().get(row);
-      int productId = item.getProductId();
+      if (!productTable.getSelectionModel().isEmpty())
+      {
+        TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        Product item = productTable.getItems().get(row);
+        int productId = item.getProductId();
 
-      //get all tags assigned to the specific product
+        //get all tags assigned to the specific product
 
-      ObservableList<String> tags = shopManagerViewModel.getAllTagsById(productId);
-      System.out.println();
-      tagListTable.getItems().clear();
-      tagsColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        ObservableList<String> tags = shopManagerViewModel.getAllTagsById(productId);
+        tagListTable.getItems().clear();
+        tagsColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 
-      for (int i = 0; i < tags.size(); i++)
-        tagListTable.getItems().add(tags.get(i));
+        for (int i = 0; i < tags.size(); i++)
+          tagListTable.getItems().add(tags.get(i));
+      }
     });
   }
   private void editShopProduct()

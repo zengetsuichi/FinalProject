@@ -32,7 +32,9 @@ public class UserViewModel
     userModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.NEW_CATEGORY.name(), this::newCategory);
+    userModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
   }
+
 
   public void loadData()
   {

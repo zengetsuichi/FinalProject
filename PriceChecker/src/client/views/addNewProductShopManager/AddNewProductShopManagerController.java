@@ -208,6 +208,8 @@ public class AddNewProductShopManagerController implements ViewController {
                 productDescriptionTextField.setDisable(true);
                 categoryBox.setDisable(true);
                 checkListViewTags.setDisable(true);
+                addProductBtn.setDisable(true);
+
 
                 break;
             }

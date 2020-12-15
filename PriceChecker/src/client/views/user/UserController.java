@@ -142,7 +142,6 @@ public class UserController implements ViewController
 
     // Add filtered data to the table.
     productTable.setItems(sortedData);
-
   }
 
   private void mainPageBtn()

@@ -25,8 +25,6 @@ public class AddNewProductShopManagerModelManager implements AddNewProductShopMa
     private PropertyChangeSupport support = new PropertyChangeSupport(this);
     public AddNewProductShopManagerModelManager(Client client) {
         this.client = client;
-
-        client.addListener(EventType.NEW_PRODUCT.name(), evt -> support.firePropertyChange(evt));
     }
 
 

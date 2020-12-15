@@ -53,7 +53,6 @@ public class AddNewProductShopManagerServerModelManager implements AddNewProduct
         try
         {
             support.firePropertyChange(EventType.NEW_PRODUCT.name(), null, getAllProducts());
-            support.firePropertyChange(EventType.NEW_PRODUCT_FOR_MANAGER.name(), null, getAllProducts());
             return addNewProductShopManagerDAO.editNewProduct(userId,price,productid);
         }
         catch (SQLException throwables)
@@ -114,7 +113,6 @@ public class AddNewProductShopManagerServerModelManager implements AddNewProduct
             String response = addNewProductShopManagerDAO.addNewProduct(clientUsername,productName, productDescription, category, parseTag,price);
             if(response.equals("Product added.")){
                 support.firePropertyChange(EventType.NEW_PRODUCT.name(), null, getAllProducts());
-                support.firePropertyChange(EventType.NEW_PRODUCT_FOR_MANAGER.name(), null, getAllProductsFor(clientUsername));
                 return response;
             }else
                 return response;

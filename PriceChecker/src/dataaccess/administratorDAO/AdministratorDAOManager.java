@@ -9,7 +9,6 @@ import shared.util.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -448,5 +447,45 @@ public class AdministratorDAOManager implements AdministratorDAO
 
     }
   }
+
+  @Override public String getUserType(String clientUsername) throws SQLException
+  {
+    Connection connection = null;
+    PreparedStatement statement = null;
+    ResultSet resultSet = null;
+    String returnStatement = null;
+
+    try {
+      connection = databaseConnection.getConnection();
+      statement = connection.prepareStatement("SELECT * FROM users where username = ?");
+      statement.setString(1, clientUsername);
+      resultSet = statement.executeQuery();
+      User user = null;
+      while (resultSet.next())
+      {
+        int userId = resultSet.getInt("userid");
+        String username = resultSet.getString("username");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String dob = resultSet.getString("dob");
+        String type = resultSet.getString("type");
+        user = new User(username, email, password, dob, type, userId, false);
+      }
+      if(user != null)
+        returnStatement = user.getType();
+      else
+      {
+        returnStatement = "We have a problem.";
+      }
+    }
+    catch (SQLException ex) { ex.printStackTrace(); }
+    finally {
+      if (resultSet != null) try { resultSet.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (statement != null) try { statement.close(); } catch (Exception e) { e.printStackTrace(); }
+      if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
+    }
+    return returnStatement;
+  }
+
 
 }

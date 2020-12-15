@@ -26,10 +26,8 @@
       <HBox alignment="CENTER" layoutX="215.0" layoutY="12.0" prefHeight="54.0" prefWidth="671.0" spacing="30.0">
          <children>
             <Button fx:id="mainPage" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="150.0" prefWidth="250.0" text="Main Page" />
-            <Button fx:id="shoppingHistory" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="150.0" prefWidth="250.0" text="Shopping List History" />
          </children>
       </HBox>
-      <Button fx:id="subscribeButton" layoutX="770.0" layoutY="84.0" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="25.0" prefWidth="114.0" text="Subscribe" />
       <Label fx:id="usernameLabel" layoutX="952.0" layoutY="51.0" text="Username" textAlignment="CENTER" />
       <CheckListView fx:id="categoryTable" layoutX="14.0" layoutY="114.0" prefHeight="512.0" prefWidth="178.0" />
       <Button fx:id="resetCategoriesBtn" layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="25.0" prefWidth="178.0" text="Reset Categories" />

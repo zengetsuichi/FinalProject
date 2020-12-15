@@ -1,12 +1,12 @@
 package client.networking;
+import javafx.application.Platform;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.ShopPrice;
-import shared.util.User;
+import shared.util.*;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -226,7 +226,40 @@ public class RMIClient implements Client, ClientCallback {
   @Override public void update(String eventName, Object newValue)
       throws RemoteException
   {
+    if(eventName.equals(EventType.DELETE_USER.name()))
+    {
+      List<User> currentUsers = (List<User>) newValue;
+      ArrayList<String> usernames = new ArrayList<>();
+
+
+      for (User currentUser : currentUsers)
+      {
+        usernames.add(currentUser.getUsername());
+      }
+      if(getType().equals("Admin"))
+        support.firePropertyChange(eventName, null, newValue);
+      else if (!usernames.contains(clientUsername))
+      {
+        logOut();
+        Platform.exit();
+        System.exit(0);
+      }
+      else
+        support.firePropertyChange(eventName, null, newValue);
+    }
+    else
     support.firePropertyChange(eventName, null, newValue);
+  }
+
+  private String getType()
+  {
+    try
+    {
+      return rmiServer.getUserType(clientUsername);
+    }
+    catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
   }
 
   @Override
@@ -262,7 +295,6 @@ public class RMIClient implements Client, ClientCallback {
               response.equals("Houston we have a problem someone fucked up the code.")) {
         return response;
       } else {
-
        rmiServer.registerClient(this);
         return response;
       }

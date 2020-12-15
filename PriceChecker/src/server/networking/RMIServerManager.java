@@ -224,7 +224,8 @@ public class RMIServerManager implements RMIServer
 
   @Override public String deleteUser(String username) throws RemoteException
   {
-    return administratorUsersServerModel.deleteUser(username);
+    String response = administratorUsersServerModel.deleteUser(username);
+    return response;
   }
 
   @Override public ArrayList<Product> getThisUserShoppingList(
@@ -297,5 +298,10 @@ public class RMIServerManager implements RMIServer
       throws RemoteException
   {
     return userShoppingListServerModel.getUnavailableProducts(shopName,clientUsername);
+  }
+
+  @Override public String getUserType(String clientUsername) throws RemoteException
+  {
+    return administratorUsersServerModel.getUserType(clientUsername);
   }
 }

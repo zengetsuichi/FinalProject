@@ -70,4 +70,5 @@ public interface RMIServer extends Remote
   int getUserId(String username) throws RemoteException;
   ArrayList<Product> getAvailableProducts(String shopName,String clientUsername) throws RemoteException;
   ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)throws RemoteException;
+  String getUserType(String clientUsername) throws RemoteException;
 }
