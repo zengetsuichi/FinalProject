@@ -54,10 +54,6 @@
                <font>
                   <Font name="Trirong ExtraLight" size="18.0" />
                </font></Button>
-            <Button fx:id="shoppingHistory" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="150.0" prefWidth="250.0" text="Shopping List History">
-               <font>
-                  <Font name="Trirong ExtraLight" size="18.0" />
-               </font></Button>
          </children>
       </HBox>
       <Label fx:id="usernameLabel" layoutX="952.0" layoutY="51.0" text="Username" textAlignment="CENTER">
