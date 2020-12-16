@@ -211,6 +211,9 @@ public class RMIServerManager implements RMIServer
     editProductShopManagerServerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(),listener);
     editProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     administratorUsersServerModel.addListener(EventType.DELETE_USER.name(), listener);
+    shopManagerServerModel.addListener(EventType.DELETED_PRODUCT.name(),listener);
+    userShoppingListServerModel.addListener(EventType.NEW_PRODUCT.name(),listener);
+    userShoppingListServerModel.addListener(EventType.SHOPPING_LIST_CHANGE.name(),listener);
   }
 
   @Override public String editShopProduct(String productName,

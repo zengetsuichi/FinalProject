@@ -1,7 +1,6 @@
 package server.networking.servermodel.addNewProductShopManagerServerModel;
 
 import dataaccess.addNewProductShopManagerDAO.AddNewProductShopManagerDAO;
-import dataaccess.shopManagerDAO.ShopManagerDAO;
 import shared.util.EventType;
 import shared.util.Product;
 

@@ -1,10 +1,13 @@
 package client.views.shoppingListView;
 import client.clientmodel.shoppingListModel.ShoppingListModel;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import shared.util.EventType;
 import shared.util.Product;
 import shared.util.ShopPrice;
 
+import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 /**
  * Class responsible for managing and storing controller data.
@@ -26,6 +29,19 @@ public class ShoppingListViewViewModel
     totalPricesList = FXCollections.observableArrayList();
     unavailableProductsList = FXCollections.observableArrayList();
     availableProductsList = FXCollections.observableArrayList();
+
+    shoppingListModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), this::newProduct);
+    shoppingListModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
+    shoppingListModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
+    shoppingListModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
+    shoppingListModel.addListener(EventType.SHOPPING_LIST_CHANGE.name(),this::newProduct);
+  }
+
+  private void newProduct(PropertyChangeEvent event)
+  {
+    Platform.runLater(()->
+        newProducts()
+        );
   }
 
   public void loadShoppingList()
@@ -84,5 +100,10 @@ public class ShoppingListViewViewModel
     ArrayList<Product> unavailableProducts = shoppingListModel.getUnavailableProducts(shopName, clientUsername);
     unavailableProductsList.setAll(unavailableProducts);
     return unavailableProductsList;
+  }
+  private void newProducts()
+  {
+    loadShoppingList();
+    loadPriceList();
   }
 }

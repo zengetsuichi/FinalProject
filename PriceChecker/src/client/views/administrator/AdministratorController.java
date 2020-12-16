@@ -138,27 +138,30 @@ public class AdministratorController implements ViewController
     //Getting the id number of the product by selecting the row
     shopPriceTable.getItems().clear();
     Platform.runLater(()-> {
-      TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
-      int row = pos.getRow();
-      Product item = productTable.getItems().get(row);
-      int productId = item.getProductId();
+      if (!productTable.getSelectionModel().isEmpty())
+      {
+        TablePosition pos = productTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        Product item = productTable.getItems().get(row);
+        int productId = item.getProductId();
 
-      //get the shop and price table by product id
-      ObservableList<ShopPrice> shopPrices = administratorViewModel.getShopPricesById(productId);
-      shopPriceTable.getItems().clear();
-      shopColumn.setCellValueFactory(new PropertyValueFactory<ShopPrice, String>("shopName"));
-      priceColumn.setCellValueFactory(new PropertyValueFactory<ShopPrice, Integer>("price"));
+        //get the shop and price table by product id
+        ObservableList<ShopPrice> shopPrices = administratorViewModel.getShopPricesById(productId);
+        shopPriceTable.getItems().clear();
+        shopColumn.setCellValueFactory(new PropertyValueFactory<ShopPrice, String>("shopName"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<ShopPrice, Integer>("price"));
 
-      for (int i = 0; i < shopPrices.size(); i++)
-        shopPriceTable.getItems().add(shopPrices.get(i));
+        for (int i = 0; i < shopPrices.size(); i++)
+          shopPriceTable.getItems().add(shopPrices.get(i));
 
-      //get all tags assigned to the specific product
-      ObservableList<String> tags = administratorViewModel.getAllTagsById(productId);
-      tagListTable.getItems().clear();
-      tagsColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
+        //get all tags assigned to the specific product
+        ObservableList<String> tags = administratorViewModel.getAllTagsById(productId);
+        tagListTable.getItems().clear();
+        tagsColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
 
-      for (int i = 0; i < tags.size(); i++)
-        tagListTable.getItems().add(tags.get(i));
+        for (int i = 0; i < tags.size(); i++)
+          tagListTable.getItems().add(tags.get(i));
+      }
     });
   }
 

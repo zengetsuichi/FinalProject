@@ -293,7 +293,6 @@ public class AddNewProductShopManagerController implements ViewController {
                 Product productSelected = addNewProductShopManagerViewModel.getAllProducts().get(i);
 
                 int userId = addNewProductShopManagerViewModel.getUserId(username);
-                System.out.println(username);
                 int productId = productSelected.getProductId();
                 String productName = productNameTextField.getText();
                 String productDescription = productDescriptionTextField.getText();
@@ -306,9 +305,6 @@ public class AddNewProductShopManagerController implements ViewController {
                         if (!category.isEmpty()) {
                             if (!price.isEmpty()) {
                                 if (!tags.isEmpty()) {
-
-
-                                    System.out.println(userId+ " " +price + " " +productId);
                                     ArrayList<String> parseTag = new ArrayList<>(tags);
                                     String response = addNewProductShopManagerViewModel.editNewProduct(userId, Integer.parseInt(price), productId);
 

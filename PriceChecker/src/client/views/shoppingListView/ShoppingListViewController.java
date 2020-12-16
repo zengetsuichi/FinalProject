@@ -182,7 +182,7 @@ public class ShoppingListViewController implements ViewController
     productsPriceTable.getItems().clear();
     Platform.runLater(()-> {
 
-      if (!totalPriceTable.getItems().isEmpty())
+      if (!totalPriceTable.getSelectionModel().isEmpty())
       {
         TablePosition pos = totalPriceTable.getSelectionModel().getSelectedCells().get(0);
         int row = pos.getRow();

@@ -1,5 +1,6 @@
 package server.networking.servermodel.userShoppingListServerModel;
 import dataaccess.userDAO.UserDAO;
+import shared.util.EventType;
 import shared.util.Product;
 import shared.util.ShopPrice;
 import java.beans.PropertyChangeListener;
@@ -85,7 +86,10 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
   {
     try
     {
-      return userDAO.deleteTheProductFromSL(clientUsername, productId);
+      Boolean deleteProduct = userDAO.deleteTheProductFromSL(clientUsername, productId);
+      if(deleteProduct)
+        support.firePropertyChange(EventType.SHOPPING_LIST_CHANGE.name(), null,userDAO.getThisUserPriceList(clientUsername));
+      return deleteProduct;
     }
     catch (SQLException throwables)
     {
@@ -100,6 +104,7 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
     try
     {
       userDAO.changeQuantityForThisProduct(clientUsername, productId, quantity);
+      support.firePropertyChange(EventType.SHOPPING_LIST_CHANGE.name(), null,userDAO.getThisUserPriceList(clientUsername));
     }
     catch (SQLException throwables)
     {

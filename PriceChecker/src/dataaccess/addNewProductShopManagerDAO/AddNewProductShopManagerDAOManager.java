@@ -47,7 +47,7 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
 
                 if (!(product == null)) {
                     String response = checkIfInPriceTable(product.getProductId(), price, clientUsername);
-                    if(response.equals("Product added")){
+                    if(response.equals("Product added.")){
                         return response;
                     }
                     else{
@@ -347,7 +347,6 @@ public class AddNewProductShopManagerDAOManager implements AddNewProductShopMana
             while (resultSet.next())
             {
                  index = resultSet.getInt(1);
-                System.out.println(index);
             }
 
             return index;
