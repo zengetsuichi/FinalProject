@@ -1,11 +1,16 @@
 package client.clientmodel.administratorEditUser;
 
 import client.networking.Client;
-import shared.util.EventType;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; editing the user.
+ *
+ * @author Dorin
+ */
 public class AdministratorEditUserModelManager implements AdministratorEditUserModel
 {
   private Client client;

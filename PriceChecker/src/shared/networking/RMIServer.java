@@ -1,5 +1,6 @@
 package shared.networking;
 
+import dataaccess.DatabaseConnection;
 import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;

@@ -59,7 +59,8 @@ public class RMIServerManager implements RMIServer
       AdministratorUsersServerModel administratorUsersServerModel,
       AdministratorEditUserServerModel administratorEditUserServerModel,
       EditProductShopManagerServerModel editProductShopManagerServerModel,
-      UserShoppingListServerModel userShoppingListServerModel,AddNewProductShopManagerServerModel addNewProductShopManagerServerModel) throws RemoteException
+      UserShoppingListServerModel userShoppingListServerModel,
+      AddNewProductShopManagerServerModel addNewProductShopManagerServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;

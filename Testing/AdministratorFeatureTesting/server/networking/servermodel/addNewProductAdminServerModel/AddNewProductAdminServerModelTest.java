@@ -8,12 +8,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import server.DummyDatabase;
-
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Testing class used for making an integration test on Admin Add Product Feature
+ *
+ * @author Gosia, Karlo
+ */
 
 class AddNewProductAdminServerModelTest
 {

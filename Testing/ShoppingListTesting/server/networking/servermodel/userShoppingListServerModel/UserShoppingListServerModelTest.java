@@ -14,6 +14,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing class used for performing an integration test on UserShoppingListServerModel
+ *
+ * @author Gosia, Karlo
+ */
+
 class UserShoppingListServerModelTest
 {
   private UserShoppingListServerModel userShoppingListServerModel;

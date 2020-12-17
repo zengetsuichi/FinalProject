@@ -55,10 +55,10 @@ class EditProductShopManagerTest
     ArrayList<String> parseTag = new ArrayList<>();
     parseTag.add("cola");
     parseTag.add("drink");
-    int price = 7;
+    int price = 105;
     String username = "Netto";
 
-    assertEquals("Specified product already exists.", editProductShopManagerServerModel.editShopProduct(
+    assertEquals("Specified product already exists", editProductShopManagerServerModel.editShopProduct(
         productName, productDescription, category, parseTag, productId,price,username));
   }
 
@@ -79,7 +79,7 @@ class EditProductShopManagerTest
     int price = 7;
     String username = "Netto";
 
-    assertEquals("Specified product already exists.", editProductShopManagerServerModel.editShopProduct(
+    assertEquals("Product updated.", editProductShopManagerServerModel.editShopProduct(
         productName, productDescription, category, parseTag, productId,price,username));
   }
 

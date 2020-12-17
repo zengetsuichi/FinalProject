@@ -1,6 +1,7 @@
 package shared.util;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A class used for creating an user object.
@@ -131,6 +132,19 @@ public class User implements Serializable
     return "User{" + "userId='" + userId + '\'' + ", username='" + username
         + '\'' + ", email='" + email + '\'' + ", password='" + password + '\''
         + ", dob='" + dob + '\'' + ", type='" + type + '\'' + '}';
+  }
+
+  @Override public boolean equals(Object o)
+  {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    User user = (User) o;
+    return userId == user.userId && isSubscribed == user.isSubscribed && Objects
+        .equals(username, user.username) && Objects.equals(email, user.email)
+        && Objects.equals(password, user.password) && Objects
+        .equals(dob, user.dob) && Objects.equals(type, user.type);
   }
 
 }

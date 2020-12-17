@@ -3,10 +3,10 @@ package client.clientmodel.shopManagerModel;
 import client.networking.Client;
 import shared.util.EventType;
 import shared.util.Product;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+
 /**
  * Class implementing the model interface. Used for requesting data from
  * the client as well as listening for events and passing them forward.

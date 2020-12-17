@@ -10,6 +10,7 @@ import shared.util.User;
  *
  * @author Gosia
  */
+
 public class AddNewManagerAdminModelManager implements AddNewManagerAdminModel
 {
   private Client client;

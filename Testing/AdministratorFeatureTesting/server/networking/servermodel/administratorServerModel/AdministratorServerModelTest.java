@@ -15,6 +15,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Testing class used for making an integration test on Administrator Server Model
+ *
+ * @author Gosia, Karlo
+ */
+
 class AdministratorServerModelTest
 {
   private AdministratorServerModel administratorServerModel;

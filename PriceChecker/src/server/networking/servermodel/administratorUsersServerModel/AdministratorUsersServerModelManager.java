@@ -27,7 +27,6 @@ public class AdministratorUsersServerModelManager implements AdministratorUsersS
   public AdministratorUsersServerModelManager(AdministratorDAO administratorDAO)
   {
     this.administratorDAO = administratorDAO;
-
   }
 
   @Override public List<User> getAllUsers()
@@ -75,6 +74,7 @@ public class AdministratorUsersServerModelManager implements AdministratorUsersS
   {
     support.removePropertyChangeListener(eventName, listener);
   }
+
   @Override public String deleteUser(String username)
   {
     try

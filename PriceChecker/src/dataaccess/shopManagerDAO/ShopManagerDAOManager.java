@@ -146,7 +146,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
           + " pr.price, pt.tagname FROM price pr\n"
           + "JOIN product p ON pr.productId = p.productId\n"
           + "JOIN users u ON u.userId = pr.UserId\n"
-          + "JOIN productTag pt ON pt.productId = p.productId where u.username = ? and pr.price = ?");
+          + "JOIN productTag pt ON pt.productId = p.productId where u.username = ? and p.productId = ?");
       statement.setString(1, username);
       statement.setInt(2,productId);
       resultSet = statement.executeQuery();
@@ -161,7 +161,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
       }
 
       Product newProduct = new Product(productId, productName, productDescription, category,price);
-      ArrayList<String> allTagsById2 = getAllTagsById(productId);
+      ArrayList<String> allTagsById2 = getAllTagsById(product.getProductId());
       Collections.sort(allTagsById2);
       Collections.sort(parseTag);
       if(newProduct.equals(product))

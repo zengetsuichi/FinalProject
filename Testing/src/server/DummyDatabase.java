@@ -9,6 +9,11 @@ import java.sql.*;
 import dataaccess.DatabaseConnection;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
+/**
+ * Class used for running the sql script.
+ * @author Gosia
+ */
+
 public class DummyDatabase
 {
   private DatabaseConnection databaseConnection;

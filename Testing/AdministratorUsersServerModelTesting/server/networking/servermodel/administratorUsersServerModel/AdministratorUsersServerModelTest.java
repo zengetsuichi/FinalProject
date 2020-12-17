@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Testing class used for making an integration test on AdministratorUsers Model
+ *
+ * @author Gosia, Karlo
+ */
 
 class AdministratorUsersServerModelTest
 {
@@ -53,8 +58,6 @@ class AdministratorUsersServerModelTest
     arrayList.add(user4);
     arrayList.add(user5);
 
-    System.out.println(arrayList);
-    System.out.println(administratorUsersServerModel.getAllUsers());
     assertEquals(arrayList, administratorUsersServerModel.getAllUsers());
   }
 

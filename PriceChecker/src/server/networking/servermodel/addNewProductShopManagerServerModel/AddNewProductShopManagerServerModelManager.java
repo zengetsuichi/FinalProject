@@ -17,7 +17,6 @@ public class AddNewProductShopManagerServerModelManager implements AddNewProduct
 
     public AddNewProductShopManagerServerModelManager(AddNewProductShopManagerDAO addNewProductShopManagerDAO) {
         this.addNewProductShopManagerDAO = addNewProductShopManagerDAO;
-
     }
 
 

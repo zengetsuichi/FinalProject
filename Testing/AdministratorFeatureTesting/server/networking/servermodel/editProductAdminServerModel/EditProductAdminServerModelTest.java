@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+/**
+ * Testing class used for making an integration test on Admin Edit Product Feature
+ *
+ * @author Gosia, Karlo
+ */
 
 class EditProductAdminServerModelTest
 {

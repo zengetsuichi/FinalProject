@@ -1,6 +1,7 @@
 package shared.util;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * A class used for creating a shopPrice object
@@ -46,4 +47,16 @@ public class ShopPrice implements Serializable
     return "ShopPrice{" + "shopName='" + shopName + '\'' + ", price=" + price
         + '}';
   }
+
+  @Override public boolean equals(Object o)
+  {
+    if (this == o)
+      return true;
+    if (o == null || getClass() != o.getClass())
+      return false;
+    ShopPrice shopPrice = (ShopPrice) o;
+    return price == shopPrice.price && Objects
+        .equals(shopName, shopPrice.shopName);
+  }
+
 }

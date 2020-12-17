@@ -46,12 +46,12 @@ class AdministratorEditUserTest
   @Test
   public void successfullEditUser(){
     //arrange
-    String oldUsername = "NettoTest";
-    String oldEmail = "nettoTest@gmail.com";
+    String oldUsername = "Netto";
+    String oldEmail = "netto@gmail.com";
 
-    String username = "Netto";
+    String username = "NettoTest";
     String password = "admin1";
-    String email ="netto@gmail.com";
+    String email ="nettoTest@gmail.com";
     String dob = "2003-01-02";
     String response = "User edited";
     //act
@@ -67,9 +67,9 @@ class AdministratorEditUserTest
   public void unsuccessfullUsernameExists(){
     //arrange
     String oldUsername = "Netto";
-    String oldEmail = "nettoTest@gmail.com";
+    String oldEmail = "netto@gmail.com";
 
-    String username = "Netto";
+    String username = "Lidl";
     String password = "admin1";
     String email ="netto@gmail.com";
     String dob = "2003-01-02";
@@ -87,12 +87,12 @@ class AdministratorEditUserTest
   @Test
   public void unsuccessfullEmailExists(){
     //arrange
-    String oldUsername = "NettoTest";
+    String oldUsername = "Netto";
     String oldEmail = "netto@gmail.com";
 
     String username = "Netto";
     String password = "admin1";
-    String email ="netto@gmail.com";
+    String email ="lidl@gmail.com";
     String dob = "2003-01-02";
     String response = "Email already used";
     //act
