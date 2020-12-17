@@ -14,7 +14,11 @@ import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * Class responsible for managing and storing controller data.
+ *
+ * @author Hadi, Dorin
+ */
 public class UserViewModel
 {
   private UserModel userModel;

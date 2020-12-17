@@ -126,7 +126,10 @@ public class ViewModelFactory
     }
     return administratorEditUserViewModel;
   }
-
+  /**
+   * Lazy instantiation of the Edit Product ShopManager view model.
+   * @author Hadi
+   */
   public EditProductShopManagerViewModel getEditProductShopManagerViewModel()
   {
     if (editProductShopManagerViewModel == null){

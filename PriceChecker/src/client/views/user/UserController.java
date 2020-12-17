@@ -21,13 +21,18 @@ import shared.util.Product;
 import shared.util.ProductList;
 
 import java.util.*;
-
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Hadi, Dorin
+ */
 public class UserController implements ViewController
 {
 
   @FXML private Button resetCategoriesBtn;
   @FXML private Button mainPage;
-  @FXML private Button shoppingHistory;
   @FXML private TableView<Product> productTable;
   @FXML private TableColumn<Product, String> productNameColumn;
   @FXML private TableColumn<Product, String> productDescriptionColumn;
@@ -38,7 +43,6 @@ public class UserController implements ViewController
   @FXML private Button addProduct;
   @FXML private Button openShopingList;
   @FXML private Label productCountLabel;
-  @FXML private Button subscribeButton;
   @FXML private Label usernameLabel;
   @FXML private CheckListView<String> categoryTable;
 
@@ -144,9 +148,6 @@ public class UserController implements ViewController
     productTable.setItems(sortedData);
   }
 
-  private void mainPageBtn()
-  {
-  }
 
   private void addProductBtn()
   {
@@ -182,16 +183,6 @@ public class UserController implements ViewController
   {
     userViewModel.logOut();
     viewHandler.openLoginView();
-  }
-
-  private void shoppingHistoryBtn()
-  {
-
-  }
-
-  private void subscribeButton()
-  {
-
   }
 
   private void openShopingListBtn()
@@ -240,6 +231,10 @@ public class UserController implements ViewController
     }
 
   }
+  private void mainPageBtn()
+  {
+    viewHandler.openUserView();
+  }
 
 
   @Override public void handleClickMe(ActionEvent actionEvent)
@@ -252,10 +247,6 @@ public class UserController implements ViewController
     {
       logOutBtn();
     }
-    else if (actionEvent.getSource() == subscribeButton)
-    {
-      subscribeButton();
-    }
     else if (actionEvent.getSource() == addProduct)
     {
       addProductBtn();
@@ -267,10 +258,6 @@ public class UserController implements ViewController
     else if (actionEvent.getSource() == mainPage)
     {
       mainPageBtn();
-    }
-    else if (actionEvent.getSource() == shoppingHistory)
-    {
-      shoppingHistoryBtn();
     }
   }
 }

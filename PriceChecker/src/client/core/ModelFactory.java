@@ -127,7 +127,10 @@ public class ModelFactory
     }
     return administratorEditUserModel;
   }
-
+  /**
+   * Lazy instantiation of the Edit Product ShopManager Model.
+   * @author Hadi
+   */
   public EditProductShopManagerModel getEditProductShopManagerModel()
   {
     if (editProductShopManagerModel == null){

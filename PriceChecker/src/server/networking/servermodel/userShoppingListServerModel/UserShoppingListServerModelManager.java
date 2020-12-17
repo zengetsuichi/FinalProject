@@ -110,7 +110,11 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
       throwables.printStackTrace();
     }
   }
-
+  /**
+   * Methods used for receiving information from the server, such as users price list,
+   * available and unavailable products.
+   * @author Hadi, Piotr
+   */
   @Override public ArrayList<ShopPrice> getThisUserPriceList(
       String clientUsername)
   {

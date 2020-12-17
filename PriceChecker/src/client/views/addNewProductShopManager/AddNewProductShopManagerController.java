@@ -251,14 +251,10 @@ public class AddNewProductShopManagerController implements ViewController {
         if (!productName.isEmpty() && productName.length() <= 40) {
             if (!productDescription.isEmpty() && productDescription.length() <= 200) {
                 if (!category.isEmpty()) {
-                    if (price>=0){
                     if (!tags.isEmpty()) {
                         if (!priceTextField.getText().isEmpty() && price > 0) {
-
-
                             ArrayList<String> parseTag = new ArrayList<>(tags);
                             String response = addNewProductShopManagerViewModel.addNewProduct(productName, productDescription, category, parseTag, price);
-
                             if (response.equals("Product added."))
                                 viewHandler.openShopManagerView();
                             else {
@@ -269,11 +265,6 @@ public class AddNewProductShopManagerController implements ViewController {
                         }
                     } else
                         errorLabel.setText("Choose at least one product tag.");
-                    }
-                    else
-                    {
-                        errorLabel.setText("Price cannot be negative or zero.");
-                    }
                 } else
                     errorLabel.setText("Choose product category.");
             } else
@@ -313,7 +304,6 @@ public class AddNewProductShopManagerController implements ViewController {
                                 if (!tags.isEmpty()) {
                                     ArrayList<String> parseTag = new ArrayList<>(tags);
                                     String response = addNewProductShopManagerViewModel.editNewProduct(userId, Integer.parseInt(price), productId);
-
                                     if (response.equals("Price added"))
                                         viewHandler.openShopManagerView();
                                     else
@@ -337,10 +327,3 @@ public class AddNewProductShopManagerController implements ViewController {
         }
     }
 }
-
-
-
-
-
-
-

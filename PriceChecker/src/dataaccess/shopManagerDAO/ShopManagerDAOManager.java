@@ -117,7 +117,18 @@ public class ShopManagerDAOManager implements ShopManagerDAO
     }
     return tags;
   }
-
+  /**
+   * Method used for updating the data in database about the product.
+   *
+   * @param productName - the name of the product
+   * @param productDescription - the description of the product
+   * @param category - the category of the product
+   * @param parseTag - the tags of the product
+   * @param productId - the product ID
+   * @param price - the price of the product
+   * @param username - the username of the shop manager
+   * @author Hadi
+   */
   @Override public String editShopProduct(String productName,
       String productDescription, String category, ArrayList<String> parseTag,
       int productId, int price,String username) throws SQLException

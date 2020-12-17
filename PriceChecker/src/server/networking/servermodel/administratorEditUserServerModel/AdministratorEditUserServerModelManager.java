@@ -34,11 +34,11 @@ public class AdministratorEditUserServerModelManager implements AdministratorEdi
 
 
       if (!isSameUser && user != null) {
-        //  if (user.getUsername().equals(username))
+
         return "User with this username already exist";
 
       } else if ( !isSameEmail && userEmail != null) {
-        //if (userEmail.equals(email))
+
         return "Email already used";
       } else {
         administratorDAO.editUser(oldUsername,oldEmail,username, email, password, dob);
@@ -49,7 +49,7 @@ public class AdministratorEditUserServerModelManager implements AdministratorEdi
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
-    return "Houston we have a problem someone fucked up the code.";
+    return "Houston we have a problem.";
   }
 
   @Override public void addListener(String eventName,

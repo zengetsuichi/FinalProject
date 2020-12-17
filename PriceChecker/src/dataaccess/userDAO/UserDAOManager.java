@@ -222,7 +222,10 @@ public class UserDAOManager implements UserDAO
       if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
-
+  /**
+   * Methods to retrieve data from the database for the tables
+   * @author Hadi, Piotr
+   */
   @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
       throws SQLException
   {

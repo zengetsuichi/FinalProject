@@ -11,6 +11,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Class implementing the model interface. Used for requesting data from
+ * the client as well as listening for events and passing them forward.
+ *
+ * Providing methods for; loading the products for current user, allowing user
+ * to add products to shopping list, search, and filter by categories.
+ *
+ * @author Hadi, Dorin
+ */
+
 public class UserModelManager implements UserModel
 {
 
