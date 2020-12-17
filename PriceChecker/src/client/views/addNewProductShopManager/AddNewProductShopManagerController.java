@@ -92,7 +92,6 @@ public class AddNewProductShopManagerController implements ViewController {
         loggedInAs.setText(username);
 
         addNewProductShopManagerViewModel.loadDataForProductsNames();
-
         ArrayList<String> productNames = new ArrayList<>();
         ArrayList<String> productNamesForSpecificManager = new ArrayList<>();
         ObservableList<String> productNamesStrings = FXCollections.observableArrayList();
@@ -117,6 +116,7 @@ public class AddNewProductShopManagerController implements ViewController {
         }
                 productBox.setItems(productNamesStrings);
         });
+        editProdButton.setDisable(true);
     }
 
 
@@ -157,7 +157,6 @@ public class AddNewProductShopManagerController implements ViewController {
             addNewCategory();
         } else if (actionEvent.getSource() == modifyProductButton) {
             getThisProduct();
-
         }
     }
 
@@ -209,7 +208,7 @@ public class AddNewProductShopManagerController implements ViewController {
                 categoryBox.setDisable(true);
                 checkListViewTags.setDisable(true);
                 addProductBtn.setDisable(true);
-
+                editProdButton.setDisable(false);
 
                 break;
             }

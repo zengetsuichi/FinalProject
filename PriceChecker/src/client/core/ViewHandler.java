@@ -343,7 +343,6 @@ public class ViewHandler
       Parent root = loader.load();
       AddNewProductShopManagerController view = loader.getController();
 
-
       view.init(this, viewModelFactory);
       Scene scene = new Scene(root);
       stage.setScene(scene);
