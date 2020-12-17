@@ -162,7 +162,12 @@ public class ShoppingListViewController implements ViewController
     else if(actionEvent.getSource() == clearShoppingListButton)
     {
       if(!shoppingListTable.getItems().isEmpty())
+      {
         shoppingListViewViewModel.clearSL();
+        productsPriceTable.getItems().clear();
+        totalPriceTable.getItems().clear();
+        unavailableProductsTable.getItems().clear();
+      }
     }
   }
 

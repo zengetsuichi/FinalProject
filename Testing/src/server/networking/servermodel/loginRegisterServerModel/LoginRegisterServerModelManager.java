@@ -54,7 +54,7 @@ public class LoginRegisterServerModelManager implements LoginRegisterServerModel
     {
       throwables.printStackTrace();
     }
-    return "Houston we have a problem someone fucked up the code.";
+    return "Houston we have a problem.";
   }
 
   /**
@@ -89,7 +89,7 @@ public class LoginRegisterServerModelManager implements LoginRegisterServerModel
     } catch (SQLException throwables) {
       throwables.printStackTrace();
     }
-    return "Houston we have a problem someone fucked up the code.";
+    return "Houston we have a problem.";
 
   }
 

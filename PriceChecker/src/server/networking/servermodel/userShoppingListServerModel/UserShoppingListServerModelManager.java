@@ -26,7 +26,6 @@ public class UserShoppingListServerModelManager implements UserShoppingListServe
   public UserShoppingListServerModelManager(UserDAO userDAO)
   {
     this.userDAO = userDAO;
-
   }
 
   @Override public void addListener(String eventName,

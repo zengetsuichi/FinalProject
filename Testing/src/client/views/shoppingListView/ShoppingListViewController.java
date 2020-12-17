@@ -1,29 +1,38 @@
 package client.views.shoppingListView;
-
 import client.core.ViewHandler;
 import client.core.ViewModelFactory;
 import client.views.ViewController;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderImage;
 import javafx.util.Callback;
 import shared.util.Product;
-
+import shared.util.ProductList;
+import shared.util.ShopPrice;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
+/**
+ * Class implementing the view controller interface. Used for initializing
+ * view components, retrieving data from them and providing functionality
+ * for components.
+ *
+ * @author Gosia, Karlo
+ */
 public class ShoppingListViewController implements ViewController
 {
-  @FXML
-  private TableColumn<Product,String> productsUnavailable;
   @FXML
   private Button backButton;
   @FXML
@@ -34,6 +43,22 @@ public class ShoppingListViewController implements ViewController
   private TableColumn<Product, String> productNameColumn;
   @FXML
   private TableColumn<Product, Integer> quantityColumn;
+  @FXML
+  private TableColumn<ShopPrice,String> shopNameColumn;
+  @FXML
+  private TableColumn<Product,Integer> totalPriceColumn;
+  @FXML
+  private TableView<ShopPrice> totalPriceTable;
+  @FXML
+  private TableView<Product> productsPriceTable;
+  @FXML
+  private TableColumn<Product,String> productsAvailableColumn;
+  @FXML
+  private TableColumn<Product,Integer> shopPricesColumn;
+  @FXML
+  private TableView<Product> unavailableProductsTable;
+  @FXML
+  private TableColumn<Product,String> unavailableProductsColumn;
 
   private ViewHandler viewHandler;
   private ShoppingListViewViewModel shoppingListViewViewModel;
@@ -116,6 +141,10 @@ public class ShoppingListViewController implements ViewController
     colBtn.setMinWidth(50); colBtn.setMaxWidth(50);
 
     shoppingListTable.getColumns().add(colBtn);
+
+    shoppingListViewViewModel.loadPriceList();
+    loadPricesTable();
+    totalPriceTable.setPlaceholder(new Label("No Products selected."));
   }
 
   private void loadTable()
@@ -133,7 +162,12 @@ public class ShoppingListViewController implements ViewController
     else if(actionEvent.getSource() == clearShoppingListButton)
     {
       if(!shoppingListTable.getItems().isEmpty())
+      {
         shoppingListViewViewModel.clearSL();
+        productsPriceTable.getItems().clear();
+        totalPriceTable.getItems().clear();
+        unavailableProductsTable.getItems().clear();
+      }
     }
   }
 
@@ -141,9 +175,45 @@ public class ShoppingListViewController implements ViewController
   {
     this.thisUser = thisUser;
   }
-
+  private void loadPricesTable()
+  {
+    totalPriceTable.getItems().clear();
+    totalPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+    shopNameColumn.setCellValueFactory(new PropertyValueFactory<>("shopName"));
+    totalPriceTable.setItems(shoppingListViewViewModel.getTotalPricesList());
+  }
   public void loadProductShopInfo(MouseEvent mouseEvent)
   {
+    productsPriceTable.getItems().clear();
+    Platform.runLater(()-> {
 
+      if (!totalPriceTable.getSelectionModel().isEmpty())
+      {
+        TablePosition pos = totalPriceTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+        ShopPrice item = totalPriceTable.getItems().get(row);
+        String shopName = item.getShopName();
+
+        //get available products for each shop by shop name
+        ObservableList<Product> availableProductList = shoppingListViewViewModel
+            .getAvailableProducts(shopName, thisUser);
+        productsPriceTable.getItems().clear();
+        productsAvailableColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("productName"));
+        shopPricesColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("price"));
+
+        for (int i = 0; i < availableProductList.size(); i++)
+          productsPriceTable.getItems().add(availableProductList.get(i));
+
+        //get unavailable products for each shop by shop name
+        ObservableList<Product> unavailableProducts = shoppingListViewViewModel
+            .getUnavailableProducts(shopName, thisUser);
+        unavailableProductsTable.getItems().clear();
+        unavailableProductsColumn.setCellValueFactory(
+            new PropertyValueFactory<Product, String>("productName"));
+
+        for (int i = 0; i < unavailableProducts.size(); i++)
+          unavailableProductsTable.getItems().add(unavailableProducts.get(i));
+      }
+    });
   }
 }

@@ -36,7 +36,7 @@ public class EditProductShopManagerServerModelManager implements EditProductShop
           username);
       if(product.equals("Product updated."))
       {
-        support.firePropertyChange(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), null, null);
+        support.firePropertyChange(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), null, administratorDAO.giveAllProductData());
         support.firePropertyChange(EventType.NEW_PRODUCT.name(), null, administratorDAO.giveAllProductData());
       }
       return product;

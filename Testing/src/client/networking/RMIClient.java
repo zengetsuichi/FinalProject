@@ -1,12 +1,12 @@
 package client.networking;
+import javafx.application.Platform;
 import shared.networking.ClientCallback;
 import shared.networking.RMIServer;
-import shared.util.Product;
-import shared.util.ProductList;
-import shared.util.ShopPrice;
-import shared.util.User;
+import shared.util.*;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.lang.reflect.Array;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -67,7 +67,7 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateLogin(username, password);
       if (response.equals("User with this username does not exist") ||
               response.equals("Wrong credentials") ||
-              response.equals("Houston we have a problem someone fucked up the code.")) {
+              response.equals("Houston we have a problem.")) {
         return response;
       } else {
         rmiServer.registerClient(this);
@@ -226,7 +226,40 @@ public class RMIClient implements Client, ClientCallback {
   @Override public void update(String eventName, Object newValue)
       throws RemoteException
   {
+    if(eventName.equals(EventType.DELETE_USER.name()))
+    {
+      List<User> currentUsers = (List<User>) newValue;
+      ArrayList<String> usernames = new ArrayList<>();
+
+
+      for (User currentUser : currentUsers)
+      {
+        usernames.add(currentUser.getUsername());
+      }
+      if(getType().equals("Admin"))
+        support.firePropertyChange(eventName, null, newValue);
+      else if (!usernames.contains(clientUsername))
+      {
+        logOut();
+        Platform.exit();
+        System.exit(0);
+      }
+      else
+        support.firePropertyChange(eventName, null, newValue);
+    }
+    else
     support.firePropertyChange(eventName, null, newValue);
+  }
+
+  private String getType()
+  {
+    try
+    {
+      return rmiServer.getUserType(clientUsername);
+    }
+    catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
   }
 
   @Override
@@ -259,10 +292,9 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateRegister(username, email, password, dob);
       if (response.equals("User with this username already exist") ||
               response.equals("Email already used") ||
-              response.equals("Houston we have a problem someone fucked up the code.")) {
+              response.equals("Houston we have a problem.")) {
         return response;
       } else {
-
        rmiServer.registerClient(this);
         return response;
       }
@@ -290,7 +322,7 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateUserEdit(oldUsername, oldEmail, username, email, password, dob);
       if (response.equals("User with this username already exist") ||
           response.equals("Email already used") ||
-          response.equals("Houston we have a problem someone fucked up the code.")) {
+          response.equals("Houston we have a problem someone.")) {
         return response;
       } else {
 
@@ -324,6 +356,10 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  /**
+   * Methods used from the shopping list.
+   * @author Gosia, Karlo
+   */
   @Override public ArrayList<Product> getThisUserShoppingList()
   {
     try
@@ -360,6 +396,18 @@ public class RMIClient implements Client, ClientCallback {
     }
   }
 
+  @Override public ArrayList<ShopPrice> getThisUserPricesList()
+  {
+    try
+    {
+      return rmiServer.getThisUserPriceList(clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
   @Override public Boolean deleteTheProductFromSL(int productId)
   {
     try
@@ -384,4 +432,75 @@ public class RMIClient implements Client, ClientCallback {
       throw new RuntimeException("Could not contact server");
     }
   }
+
+
+  @Override
+  public String addNewProductShopManager(String productName, String productDescription, String category, ArrayList<String> parseTag, int price) {
+    try {
+      return rmiServer.addNewProductShopManager(clientUsername,productName,productDescription,category,parseTag,price);
+    } catch (RemoteException e) {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public ArrayList<Product> getAllProducts() {
+    try {
+      return rmiServer.getAllProducts();
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public ArrayList<Product> getAllProductsFor() {
+    try {
+      return rmiServer.getAllProductsForSpecificManager(clientUsername);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public String editNewProduct(int userId,int price, int productid) {
+    try {
+      return rmiServer.editNewProduct(userId,price,productid);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override
+  public int getUserId(String username) {
+    try {
+      return rmiServer.getUserId(username);
+    }catch(RemoteException e){
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+  {
+    try
+    {
+      return rmiServer.getAvailableProducts(shopName,clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+  {
+    try
+    {
+      return rmiServer.getUnavailableProducts(shopName,clientUsername);
+    }
+    catch (RemoteException e)
+    {
+      throw new RuntimeException("Could not contact server");
+    }
+  }
+  /*--------------------------------------------------------------------------------*/
 }

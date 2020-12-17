@@ -8,9 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.CheckListView?>
 
-<AnchorPane prefHeight="640.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.user.UserController">
+<AnchorPane prefHeight="640.0" prefWidth="1024.0" stylesheets="@../styling.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.views.user.UserController">
    <children>
       <TableView fx:id="productTable" layoutX="213.0" layoutY="114.0" prefHeight="512.0" prefWidth="671.0">
         <columns>
@@ -19,24 +20,50 @@
             <TableColumn fx:id="productCategoryColumn" prefWidth="141.0" text="Product Category" />
         </columns>
       </TableView>
-      <Button fx:id="logOut" layoutX="952.0" layoutY="14.0" mnemonicParsing="false" onAction="#logOutBtn" text="Log out" />
-      <Label fx:id="errorLabel" layoutX="519.0" layoutY="75.0" prefHeight="35.0" prefWidth="241.0" />
-      <TextField fx:id="searchBar" layoutX="213.0" layoutY="83.0" prefHeight="26.0" prefWidth="297.0" promptText="Search for products" />
+      <Button fx:id="logOut" layoutX="952.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleClickMe" text="Log out">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
+      <Label fx:id="errorLabel" layoutX="519.0" layoutY="75.0" prefHeight="35.0" prefWidth="241.0">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Label>
+      <TextField fx:id="searchBar" layoutX="213.0" layoutY="77.0" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" prefWidth="297.0" promptText="Search for products">
+         <font>
+            <Font name="Trirong ExtraLight" size="13.0" />
+         </font></TextField>
       <VBox alignment="CENTER" layoutX="888.0" layoutY="138.0" prefHeight="136.0" prefWidth="128.0" spacing="20.0">
          <children>
-            <Button fx:id="addProduct" mnemonicParsing="false" onAction="#addProductBtn" text="Add product" />
-            <Label fx:id="productCountLabel" text="productCount" />
-            <Button fx:id="openShopingList" mnemonicParsing="false" onAction="#openShopingListBtn" prefWidth="100.0" text="Shopping List" />
+            <Button fx:id="addProduct" mnemonicParsing="false" onAction="#handleClickMe" text="Add product">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font></Button>
+            <Label fx:id="productCountLabel" text="productCount">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font></Label>
+            <Button fx:id="openShopingList" mnemonicParsing="false" onAction="#handleClickMe" prefWidth="100.0" text="Shopping List">
+               <font>
+                  <Font name="Trirong ExtraLight" size="12.0" />
+               </font></Button>
          </children>
       </VBox>
       <HBox alignment="CENTER" layoutX="215.0" layoutY="12.0" prefHeight="54.0" prefWidth="671.0" spacing="30.0">
          <children>
-            <Button fx:id="MainPage" mnemonicParsing="false" onAction="#MainPageBtn" prefHeight="150.0" prefWidth="250.0" text="Main Page" />
-            <Button fx:id="shoppingHistory" mnemonicParsing="false" onAction="#shoppingHistoryBtn" prefHeight="150.0" prefWidth="250.0" text="Shopping List History" />
+            <Button fx:id="mainPage" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="150.0" prefWidth="250.0" text="Main Page">
+               <font>
+                  <Font name="Trirong ExtraLight" size="18.0" />
+               </font></Button>
          </children>
       </HBox>
-      <Button fx:id="subscribeButton" layoutX="770.0" layoutY="84.0" mnemonicParsing="false" onAction="#subscribeButton" prefHeight="25.0" prefWidth="114.0" text="Subscribe" />
-      <Label fx:id="usernameLabel" layoutX="952.0" layoutY="51.0" text="Username" textAlignment="CENTER" />
+      <Label fx:id="usernameLabel" layoutX="952.0" layoutY="51.0" text="Username" textAlignment="CENTER">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Label>
       <CheckListView fx:id="categoryTable" layoutX="14.0" layoutY="114.0" prefHeight="512.0" prefWidth="178.0" />
+      <Button fx:id="resetCategoriesBtn" layoutX="14.0" layoutY="74.0" mnemonicParsing="false" onAction="#handleClickMe" prefHeight="25.0" prefWidth="178.0" text="Reset Categories">
+         <font>
+            <Font name="Trirong ExtraLight" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

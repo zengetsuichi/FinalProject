@@ -33,8 +33,16 @@ public class UserViewModel
     userModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.NEW_CATEGORY.name(), this::newCategory);
     userModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
+    userModel.addListener(EventType.NEW_PRODUCT_MANAGER.name(), this::newProductManager);
   }
 
+  private void newProductManager(PropertyChangeEvent event)
+  {
+    Platform.runLater(() -> {
+      ArrayList<Product> products = (ArrayList<Product>) event.getNewValue();
+      listOfAllProducts.setAll(products);
+    });
+  }
 
   public void loadData()
   {

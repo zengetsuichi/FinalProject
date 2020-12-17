@@ -67,7 +67,7 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateLogin(username, password);
       if (response.equals("User with this username does not exist") ||
               response.equals("Wrong credentials") ||
-              response.equals("Houston we have a problem someone fucked up the code.")) {
+              response.equals("Houston we have a problem.")) {
         return response;
       } else {
         rmiServer.registerClient(this);
@@ -292,7 +292,7 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateRegister(username, email, password, dob);
       if (response.equals("User with this username already exist") ||
               response.equals("Email already used") ||
-              response.equals("Houston we have a problem someone fucked up the code.")) {
+              response.equals("Houston we have a problem.")) {
         return response;
       } else {
        rmiServer.registerClient(this);
@@ -322,7 +322,7 @@ public class RMIClient implements Client, ClientCallback {
       String response = rmiServer.validateUserEdit(oldUsername, oldEmail, username, email, password, dob);
       if (response.equals("User with this username already exist") ||
           response.equals("Email already used") ||
-          response.equals("Houston we have a problem someone fucked up the code.")) {
+          response.equals("Houston we have a problem someone.")) {
         return response;
       } else {
 

@@ -89,6 +89,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
     }
     return returnStatement;
   }
+
   @Override public ArrayList<String> getAllTagsById(int productId)
       throws SQLException
   {
@@ -116,6 +117,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
     }
     return tags;
   }
+
   @Override public String editShopProduct(String productName,
       String productDescription, String category, ArrayList<String> parseTag,
       int productId, int price,String username) throws SQLException
@@ -155,12 +157,15 @@ public class ShopManagerDAOManager implements ShopManagerDAO
       {
         if(allTagsById2.equals(parseTag))
           returnStatement = "Specified product already exists";
+
         else
         {
           updateTags(parseTag, productId);
           returnStatement = "Product updated.";
         }
       }
+      else if (price <=0)
+        returnStatement = "Price cannot be negative or zero.";
       else
       {
         updateProduct(productId, productName, productDescription, category,price,username);
@@ -181,6 +186,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
     }
     return returnStatement;
   }
+
   private void updateProduct(int productId, String productName,
       String productDescription, String category,int price,String username) throws SQLException
   {
@@ -207,6 +213,7 @@ public class ShopManagerDAOManager implements ShopManagerDAO
       if (connection != null) try { connection.close(); } catch (Exception e) { e.printStackTrace(); }
     }
   }
+
   private void updateTags(ArrayList<String> parseTag, int productId) throws SQLException
   {
     Connection connection = null;

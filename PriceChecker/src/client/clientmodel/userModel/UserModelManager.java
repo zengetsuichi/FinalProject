@@ -24,6 +24,7 @@ public class UserModelManager implements UserModel
     client.addListener(EventType.DELETED_PRODUCT.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.NEW_PRODUCT.name(),evt -> support.firePropertyChange(evt));
     client.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(),evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.NEW_PRODUCT_MANAGER.name(),evt -> support.firePropertyChange(evt));
   }
 
   @Override public void logOut()

@@ -29,6 +29,8 @@ import java.util.regex.Pattern;
 public class RegisterController implements ViewController
 {
 
+  @FXML private Button obBackButton;
+  @FXML private Button onRegisterButton;
   @FXML private TextField usernameTextField;
 
   @FXML private TextField emailTextField;
@@ -53,16 +55,21 @@ public class RegisterController implements ViewController
 
   @Override public void handleClickMe(ActionEvent actionEvent)
   {
+    if(actionEvent.getSource() == onRegisterButton ){
+      onRegisterButton();
+    } else if(actionEvent.getSource() == obBackButton){
+      onBackButton();
+    }
 
   }
 
-  @FXML void onBackButton(ActionEvent event)
+  private void  onBackButton()
   {
     registerViewModel.clear();
     viewHandler.openLoginView();
   }
 
-  @FXML void onRegisterButton(ActionEvent event)
+  private void onRegisterButton()
   {
 
     String regex3 = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,10}$";

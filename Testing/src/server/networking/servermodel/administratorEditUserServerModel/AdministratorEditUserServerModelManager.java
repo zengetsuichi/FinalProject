@@ -1,10 +1,8 @@
 package server.networking.servermodel.administratorEditUserServerModel;
-
 import dataaccess.administratorDAO.AdministratorDAO;
 import dataaccess.loginRegisterDAO.LoginRegisterDAO;
 import shared.util.EventType;
 import shared.util.User;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.sql.SQLException;

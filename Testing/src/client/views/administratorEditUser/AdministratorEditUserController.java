@@ -20,12 +20,12 @@ import java.util.regex.Pattern;
 public class AdministratorEditUserController implements ViewController
 {
 
+  @FXML private Button editButton;
+  @FXML private Button goBackButton;
   @FXML private DatePicker dateOfBirthPicker;
-  @FXML private Button goBackBtn;
   @FXML private Label userTypeLabel;
   @FXML private Label isSubscribedLabel;
   @FXML private Label errorLabel;
-  @FXML private Button addManagerBtn;
   @FXML private TextField usernameTextField;
   @FXML private Label userCharLabel;
   @FXML private TextField emailTextField;
@@ -45,7 +45,16 @@ public class AdministratorEditUserController implements ViewController
     setMinMaxDate();
     textFieldsMaxLenght();
     labelCharCount();
+  }
 
+
+  @Override public void handleClickMe(ActionEvent actionEvent)
+  {
+    if(actionEvent.getSource() == editButton){
+      editButton();
+    }else if(actionEvent.getSource() == goBackButton){
+      goBackButton();
+    }
   }
 
   private void labelCharCount()
@@ -108,10 +117,6 @@ public class AdministratorEditUserController implements ViewController
     dateOfBirthPicker.setDayCellFactory(dayCellFactory);
   }
 
-  @Override public void handleClickMe(ActionEvent actionEvent)
-  {
-
-  }
 
   public void setUser(User user)
   {
@@ -137,12 +142,12 @@ public class AdministratorEditUserController implements ViewController
 
   }
 
-  @FXML private void goBackButton(ActionEvent actionEvent)
+  private void goBackButton()
   {
     viewHandler.openAdministratorUsersPage();
   }
 
-  @FXML private void editButton(ActionEvent actionEvent)
+  private void editButton()
   {
     String regex3 = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,10}$";
     Pattern pattern3 = Pattern.compile(regex3, Pattern.CASE_INSENSITIVE);

@@ -94,4 +94,17 @@ public class AdministratorUsersServerModelManager implements AdministratorUsersS
     }
     return null;
   }
+
+  @Override public String getUserType(String clientUsername)
+  {
+    try
+    {
+      return administratorDAO.getUserType(clientUsername);
+    }
+    catch (SQLException throwables)
+    {
+      throwables.printStackTrace();
+    }
+    return null;
+  }
 }

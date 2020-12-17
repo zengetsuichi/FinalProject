@@ -6,7 +6,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import shared.util.EventType;
 import shared.util.Product;
-import shared.util.ProductList;
 
 import java.beans.PropertyChangeEvent;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ public class ShopManagerViewModel
     shopManagerModel.addListener(EventType.DELETED_PRODUCT_PRICE.name(), this::newProduct);
     shopManagerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
     shopManagerModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
+    shopManagerModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
   }
 
   private void reloadData(PropertyChangeEvent propertyChangeEvent)

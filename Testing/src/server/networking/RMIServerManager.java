@@ -2,6 +2,7 @@ package server.networking;
 
 
 import server.networking.servermodel.addNewProductAdminServerModel.AddNewProductAdminServerModel;
+import server.networking.servermodel.addNewProductShopManagerServerModel.AddNewProductShopManagerServerModel;
 import server.networking.servermodel.administratorEditUserServerModel.AdministratorEditUserServerModel;
 import server.networking.servermodel.administratorServerModel.AdministratorServerModel;
 import server.networking.servermodel.administratorUsersServerModel.AdministratorUsersServerModel;
@@ -48,6 +49,7 @@ public class RMIServerManager implements RMIServer
   private Map<ClientCallback, PropertyChangeListener> listeners = new HashMap<>();
   private EditProductShopManagerServerModel editProductShopManagerServerModel;
   private UserShoppingListServerModel userShoppingListServerModel;
+  private AddNewProductShopManagerServerModel addNewProductShopManagerServerModel;
 
   public RMIServerManager(LoginRegisterServerModel loginRegisterServerModel,
       AdministratorServerModel administratorServerModel,
@@ -57,7 +59,7 @@ public class RMIServerManager implements RMIServer
       AdministratorUsersServerModel administratorUsersServerModel,
       AdministratorEditUserServerModel administratorEditUserServerModel,
       EditProductShopManagerServerModel editProductShopManagerServerModel,
-      UserShoppingListServerModel userShoppingListServerModel) throws RemoteException
+      UserShoppingListServerModel userShoppingListServerModel,AddNewProductShopManagerServerModel addNewProductShopManagerServerModel) throws RemoteException
   {
     UnicastRemoteObject.exportObject(this, 0);
     this.loginRegisterServerModel = loginRegisterServerModel;
@@ -69,6 +71,7 @@ public class RMIServerManager implements RMIServer
     this.administratorEditUserServerModel= administratorEditUserServerModel;
     this.editProductShopManagerServerModel = editProductShopManagerServerModel;
     this.userShoppingListServerModel = userShoppingListServerModel;
+    this.addNewProductShopManagerServerModel = addNewProductShopManagerServerModel;
   }
 
   public void startServer() throws RemoteException, AlreadyBoundException
@@ -208,6 +211,11 @@ public class RMIServerManager implements RMIServer
     editProductShopManagerServerModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(),listener);
     editProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
     administratorUsersServerModel.addListener(EventType.DELETE_USER.name(), listener);
+    shopManagerServerModel.addListener(EventType.DELETED_PRODUCT.name(),listener);
+    userShoppingListServerModel.addListener(EventType.NEW_PRODUCT.name(),listener);
+    userShoppingListServerModel.addListener(EventType.SHOPPING_LIST_CHANGE.name(),listener);
+    addNewProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT_MANAGER.name(), listener);
+    addNewProductShopManagerServerModel.addListener(EventType.NEW_PRODUCT.name(), listener);
   }
 
   @Override public String editShopProduct(String productName,
@@ -221,7 +229,8 @@ public class RMIServerManager implements RMIServer
 
   @Override public String deleteUser(String username) throws RemoteException
   {
-    return administratorUsersServerModel.deleteUser(username);
+    String response = administratorUsersServerModel.deleteUser(username);
+    return response;
   }
 
   @Override public ArrayList<Product> getThisUserShoppingList(
@@ -240,6 +249,12 @@ public class RMIServerManager implements RMIServer
     return userShoppingListServerModel.addProductToSL(item, clientUsername);
   }
 
+  @Override public ArrayList<ShopPrice> getThisUserPriceList(
+      String clientUsername) throws RemoteException
+  {
+    return userShoppingListServerModel.getThisUserPriceList(clientUsername);
+  }
+
   @Override public Boolean deleteTheProductFromSL(String clientUsername,
       int productId) throws RemoteException
   {
@@ -251,5 +266,47 @@ public class RMIServerManager implements RMIServer
       int productId, int quantity) throws RemoteException
   {
     userShoppingListServerModel.changeQuantityForThisProduct(clientUsername, productId, quantity);
+  }
+
+  @Override
+  public ArrayList<Product> getAllProducts()  throws RemoteException {
+    return addNewProductShopManagerServerModel.getAllProducts();
+  }
+
+  @Override
+  public ArrayList<Product> getAllProductsFor(String username) throws RemoteException {
+    return addNewProductShopManagerServerModel.getAllProductsFor(username);
+  }
+
+  @Override
+  public String addNewProductShopManager(String clientUsername, String productName, String productDescription, String category, ArrayList<String> parseTag, int price) {
+    return addNewProductShopManagerServerModel.addNewProduct(clientUsername,productName,productDescription,category,parseTag,price);
+  }
+
+  @Override
+  public String editNewProduct(int userId, int price, int productid) throws RemoteException {
+    return addNewProductShopManagerServerModel.editNewProduct(userId,price,productid);
+  }
+
+  @Override
+  public int getUserId(String username) throws RemoteException {
+    return addNewProductShopManagerServerModel.getUserId(username);
+  }
+
+  @Override public ArrayList<Product> getAvailableProducts(String shopName,String clientUsername)
+      throws RemoteException
+  {
+    return userShoppingListServerModel.getAvailableProducts(shopName,clientUsername);
+  }
+
+  @Override public ArrayList<Product> getUnavailableProducts(String shopName,String clientUsername)
+      throws RemoteException
+  {
+    return userShoppingListServerModel.getUnavailableProducts(shopName,clientUsername);
+  }
+
+  @Override public String getUserType(String clientUsername) throws RemoteException
+  {
+    return administratorUsersServerModel.getUserType(clientUsername);
   }
 }

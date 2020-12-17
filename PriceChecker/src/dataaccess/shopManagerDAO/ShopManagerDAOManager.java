@@ -157,12 +157,15 @@ public class ShopManagerDAOManager implements ShopManagerDAO
       {
         if(allTagsById2.equals(parseTag))
           returnStatement = "Specified product already exists";
+
         else
         {
           updateTags(parseTag, productId);
           returnStatement = "Product updated.";
         }
       }
+      else if (price <=0)
+        returnStatement = "Price cannot be negative or zero.";
       else
       {
         updateProduct(productId, productName, productDescription, category,price,username);

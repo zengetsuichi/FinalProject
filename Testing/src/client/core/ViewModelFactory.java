@@ -2,6 +2,7 @@ package client.core;
 
 import client.views.addNewManagerAdmin.AddNewManagerAdminViewModel;
 import client.views.addNewProductAdmin.AddNewProductAdminViewModel;
+import client.views.addNewProductShopManager.AddNewProductShopManagerViewModel;
 import client.views.administrator.AdministratorViewModel;
 import client.views.administratorEditUser.AdministratorEditUserViewModel;
 import client.views.administratorUsersPage.AdministratorUsersPageViewModel;
@@ -35,6 +36,7 @@ public class ViewModelFactory
   private EditProductShopManagerViewModel editProductShopManagerViewModel;
   private ShoppingListViewViewModel shoppingListViewViewModel;
   private UserViewModel userViewModel;
+  private AddNewProductShopManagerViewModel addNewProductShopManagerViewModel;
 
   public ViewModelFactory(ModelFactory modelFactory)
   {
@@ -48,6 +50,10 @@ public class ViewModelFactory
     return loginViewModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator view model.
+   * @author Gosia, Karlo
+   */
   public AdministratorViewModel getAdministratorViewModel(){
     if(administratorViewModel == null){
       administratorViewModel = new AdministratorViewModel(modelFactory.getAdministratorModel());
@@ -55,6 +61,10 @@ public class ViewModelFactory
     return administratorViewModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator add new product view model.
+   * @author Gosia, Karlo
+   */
   public AddNewProductAdminViewModel getAddNewProductAdminViewModel()
   {
     if(addNewProductAdminViewModel == null){
@@ -63,6 +73,10 @@ public class ViewModelFactory
     return addNewProductAdminViewModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator edit product view model.
+   * @author Gosia, Karlo
+   */
   public EditProductAdminViewModel getEditProductAdminViewModel()
   {
     if(editProductAdminViewModel == null){
@@ -86,6 +100,10 @@ public class ViewModelFactory
     return registerViewModel;
   }
 
+  /**
+   * Lazy instantiation of the Administrator users view model.
+   * @author Karlo
+   */
   public AdministratorUsersPageViewModel getAdministratorUsersPageViewModel() {
     if(administratorUsersPageViewModel == null){
       administratorUsersPageViewModel = new AdministratorUsersPageViewModel(modelFactory.getAdministratorUsersPageModel());
@@ -125,11 +143,22 @@ public class ViewModelFactory
     return userViewModel;
   }
 
+  /**
+   * Lazy instantiation of the Shopping list view model.
+   * @author Gosia, Karlo
+   */
   public ShoppingListViewViewModel getShoppingListViewViewModel()
   {
     if (shoppingListViewViewModel == null){
       shoppingListViewViewModel = new ShoppingListViewViewModel(modelFactory.getShoppingListModel());
     }
     return shoppingListViewViewModel;
+  }
+
+  public AddNewProductShopManagerViewModel getAddNewProductShopManagerViewModel() {
+    if(addNewProductShopManagerViewModel == null){
+      addNewProductShopManagerViewModel = new AddNewProductShopManagerViewModel(modelFactory.getAddNewProductShopManagerModel());
+    }
+    return addNewProductShopManagerViewModel;
   }
 }

@@ -18,6 +18,10 @@ public class User implements Serializable
   private String type;
   private boolean isSubscribed;
 
+  /**
+   * Constructor made for retrieving user data with subscription field
+   * @author Karlo
+   */
   public User(String username, String email, String password,
       String dob, String type, int userId, boolean isSubscribed)
   {

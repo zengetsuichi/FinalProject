@@ -10,7 +10,6 @@ import shared.util.Product;
 import shared.util.ProductList;
 import shared.util.ShopPrice;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

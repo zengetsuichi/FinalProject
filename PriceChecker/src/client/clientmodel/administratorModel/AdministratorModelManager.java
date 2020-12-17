@@ -29,6 +29,7 @@ public class AdministratorModelManager implements AdministratorModel
     this.client = client;
     client.addListener(EventType.NEW_PRODUCT.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.DELETED_PRODUCT.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.NEW_PRODUCT_MANAGER.name(), evt -> support.firePropertyChange(evt));
   }
 
   /**

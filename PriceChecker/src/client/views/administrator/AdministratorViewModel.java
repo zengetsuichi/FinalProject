@@ -32,6 +32,15 @@ public class AdministratorViewModel
     tagsForSpecificProduct = FXCollections.observableArrayList();
     administratorModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
     administratorModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
+    administratorModel.addListener(EventType.NEW_PRODUCT_MANAGER.name(), this::newProductManager);
+  }
+
+  private void newProductManager(PropertyChangeEvent event)
+  {
+    Platform.runLater(()-> {
+      ArrayList<Product> productList = ( ArrayList<Product>) event.getNewValue();
+      listOfAllProducts.setAll(productList);
+    });
   }
 
   private void newProduct(PropertyChangeEvent propertyChangeEvent)

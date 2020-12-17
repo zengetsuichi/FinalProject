@@ -11,23 +11,51 @@ import shared.util.Product;
 import shared.util.ProductList;
 
 import java.beans.PropertyChangeEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class UserViewModel
 {
   private UserModel userModel;
   private ObservableList<Product> listOfAllProducts;
   private ObservableList<Product> shoppingList;
+  private ObservableList<String> allProductCategories;
 
   public UserViewModel(UserModel userModel)
   {
     this.userModel = userModel;
     listOfAllProducts = FXCollections.observableArrayList();
     shoppingList = FXCollections.observableArrayList();
+    allProductCategories = FXCollections.observableArrayList();
+
     userModel.addListener(EventType.NEW_PRODUCT.name(), this::newProduct);
     userModel.addListener(EventType.DELETED_PRODUCT.name(), this::newProduct);
-    userModel.addListener(EventType.NEW_CATEGORY.name(), this::newProduct);
+    userModel.addListener(EventType.NEW_CATEGORY.name(), this::newCategory);
+    userModel.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), this::newProduct);
+    userModel.addListener(EventType.NEW_PRODUCT_MANAGER.name(), this::newProductManager);
   }
 
+  private void newProductManager(PropertyChangeEvent event)
+  {
+    Platform.runLater(() -> {
+      ArrayList<Product> products = (ArrayList<Product>) event.getNewValue();
+      listOfAllProducts.setAll(products);
+    });
+  }
+
+  public void loadData()
+  {
+    allProductCategories.setAll(userModel.getAllProductCategories());
+  }
+
+  private void newCategory(PropertyChangeEvent event)
+  {
+    Platform.runLater(() -> {
+      ArrayList<String> newCategories = (ArrayList<String>) event.getNewValue();
+      allProductCategories.setAll(newCategories);
+    });
+  }
 
   private void newProduct(PropertyChangeEvent propertyChangeEvent)
   {
@@ -72,5 +100,15 @@ public class UserViewModel
     boolean added = userModel.addProductToSL(item);
     if(added)
       loadShoppingList();
+  }
+
+  public ObservableList<String> getAllProductCategories()
+  {
+    return allProductCategories;
+  }
+
+  public ArrayList<String> getTagsById(int productId)
+  {
+    return userModel.getTagsById(productId);
   }
 }

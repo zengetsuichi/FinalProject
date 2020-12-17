@@ -105,7 +105,7 @@ public class EditProductShopManagerController implements ViewController
     if(!productName.isEmpty() && productName.length() <= 40){
       if(!productDescription.isEmpty() && productDescription.length() <= 200){
          if(!category.isEmpty()){
-          if (!price.isEmpty()){
+          if (!price.isEmpty() || Integer.parseInt(price)<=0){
            if(!tags.isEmpty()){
 
              ArrayList<String> parseTag = new ArrayList<>(tags);
@@ -115,7 +115,7 @@ public class EditProductShopManagerController implements ViewController
              if (response.equals("Product updated."))
                viewHandler.openShopManagerView();
              else
-               errorLabel.setText("Product already exists.");
+               errorLabel.setText(response);
            }
            else{
              errorLabel.setText("Choose at least one product tag.");

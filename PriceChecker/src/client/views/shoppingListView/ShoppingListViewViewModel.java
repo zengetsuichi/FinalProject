@@ -60,7 +60,6 @@ public class ShoppingListViewViewModel
     Boolean clear = shoppingListModel.clearSL();
     if(clear)
       shoppingList.clear();
-    totalPricesList.clear();
   }
 
   public ObservableList<ShopPrice> getTotalPricesList()

@@ -8,8 +8,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import server.DummyDatabase;
-import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModel;
-import server.networking.servermodel.loginRegisterServerModel.LoginRegisterServerModelManager;
 
 import java.sql.SQLException;
 

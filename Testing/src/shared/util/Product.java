@@ -22,7 +22,7 @@ public class Product implements Serializable
   private int price;
   private int quantity;
 
-  public Product( int productId, String productName, String description,
+  public Product(int productId, String productName, String description,
       String category)
   {
     this.productName = productName;

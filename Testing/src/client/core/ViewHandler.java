@@ -2,6 +2,7 @@ package client.core;
 
 import client.views.addNewManagerAdmin.AddNewManagerAdminController;
 import client.views.addNewProductAdmin.AddNewProductAdminController;
+import client.views.addNewProductShopManager.AddNewProductShopManagerController;
 import client.views.administrator.AdministratorController;
 import client.views.administratorEditUser.AdministratorEditUserController;
 import client.views.administratorUsersPage.AdministratorUsersPageController;
@@ -18,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import shared.util.Product;
@@ -42,7 +44,10 @@ public class ViewHandler
 
   public void start(){
 
-    // Terminating and closing the program on X button in window
+    /**
+     *  Terminating and closing the program on X button in window
+     * @author Karlo
+     */
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       @Override
       public void handle(WindowEvent t) {
@@ -115,6 +120,10 @@ public class ViewHandler
     }
   }
 
+  /**
+   * Initializing Administrator view and opening it.
+   * @author Gosia, Karlo
+   */
   public void openAdministratorView(){
     try
     {
@@ -135,8 +144,10 @@ public class ViewHandler
     }
   }
 
-
-
+  /**
+   * Initializing Administrator view for adding new products and opening it.
+   * @author Gosia, Karlo
+   */
   public void openAddNewProductView()
   {
     try
@@ -158,6 +169,10 @@ public class ViewHandler
     }
   }
 
+  /**
+   * Initializing Administrator view for editing a product and opening it.
+   * @author Gosia, Karlo
+   */
   public void openEditProductView(Product product, ObservableList<String> tags)
   {
     try
@@ -181,6 +196,10 @@ public class ViewHandler
     }
   }
 
+  /**
+   * Initializing Administrator users view and opening it.
+   * @author Karlo
+   */
   public void openAdministratorUsersPage()
   {
     try
@@ -243,6 +262,7 @@ public class ViewHandler
       e.printStackTrace();
     }
   }
+
   public void openEditShopManagerProductView(Product product, ObservableList<String> tags)
   {
     try
@@ -266,6 +286,10 @@ public class ViewHandler
     }
   }
 
+  /**
+   * Initializing User view and opening it.
+   * @author Gosia, Karlo
+   */
   public void openUserView(){
     try
     {
@@ -286,6 +310,10 @@ public class ViewHandler
     }
   }
 
+  /**
+   * Initializing User shopping list view and opening it.
+   * @author Gosia, Karlo
+   */
   public void openShoppingList(String thisUser){
     try
     {
@@ -306,4 +334,26 @@ public class ViewHandler
       e.printStackTrace();
     }
   }
+
+  public void openShopManagerAddNewProductView() {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader();
+      loader.setLocation(getClass().getResource("../views/addNewProductShopManager/addNewProductShopManager.fxml"));
+      Parent root = loader.load();
+      AddNewProductShopManagerController view = loader.getController();
+
+
+      view.init(this, viewModelFactory);
+      Scene scene = new Scene(root);
+      stage.setScene(scene);
+      stage.setTitle("Add New Product Shop Manager");
+      stage.show();
+    }
+    catch (IOException e)
+    {
+      e.printStackTrace();
+    }
+  }
+
 }

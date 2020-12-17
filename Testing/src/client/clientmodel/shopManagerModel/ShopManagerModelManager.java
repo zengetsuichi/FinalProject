@@ -30,6 +30,7 @@ public class ShopManagerModelManager implements ShopManagerModel
     client.addListener(EventType.DELETED_PRODUCT_PRICE.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.EDIT_SHOP_MANAGER_PRODUCT.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.NEW_PRODUCT.name(), evt -> support.firePropertyChange(evt));
+    client.addListener(EventType.DELETED_PRODUCT.name(), evt -> support.firePropertyChange(evt));
   }
 
   @Override public void addListener(String eventName,

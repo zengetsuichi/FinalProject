@@ -23,6 +23,7 @@ public class EditProductAdministratorModelManager implements EditProductAdminist
     this.client = client;
     client.addListener(EventType.NEW_CATEGORY.name(), evt -> support.firePropertyChange(evt));
     client.addListener(EventType.NEW_TAG.name(), evt -> support.firePropertyChange(evt));
+
   }
 
   @Override public ArrayList<String> getAllProductCategories()
